@@ -1,0 +1,455 @@
+@import '_var.scss';
+
+// Navbar
+#navbar {
+    background-color: white;
+    box-shadow: $BoxShadow;
+    position: relative;
+    z-index: 120;
+
+    .container {
+        height: 60px;
+
+        display: flex;
+        flex-direction: row;
+        row-gap: 20px;
+
+        .logo-wrapper {
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+            padding: 5px 0;
+
+            &:hover {
+                cursor: pointer;
+            }
+
+            .logo-img-container {
+                width: fit-content;
+
+                img {
+                    height: 100%;
+                    object-fit: contain;
+                }
+            }
+
+            .logo-text-container {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+
+                .logo-text-main {
+                    font-weight: 600;
+                    font-size: 1rem;
+                    letter-spacing: 2px;
+                }
+                .logo-text-sub {
+                    font-size: 0.8rem;
+                    letter-spacing: 2px;
+                }
+            }
+        }
+
+        .menu-wrapper {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: center;
+            
+            ul {
+                list-style-type: none;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-evenly;
+                flex-grow: 1;
+                gap: 20px;
+                padding: 0;
+                margin: 0;
+
+                li {
+                    padding: 0 20px;
+                    flex-shrink: 0;
+
+                    a {
+                        text-decoration: none;
+                        color: black;
+
+                        &:hover {
+                            cursor: pointer;
+                            font-weight: 600;
+                        }
+                    }
+
+                    &.active {
+                        font-weight: 600;
+                    }
+
+                    &.menu-dropdown {
+                        display: none;
+                        // background-color: $PrimaryRed;
+                        padding: 10px;
+                        border-radius: 4px;
+                        color: $PrimaryRed;
+                        transition: all ease 0.3s;
+
+                        &.active {
+                            transform: rotate(180deg);
+                        }
+                    }
+                }
+            }
+        }
+
+        .auth-wrapper {
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+            align-items: center;
+            justify-content: space-between;
+
+            .auth, .user {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
+                height: 100%;
+
+                .btn.auth-primary {
+                    @include button-default($PrimaryRed, white, $PrimaryRed, black);
+                    
+                }
+                .btn.auth-secondary {
+                    @include button-default(white, black, white, $PrimaryRed);
+
+                    &:hover {
+                        border: 1px solid $PrimaryRed
+                    }
+                }
+            }
+
+            .user {
+
+                .btn-dropdown {
+                    @include button-default(white, black, $PrimaryRed, white);
+                    transition: ease 0.3s;
+
+                    &.active {
+                        transform: rotate(180deg);
+                        border: 1px solid $PrimaryRed;
+                        color: $PrimaryRed;
+                    }
+                }
+            }
+
+            .search, .hidden-menu {
+                padding: 5px 20px;
+                border-radius: 4px;
+                
+                &:hover {
+                    cursor: pointer;
+                    background-color: $SecondaryWhite;
+                }
+                
+                &.active {
+                    background-color: $LightenOrange;
+                }
+            }
+
+            .hidden-menu {
+                display: none;
+
+                &.active {
+                    background-color: $SecondaryWhite;
+                }
+            }
+
+        }
+    }
+}
+
+// Navbar Auth Dropdown
+.navbar-auth-dropdown {
+    background-color: $PrimaryDark;
+    color: white;
+    position: absolute;
+    top: 60px;
+    z-index: 118;
+    transition: all ease-in-out 0.3s;
+    overflow: hidden;
+    height: fit-content;
+    width: 100%;
+    min-width: $ScreenMinWidth;
+    transform: translateY(-100vh);
+    
+    &.active {
+        transform: translateY(0);
+    }
+
+    .container {
+        padding: 10px 0;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    
+        .auth {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+
+            .btn.auth-primary {
+                @include button-default($PrimaryRed, white, $PrimaryRed, black);
+                
+            }
+            .btn.auth-secondary {
+                @include button-default($PrimaryDark, white, $PrimaryDark, $PrimaryRed);
+
+                &:hover {
+                    border: 1px solid $PrimaryRed
+                }
+            }
+        }
+
+        .user {
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+
+            .img-container {
+                height: 80px;
+                width: 80px;
+                border-radius: 50%;
+                overflow: hidden;
+                
+                img {
+                    height: 100%;
+                    width: 100%;
+                    object-fit: cover;
+                }
+            }
+            
+            .username-container {
+                flex-grow: 1;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+                flex-wrap: nowrap;
+                
+                .username {
+                    font-weight: 600;
+                    overflow: hidden;
+                    flex-grow: 1;
+                }
+                
+                .btn {
+                    color: white;
+                }
+            }
+        }
+
+        ul {
+            list-style-type: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 0;
+            padding: 0;
+
+
+            li {
+                margin: 0;
+
+                a {
+                    color: white;
+                    text-decoration: none;
+
+                    &:hover {
+                        font-weight: 600;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.navbar-menu-dropdown {
+    background-color: $LightenOrange;
+    color: white;
+    position: absolute;
+    top: 60px;
+    z-index: 119;
+    transition: all ease-in-out 0.3s;
+    overflow: hidden;
+    height: fit-content;
+    width: 100%;
+    min-width: $ScreenMinWidth;
+    transform: translateY(-100vh);
+    
+    &.active {
+        transform: translateY(0);
+    }
+
+    .container {
+        padding-top: 10px;
+        padding-bottom: 10px;
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+    
+            li {
+                
+                &.active a {
+                    font-weight: 600;
+                    color: $PrimaryRed;
+                }
+
+                a {
+                    color: black;
+                    text-decoration: none;
+
+                    &:hover {
+                        cursor: pointer;
+                        font-weight: 600;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.navbar-search-dropdown {
+    position: absolute;
+    top: 70px;
+    right: 0;
+    left: 0;
+    display: grid;
+    place-items: center;
+    transform: translateY(-100vh);
+    transition: all ease-in-out 0.3s;
+
+    &.active {
+        transform: translateY(0);
+    }
+
+    .container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: $ScreenMinWidth;
+
+        .input-group {
+
+            button {
+                @include button-default($PrimaryDark, white, $LightenOrange, black)
+            }
+        }
+    }
+
+}
+
+// Responsive Design
+@media screen and (max-width: 991px) {
+    #navbar {
+        
+        .container {
+
+            .logo-wrapper {
+
+                .logo-text-container {
+                    display: none;
+
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 767px) {
+    #navbar {
+        
+        .container {
+
+            .menu-wrapper {
+                
+                ul {
+                    gap: 0;
+
+                }
+            }
+
+            .auth-wrapper {
+                gap: 5px;
+
+                .hidden-menu {
+                    display: block;
+                }
+
+                .auth, .user {
+                    display: none;
+                }
+            }
+
+        }
+    }
+}
+
+@media screen and (max-width: 575px) {
+    .navbar-auth-dropdown {
+        
+        .container {
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+    }
+}
+
+@media screen and (max-width: 529px) {
+    #navbar {
+        
+        .container {
+
+            .menu-wrapper {
+                flex-wrap: wrap;
+                padding: 0 10px;
+
+                ul {
+                    gap: 10px;
+                    justify-content: flex-start;
+
+                    li {
+                        flex-shrink: 1;
+                        padding: 0;
+                    }
+
+                    li:not(.active) {
+                        display: none;
+                    }
+
+                    .menu-dropdown {
+                        display: grid !important;
+                        place-items: center;
+                    }
+                }
+
+            }
+        }
+
+        .auth-wrapper {
+            flex-wrap: nowrap;
+
+            .search, .hidden-menu {
+                padding: 5px 10px !important;
+            }
+        }
+    }
+}

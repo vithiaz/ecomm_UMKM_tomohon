@@ -1,0 +1,103 @@
+@startuml
+
+entity User {
+    * id BIGINT PRIMARY KEY
+    * user_type INT
+    * username VARCHAR(255)
+    * first_name VARCHAR(255)
+    * last_name VARCHAR(255)
+    * password TEXT
+    * email VARCHAR(255)
+    * phone_number VARCHAR(255)
+    * umkm_status BOOLEAN
+    --
+    address TEXT
+    profile_img TEXT
+    --
+    * created DATE
+    * updated DATE
+}
+
+entity User_Cart {
+    * id BIGINT PRIMARY KEY
+    * qty INT
+    --
+    * user_id BIGINT FOUREIGN(User.id)
+    * product_id BIGINT FOUREIGN(Product.id)
+    --
+    * created DATE
+    * updated DATE
+}
+
+entity UMKM {
+    * id BIGINT PRIMARY KEY
+    * name VARCHAR(255)
+    --
+    address TEXT
+    profile_img TEXT
+    --
+    * user_id BIGINT FOUREIGN(User.id)
+    --
+    * created DATE
+    * updated DATE
+}
+
+entity Bank_Account {
+    * id BIGINT PRIMARY KEY
+    * bank_name VARCHAR(255)
+    * bank_account VARCHAR(255)
+    * status VARCHAR(255)
+    --
+    * user_id BIGINT FOUREIGN(User.id)
+    --
+    * created DATE
+    * updated DATE
+}
+
+entity Product {
+    * id BIGINT PRIMARY KEY
+    * name VARCHAR(255)
+    * stock INT
+    * discount FLOAT
+    * price INT
+    * description TEXT
+    * status VARCHAR(255)
+    --
+    * umkm_id BIGINT FOUREIGN(UMKM.id)
+    --
+    * created DATE
+    * updated DATE
+}
+
+entity Product_Image {
+    * id BIGINT PRIMARY KEY
+    * img TEXT
+    --
+    * product_id BIGINT FOUREIGN(Product.id)
+    --
+    * created DATE
+    * updated DATE
+}
+
+entity Product_Category {
+    * id BIGINT PRIMARY KEY
+    * name VARCHAR(255)
+    --
+    * product_id BIGINT FOUREIGN(Product.id)
+    --
+    * created DATE
+    * updated DATE
+}
+
+' Relation
+User ||--o{ UMKM
+User ||--o{ Bank_Account
+User ||--o{ User_Cart
+
+UMKM ||--o{ Product
+
+Product ||--o{ Product_Image
+Product }|--|{ Product_Category
+Product ||--o{ User_Cart
+
+@enduml

@@ -1,0 +1,33 @@
+// Collor Pallete
+$PrimaryDark: #2A2A2A;
+$LightWhite: #EDF0F3;
+$SecondaryWhite: #FBF7F7;
+$BorderLight: #707070;
+$BorderVeryLight: #D4D4D4;
+$LightenOrange: #F9D00F;
+$DarkerOrange: #F0AE2C;
+$PrimaryRed: #F92727;
+
+$ScreenMinWidth: 270px;
+
+
+$BoxShadow: 0px 3px 6px rgba(0,0,0,0.2);
+
+@mixin button-default($bg: black, $color: white, $bg_hover: white, $color_hover: black) {
+    background-color: $bg;
+    font-weight: 600;
+    color: $color;
+
+    &:hover {
+        cursor: pointer;
+        background-color: $bg_hover;
+        color: $color_hover;
+    }
+}
+
+@mixin section-header-title() {
+    font-size: 1.1em;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
