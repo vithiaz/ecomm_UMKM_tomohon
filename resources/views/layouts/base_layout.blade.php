@@ -38,8 +38,14 @@
     @livewireStyles
 </head>
 <body>
+
+    {{-- Content Here --}}
     @yield('base_layout_content')
-   
+
+
+
+    {{-- Dependencies /////////////////////// --}}
+
     {{-- JQuery CDN --}}
     <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
 

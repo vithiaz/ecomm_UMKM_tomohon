@@ -4,8 +4,21 @@
 #navbar {
     background-color: white;
     box-shadow: $BoxShadow;
-    position: relative;
     z-index: 120;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    transition: all ease-in-out 0.3s;
+
+
+    &.scroll-up {
+        position: fixed;
+        filter: drop-shadow(0 3px 6px rgba(black, 0.2));
+    }
+
+    &.scroll-down {
+        transform: translate3d(0, -100%, 0);
+    }
 
     .container {
         height: 60px;
@@ -170,6 +183,11 @@
     }
 }
 
+.navbar-placeholder {
+    height: 60px;
+    width: 100%;
+}
+
 // Navbar Auth Dropdown
 .navbar-auth-dropdown {
     background-color: $PrimaryDark;
@@ -183,9 +201,11 @@
     width: 100%;
     min-width: $ScreenMinWidth;
     transform: translateY(-100vh);
+    opacity: 0;
     
     &.active {
         transform: translateY(0);
+        opacity: 1;
     }
 
     .container {
@@ -292,9 +312,11 @@
     width: 100%;
     min-width: $ScreenMinWidth;
     transform: translateY(-100vh);
+    opacity: 0;
     
     &.active {
         transform: translateY(0);
+        opacity: 1;
     }
 
     .container {
@@ -334,11 +356,14 @@
     left: 0;
     display: grid;
     place-items: center;
+    z-index: 119;
     transform: translateY(-100vh);
     transition: all ease-in-out 0.3s;
+    opacity: 0;
 
     &.active {
         transform: translateY(0);
+        opacity: 1;
     }
 
     .container {

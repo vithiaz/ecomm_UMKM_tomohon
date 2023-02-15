@@ -2,6 +2,7 @@
 
 use App\Http\Livewire\Base\Homepage;
 use Illuminate\Support\Facades\Route;
+use App\Http\Livewire\Base\ProductPage;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,11 +15,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
-Route::get('/home', Homepage::class)->name('homepage');
+Route::get('/', Homepage::class)->name('homepage');
+Route::get('/product', ProductPage::class)->name('product-page');
 
 // Auth::routes();
 

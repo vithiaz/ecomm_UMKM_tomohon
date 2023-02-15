@@ -15,8 +15,12 @@
                     @if (\Request::route()->getName() == 'homepage')
                         class="active"
                     @endif
-                ><a href="#">Market Place</a></li>
-                <li><a href="#">Produk</a></li>
+                ><a href="{{ route('homepage') }}">Market Place</a></li>
+                <li
+                    @if (\Request::route()->getName() == 'product-page')
+                        class="active"
+                    @endif
+                ><a href="{{ route('product-page') }}">Produk</a></li>
                 <li><a href="#">UMKM</a></li>
                 <li id="navbar-menu-dropdown-btn" class="menu-dropdown"><i class="fa-solid fa-angle-down"></i></li>
             </ul>
@@ -39,6 +43,8 @@
         </div>
     </div>
 </nav>
+
+<div class="navbar-placeholder"></div>
 
 <div class="navbar-auth-dropdown">
     <div class="container">
@@ -94,12 +100,19 @@
 @push('script')
 <script>
 
+    function adaptNavbarDropdown(DropdownClass, top = 0) {
+        let navbarOffset = $('#navbar').offset().top
+        let navbarHeight = $('#navbar').height()
+        DropdownClass.css('top', navbarOffset + navbarHeight + top + 'px')
+    }
+
     // Toggle Navbar Dropdown Menu
     $('#user-dropdown-btn').click(function() {
         $( this ).toggleClass('active')
         $('.navbar-auth-dropdown').toggleClass('active')
         $('#navbar-hidden-menu').toggleClass('active')
         HideNavbarSearch()
+        adaptNavbarDropdown($('.navbar-auth-dropdown'))
     })
     $('#navbar-hidden-menu').click(function() {
         $( this ).toggleClass('active')
@@ -107,6 +120,7 @@
         $('.navbar-auth-dropdown').toggleClass('active')
         $('#navbar-hidden-menu').toggleClass('active')
         HideNavbarSearch()
+        adaptNavbarDropdown($('.navbar-auth-dropdown'))
     })
 
     // Toggle Navbar Link Dropdown
@@ -114,6 +128,7 @@
         $( this ).toggleClass('active')
         $('.navbar-menu-dropdown').toggleClass('active')
         HideNavbarSearch()
+        adaptNavbarDropdown($('.navbar-menu-dropdown'))
     })
     
     // Toggle Navbar Search
@@ -122,6 +137,7 @@
         $('.navbar-search-dropdown').toggleClass('active')
         HideNavbarHiddenMenu()
         HideNavbarLinkDropdown()
+        adaptNavbarDropdown($('.navbar-search-dropdown'), 10)
     })
 
     function HideNavbarHiddenMenu() {
@@ -140,16 +156,61 @@
         $('.navbar-search-dropdown').removeClass('active')
     }
 
+    
+    // Navbar Scroll Positioning
+    function scroll_up() {
+        $('#navbar').addClass('scroll-up');
+        $('#navbar').removeClass('scroll-down');
+    }
+    
+    function scroll_down() {
+        $('#navbar').addClass('scroll-down');
+        $('#navbar').removeClass('scroll-up');
+    }
+
+    let lastScroll = 0;
+    $(window).scroll(function() {
+        if (this.scrollY <= 0) {
+            $('#navbar').removeClass('scroll-up')
+            $('#navbar').removeClass('floating')
+        }
+        
+        if (this.scrollY >= $('#navbar').height()) {
+        $('.navbar-placeholder').height( $('#navbar').height() );
+
+            if (this.scrollY > lastScroll && !$('#navbar').hasClass('scroll-down')) {
+                scroll_down()
+            }
+            if (this.scrollY <= lastScroll && $('#navbar').hasClass('scroll-down')) {
+                scroll_up();
+            }
+        }
+        lastScroll = this.scrollY;
+    })
+
+
+    // Window Resize Events
     $( window ).resize(function() {
         HideNavbarHiddenMenu()
         HideNavbarLinkDropdown()
         HideNavbarSearch()
+
+        adaptNavbarDropdown($('.navbar-auth-dropdown'))
+        adaptNavbarDropdown($('.navbar-auth-dropdown'))
+        adaptNavbarDropdown($('.navbar-menu-dropdown'))
+        adaptNavbarDropdown($('.navbar-search-dropdown'), 10)
     })
 
+    // Window Scroll Events
     $( window ).scroll(function() {
         HideNavbarHiddenMenu()
         HideNavbarLinkDropdown()
         HideNavbarSearch()
+
+        adaptNavbarDropdown($('.navbar-auth-dropdown'))
+        adaptNavbarDropdown($('.navbar-auth-dropdown'))
+        adaptNavbarDropdown($('.navbar-menu-dropdown'))
+        adaptNavbarDropdown($('.navbar-search-dropdown'), 10)
     })
 
     

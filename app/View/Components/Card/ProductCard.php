@@ -6,14 +6,44 @@ use Illuminate\View\Component;
 
 class ProductCard extends Component
 {
-    /**
-     * Create a new component instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    
+   public $basePrice;
+   public $price;
+   public $discount;
+   public $umkm;
+   public $sold;
+   public $stock;
+   public $productName;
+   public $location;
+   public $img;
+   public $link;
+    
+    public function __construct(
+        $basePrice,
+        $discount,
+        $umkm,
+        $sold,
+        $stock,
+        $productName,
+        $location,
+        $img,
+        $link
+        )
     {
-        //
+        $this->basePrice = number_format($basePrice, 2, ",", '.');
+        $this->discount = $discount;
+        $this->umkm = $umkm;
+        $this->sold = $this->simplify_number($sold);
+        $this->stock = $stock;
+        $this->productName = $productName;
+        $this->location = $location;
+        $this->img = $img;
+        $this->link = $link;
+
+        // Calculate Discount
+        $Amount = (int)$basePrice;
+        $CalculatedAmount = $Amount - ($Amount * ((float)$this->discount) / 100);
+        $this->price = number_format($CalculatedAmount, 2, ",", '.');
     }
 
     /**
@@ -25,4 +55,12 @@ class ProductCard extends Component
     {
         return view('components.card.product-card');
     }
+
+    public function simplify_number($number) {
+        if ($number >= 1000) {
+            return number_format($number / 1000, 1) . 'rb';
+        }
+        return $number;
+    }
+    
 }

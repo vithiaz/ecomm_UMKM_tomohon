@@ -1,0 +1,191 @@
+#footer {
+  background-color: #2A2A2A;
+  color: white;
+  padding: 10px 0;
+}
+
+#footer * {
+  font-size: 0.9rem;
+}
+
+#footer .container .content-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-column-gap: 20px;
+          column-gap: 20px;
+  row-gap: 10px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+#footer .container .content-wrapper .head-logo-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-preferred-size: 280px;
+      flex-basis: 280px;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+}
+
+#footer .container .content-wrapper .head-logo-wrapper .head-title {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+
+#footer .container .content-wrapper .head-logo-wrapper .head-title span {
+  text-align: center;
+  font-size: 0.9em;
+}
+
+#footer .container .content-wrapper .head-logo-wrapper .logo-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  gap: 10px;
+  padding: 5px 0;
+}
+
+#footer .container .content-wrapper .head-logo-wrapper .logo-wrapper:hover {
+  cursor: pointer;
+}
+
+#footer .container .content-wrapper .head-logo-wrapper .logo-wrapper .logo-img-container {
+  width: 40px;
+}
+
+#footer .container .content-wrapper .head-logo-wrapper .logo-wrapper .logo-img-container img {
+  height: 100%;
+  width: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
+#footer .container .content-wrapper .head-logo-wrapper .logo-wrapper .logo-text-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+#footer .container .content-wrapper .head-logo-wrapper .logo-wrapper .logo-text-container .logo-text-main {
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 2px;
+}
+
+#footer .container .content-wrapper .head-logo-wrapper .logo-wrapper .logo-text-container .logo-text-sub {
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+}
+
+#footer .container .content-wrapper .description {
+  -webkit-box-flex: 3;
+      -ms-flex-positive: 3;
+          flex-grow: 3;
+  -ms-flex-preferred-size: 300px;
+      flex-basis: 300px;
+}
+
+#footer .container .content-wrapper .description p {
+  text-align: justify;
+  padding: 0;
+  margin: 0;
+}
+
+#footer .container .content-wrapper .menu-wrapper {
+  -ms-flex-preferred-size: 150px;
+      flex-basis: 150px;
+  width: 150px;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  display: -ms-grid;
+  display: grid;
+  place-items: center;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+}
+
+#footer .container .content-wrapper .menu-wrapper ul {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  list-style-type: none;
+  row-gap: 5px;
+  -webkit-column-gap: 10px;
+          column-gap: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+#footer .container .content-wrapper .menu-wrapper ul li {
+  -ms-flex-preferred-size: 150px;
+      flex-basis: 150px;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  margin: 0;
+  padding: 0;
+}
+
+#footer .container .content-wrapper .menu-wrapper ul li a {
+  color: white;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+#footer .container .content-wrapper .menu-wrapper ul li a:hover {
+  cursor: pointer;
+  color: #F9D00F;
+}
+/*# sourceMappingURL=footer.css.map */

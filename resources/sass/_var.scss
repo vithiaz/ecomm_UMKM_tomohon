@@ -26,8 +26,18 @@ $BoxShadow: 0px 3px 6px rgba(0,0,0,0.2);
 }
 
 @mixin section-header-title() {
-    font-size: 1.1em;
+    font-size: 1rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 2px;
+    margin: 0;
+}
+
+@mixin image-hover-animate() {
+    transition: all ease-in-out 0.3s;
+
+    &:hover {
+        cursor: pointer;
+        transform: scale(1.5);
+    }
 }
