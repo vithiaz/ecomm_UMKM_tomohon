@@ -1,0 +1,140 @@
+@import '_var.scss';
+
+
+.admin-umkm-account-ver-page {
+    padding: 20px 10px;
+    
+    .container {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        .page-title {
+            padding: 10px;
+            background-color: $LightenOrange;
+            border-radius: 4px;
+
+            h1 {
+                @include section-header-title();
+
+                span {
+                    color: $PrimaryRed;
+                }
+            }
+        }
+
+        .content-menu-wrapper {
+            width: 100%;
+            height: fit-content;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 5px;
+
+            .menu-item {
+                font-size: 0.9rem;
+                font-weight: 600;
+                padding: 5px 10px;
+                color: black;
+                border-radius: 4px;
+                background-color: $LightWhite;
+                text-decoration: none;
+
+                &:hover {
+                    cursor: pointer;
+                    background-color: $LightenOrange;
+                }
+
+                &.active {
+                    background-color: $LightenOrange;
+                }
+            }
+
+        }
+
+        .page-content-card {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 100%;
+            height: fit-content;
+            padding: 10px;
+            background-color: white;
+            border-radius: 4px;
+
+            * {
+                font-size: 0.9rem;
+            }
+
+            .card-title-wrapper {
+                width: 100%;
+                height: fit-content;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+                column-gap: 20px;
+                row-gap: 10px;
+                flex-wrap: wrap;
+
+                .card-title {
+                    font-weight: 600;
+                    margin: 0;
+                    flex-grow: 4;
+
+                }
+
+                .card-search-input {
+                    flex-basis: 240px;
+                    flex-grow: 1;
+                    border: none;
+                    background-color: $SecondaryWhite;
+                    padding: 3px 10px;
+
+                    &:focus {
+                        border: 0;
+                        outline: none;
+                    }
+                }
+            }
+
+
+            table {
+
+                thead {
+                    tr td {
+                        font-weight: 600;
+                    }
+                }
+
+                .table-a {
+                    color: $PrimaryRed;
+                    text-decoration: underline;
+
+                    &:hover {
+                        cursor: pointer;
+                        font-weight: 600;
+                    }
+                }
+            }
+
+            .pagination-wrapper {
+                width: 100%;
+                height: fit-content;
+                display: grid;
+                place-items: center;
+            }
+
+        }
+    }
+}
+
+// Responsive
+@media screen and (max-width: 576px) {
+    .admin-umkm-account-ver-page {
+
+        .container {
+            max-width: 100vw;
+        }
+    }
+}

@@ -7,6 +7,10 @@ $BorderVeryLight: #D4D4D4;
 $LightenOrange: #F9D00F;
 $DarkerOrange: #F0AE2C;
 $PrimaryRed: #F92727;
+$PrimaryGreen: #27f939;
+$PrimaryYellow: #e5ff00;
+$PrimaryBlue: #4270EE;
+
 
 $ScreenMinWidth: 270px;
 
@@ -39,5 +43,27 @@ $BoxShadow: 0px 3px 6px rgba(0,0,0,0.2);
     &:hover {
         cursor: pointer;
         transform: scale(1.5);
+    }
+}
+
+@mixin no-image-i() {
+    width: 100%;
+    height: 100%;
+    background-color: $BorderVeryLight;
+    display: grid;
+    place-items: center;
+
+    &:hover {
+        cursor: pointer;
+        background-color: $PrimaryDark;
+
+        i {
+            color:  white;
+        }
+    }
+    
+    i {
+        font-size: 1.2rem;
+        color: black;
     }
 }

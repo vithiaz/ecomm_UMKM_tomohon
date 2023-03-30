@@ -29,25 +29,16 @@
             <div class="section-content">
                 <div class="swiper HeroProductSwiper">
                     <div class="swiper-wrapper">
-                        <x-card.product-card 
-                            basePrice='220000'
-                            discount='50'
-                            umkm='Mitra UMKM'
-                            sold='2130'
-                            stock='999'
-                            productName='Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit'
-                            Location='Location'
-                            img='{{ asset("img\aziz-acharki-boIJluEJEPM-unsplash.jpg") }}'
-                            link='#'
-                        />
                         @foreach (range(1,8) as $i)
                             <x-card.product-card 
+                                productId='1'
                                 basePrice='220000'
                                 discount='50'
                                 umkm='Mitra UMKM'
                                 sold='2130'
                                 stock='999'
                                 productName='{{ $i }} - Lorem ipsum dolor sit amet consectetur adipisicing elit.'
+                                productNameSlug='slug'
                                 Location='Location'
                                 img='{{ asset("img\aziz-acharki-boIJluEJEPM-unsplash.jpg") }}'
                                 link='#'
@@ -104,28 +95,17 @@
             </div>
             <div class="section-content">
                 <div class="product-wrapper">
-                    <div class="item">
-                        <x-card.product-card 
-                            basePrice='220000'
-                            discount='50'
-                            umkm='Mitra UMKM'
-                            sold='2130'
-                            stock='999'
-                            productName='Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit'
-                            Location='Location'
-                            img='{{ asset("img\aziz-acharki-boIJluEJEPM-unsplash.jpg") }}'
-                            link='#'
-                        />
-                    </div>
                     @foreach (range(0,8) as $i)
                         <div class="item">
                             <x-card.product-card 
+                                productId='1'
                                 basePrice='220000'
                                 discount='50'
                                 umkm='Mitra UMKM'
                                 sold='2130'
                                 stock='999'
                                 productName='{{ $i }} - Lorem ipsum dolor sit amet consectetur adipisicing elit.'
+                                productNameSlug='slug'
                                 Location='Location'
                                 img='{{ asset("img\aziz-acharki-boIJluEJEPM-unsplash.jpg") }}'
                                 link='#'

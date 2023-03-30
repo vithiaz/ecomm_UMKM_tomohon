@@ -20,9 +20,15 @@
                     @if (\Request::route()->getName() == 'product-page')
                         class="active"
                     @endif
-                ><a href="{{ route('product-page') }}">Produk</a></li>
-                <li><a href="#">UMKM</a></li>
-                <li id="navbar-menu-dropdown-btn" class="menu-dropdown"><i class="fa-solid fa-angle-down"></i></li>
+                ><a href="{{ route('product-page', [0]) }}">Produk</a></li>
+                <li
+                    @if (\Request::route()->getName() == 'umkm-page')
+                        class="active"
+                    @endif
+                ><a href="{{ route('umkm-page') }}">UMKM</a></li>
+                <li id="navbar-menu-dropdown-btn" class="menu-dropdown">
+                    <i class="fa-solid fa-angle-down"></i>
+                </li>
             </ul>
         </div>
         <div class="auth-wrapper">
@@ -32,44 +38,65 @@
             <div id="navbar-hidden-menu" class="hidden-menu">
                 <i class="fa-solid fa-bars"></i>
             </div>
-            {{-- <div class="auth">
-                <button class="btn auth-secondary">Masuk</button>
-                <button class="btn auth-primary">Daftar</button>
-            </div> --}}
-            <div class="user">
-                <span class="username">Username</span>
-                <div id="user-dropdown-btn" class="btn btn-dropdown"><i class="fa-solid fa-angle-down"></i></div>
-            </div>
+            
+            @auth
+                <div class="user">
+                    <span class="username">{{ Auth::user()->username }}</span>
+                    <div id="user-dropdown-btn" class="btn btn-dropdown"><i class="fa-solid fa-angle-down"></i></div>
+                </div>
+            @else
+                <div class="auth">
+                    <button class="btn auth-secondary" data-bs-toggle="modal" data-bs-target="#auth_modal">Masuk</button>
+                    <a href="{{ route('register') }}" class="btn auth-primary">Daftar</a>
+                </div>            
+            @endauth
+
         </div>
     </div>
 </nav>
+
+<livewire:components.login/>
 
 <div class="navbar-placeholder"></div>
 
 <div class="navbar-auth-dropdown">
     <div class="container">
-        {{-- <div class="auth">
-            <button class="btn auth-secondary">Masuk</button>
-            <button class="btn auth-primary">Daftar</button>
-        </div> --}}
-        <div class="user">
-            <div class="img-container">
-                <img src="{{ asset('img\aziz-acharki-boIJluEJEPM-unsplash.jpg') }}" alt="">
-            </div>
-            <div class="username-container">
-                <span class="username">
-                    Username
-                </span>
-                <button class="btn"><i class="fa-solid fa-gear"></i></button>
-            </div>
 
-        </div>
-        <ul>
-            <li><a href="#">Pengaturan Akun</a></li>
-            <li><a href="#">Pesanan Saya</a></li>
-            <li><a href="#">Zona UMKM</a></li>
-            <li><a href="#">Keluar</a></li>
-        </ul>
+        @auth
+            <div class="user">
+                <div class="img-container">
+                    @if (Auth::user()->profile_img)
+                        <img src="{{ asset('storage/'.Auth::user()->profile_img) }}" alt="{{ Auth::user()->first_name }}_profile">
+                    @else
+                        <div class="no-image">
+                            <i class="fa-solid fa-user"></i>
+                        </div>                        
+                    @endif
+                </div>
+                <div class="username-container">
+                    <span class="username">
+                        {{ Auth::user()->username }}
+                    </span>
+                    <a href="{{ route('account-settings') }}" class="btn"><i class="fa-solid fa-gear"></i></a>
+                </div>
+            </div>
+            <ul>
+                @if (Auth::user()->user_type == 1)
+                    <li><a href="{{ route('admin.products', ['status' => 'active']) }}">Admin Panel</a></li>
+                @endif
+                <li><a href="{{ route('account-settings') }}">Pengaturan Akun</a></li>
+                <li><a href="{{ route('cart-page') }}">Pesanan Saya</a></li>
+                <li><a href="{{ route('umkm.profile') }}">Zona UMKM</a></li>
+                {{-- <li><a href="#">Keluar</a></li> --}}
+                <li><a href="{{ route('logout') }}">Keluar</a></li>
+            </ul>           
+        @else
+            <div class="auth">
+                <button class="btn auth-secondary" data-bs-toggle="modal" data-bs-target="#auth_modal">Masuk</button>
+                <a href="{{ route('register') }}" class="btn auth-primary">Daftar</a>
+            </div> 
+        @endauth
+
     </div>
 </div>
 
@@ -77,12 +104,20 @@
     <div class="container">
         <ul>
             <li
-            @if (\Request::route()->getName() == 'homepage')
-                class="active"
-            @endif
-            ><a href="#">Market Place</a></li>
-            <li><a href="#">Produk</a></li>
-            <li><a href="#">UMKM</a></li>
+                @if (\Request::route()->getName() == 'homepage')
+                    class="active"
+                @endif
+            ><a href="{{ route('homepage') }}">Market Place</a></li>
+            <li
+                @if (\Request::route()->getName() == 'product-page')
+                    class="active"
+                @endif
+            ><a href="{{ route('product-page', [0]) }}">Produk</a></li>
+            <li
+                @if (\Request::route()->getName() == 'umkm-page')
+                    class="active"
+                @endif
+            ><a href="{{ route('umkm-page') }}">UMKM</a></li>
     
         </ul>
     </div>

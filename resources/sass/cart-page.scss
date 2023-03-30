@@ -1,0 +1,275 @@
+@import '_var.scss';
+
+.cart-page {
+
+    .container {
+        padding-top: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        .page-title {
+            padding: 10px;
+            background-color: $LightenOrange;
+            border-radius: 4px;
+
+            h1 {
+                @include section-header-title();
+
+                span {
+                    color: $PrimaryRed;
+                }
+            }
+        }
+
+        .page-nav-menu-wrapper {
+            width: 100%;
+            height: fit-content;
+            padding: 10px 0;
+
+            ul {
+                width: 100%;
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                column-gap: 10px;
+                row-gap: 5px;
+                height: fit-content;
+
+                li {
+                    background-color: $LightWhite;
+                    border-radius: 4px;
+                    
+                    &:hover {
+                        cursor: pointer;
+                        background-color: $LightenOrange;
+                    }
+
+                    &.active {
+                        background-color: $LightenOrange;
+                    }
+                    
+                    a {
+                        padding: 10px 20px;
+                        width: 100%;
+                        height: 100%;
+                        text-decoration: none;
+                        color: black;
+                        font-size: 0.9rem;
+                        display: block;
+                    }
+                }
+            }
+        }
+
+        .page-content-card {
+            width: 100%;
+            height: fit-content;
+            padding: 10px;
+            border-radius: 4px;
+            background-color: $SecondaryWhite;
+            margin-bottom: 10px;
+            
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+
+            .card-id-wrapper {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+                flex-wrap: wrap;
+
+                .status {
+                    font-weight: 600;
+                }
+            }
+
+            .address-wrapper {
+                display: flex;
+                flex-direction: row;
+                row-gap: 10px;
+                column-gap: 20px;
+                align-items: center;
+                justify-content: flex-start;
+
+                .label {
+                    font-weight: 600;
+                }
+
+                p {
+                    margin: 0;
+                }
+            }
+
+            .table-responsive {
+                width: 100%;
+                height: fit-content;
+                overflow: auto;
+
+                table {
+    
+                    thead {
+    
+                        tr {
+    
+                            td {
+                                font-size: 0.9em;
+                                font-weight: 600;
+                            }
+                        }
+                    }
+    
+                    tbody {
+                        tr {
+    
+                            td {
+                                font-size: 0.9em;
+
+                                a {
+                                    text-decoration: none;
+                                    color: black;
+                                    font-weight: 600;
+                                    font-size: 0.9em;
+
+                                    &:hover {
+                                        cursor: pointer;
+                                        text-decoration: underline;
+                                    }
+                                }
+
+                                .qty-wrapper {
+                                    width: 100%;
+                                    display: flex;
+                                    flex-direction: row;
+                                    gap: 3px;
+                                    align-items: center;
+                                    flex-wrap: wrap;
+                                    
+                                    input {
+                                        flex-grow: 1;
+                                        flex-basis: 20px;
+                                    }
+
+                                    i {
+                                        padding: 0 5px;
+                                        color: black;
+
+                                        &:hover {
+                                            cursor: pointer;
+                                            color: $PrimaryRed;
+                                        }
+                                    }
+                                }
+    
+                                .table-text {
+                                    width: 100%;
+                                    height: 100%;
+                                    display: flex;
+                                    flex-direction: column;
+                                    align-items: center;
+                                    justify-content: center;
+                                }
+    
+    
+                                .image-container {
+                                    width: 60px;
+                                    height: 60px;
+                                    border-radius: 4px;
+                                    overflow: hidden;
+    
+                                    img {
+                                        @include image-hover-animate();
+                                        width: 100%;
+                                        height: 100%;
+                                        object-fit: cover;
+                                    }
+                                }
+    
+                                .prices {
+                                    height: 100%;
+                                    width: 100%;
+                                    display: flex;
+                                    flex-direction: column;
+                                    align-items: flex-end;
+                                    gap: 2px;
+    
+                                    .base-price {
+                                        font-size: 0.9em;
+                                        color: $DarkerOrange;
+                                        text-decoration: line-through;
+                                        word-break: break-all;
+                                    }
+    
+                                    .final-price {
+                                        font-size: 0.9em;
+                                        word-break: break-all;
+                                    }
+    
+                                }
+    
+                                &.amount {
+                                    text-align: right;
+                                    word-break: break-all;
+                                }
+    
+                                .sub-total-wrapper {
+                                    display: flex;
+                                    flex-direction: row;
+                                    align-items: baseline;
+                                    justify-content: flex-end;
+                                    column-gap: 20px;
+                                    row-gap: 10px;
+                                    flex-wrap: wrap;
+                                }
+    
+                                .sub-total-label {
+                                    font-size: 0.9em;
+                                    // flex-grow: 1;
+                                    // width: 100%;
+                                    // display: flex;
+                                    // flex-direction: row-reverse;
+                                    // align-items: center;
+                                    // min-height: 60px;
+                                }
+                                
+                                .sub-total {
+                                    font-size: 1.1em;
+                                    font-weight: 600;
+                                //     display: flex;
+                                //     flex-direction: column;
+                                //     min-height: 60px;
+                                //     justify-content: center;
+                                }
+    
+                            }
+    
+                        }
+                    }
+                }
+            }
+
+            .button-wrapper {
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                gap: 10px;
+                flex-wrap: wrap;
+
+                align-items: center;
+                justify-content: flex-end;
+
+                .checkout-btn {
+                    @include button-default($bg: $LightenOrange, $color: black, $bg_hover: $DarkerOrange, $color_hover: white);
+                    font-size: 0.9rem;
+                }
+            }
+            
+        }
+
+    }
+}

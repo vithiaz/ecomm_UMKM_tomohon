@@ -1,30 +1,28 @@
 <div class="app">
     <div class="row-container">
-        <div class="menu-container">
+        <div id="side-menu" class="menu-container">
             <div class="shadow-placeholder"></div>
             <div id="side-menu-toggle-btn" class="toggle-btn">
                 <i class="fa-solid fa-angle-left"></i>
             </div>
-
             <div class="navigation card">
                 <div class="nav-header">
                     <h1>Kategori</h1>
-                    
                 </div>
                 <div class="nav-content">
-                    <ul>
-                        <li class="nav-item active">
+                    <ul class="category-list">
+                        {{-- <li class="nav-item active">
                             <span class="nav-item-main">Makanan</span>
                             <span class="nav-item-secondary">(123)</span>
-                        </li>
-                        <li class="nav-item">
-                            <span class="nav-item-main">Elektronik</span>
-                            <span class="nav-item-secondary">(110)</span>
-                        </li>
-                        <li class="nav-item">
-                            <span class="nav-item-main">Perabotan</span>
-                            <span class="nav-item-secondary">(96)</span>
-                        </li>
+                        </li> --}}
+                        @foreach ($categories as $category)
+                            <li class="nav-item">
+                                <a href="{{ route('product-page', [$category->name_slug]) }}">
+                                    <span class="nav-item-main">{{ $category->name }}</span>
+                                    <span class="nav-item-secondary">{{ $category->product_active->count() }}</span>
+                                </a>
+                            </li>
+                        @endforeach
                     </ul>
                 </div>
             </div>
@@ -36,36 +34,26 @@
                 </div>
                 <div class="section-content">
                     <div class="product-wrapper">
-                        <div class="item">
-                            <x-card.product-card 
-                                basePrice='220000'
-                                discount='50'
-                                umkm='Mitra UMKM'
-                                sold='2130'
-                                stock='999'
-                                productName='Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit'
-                                Location='Location'
-                                img='{{ asset("img\aziz-acharki-boIJluEJEPM-unsplash.jpg") }}'
-                                link='#'
-                            />
-                        </div>
-                        @foreach (range(0,8) as $i)
+                        @foreach ($products as $product)
                             <div class="item">
                                 <x-card.product-card 
-                                    basePrice='220000'
-                                    discount='50'
-                                    umkm='Mitra UMKM'
-                                    sold='2130'
-                                    stock='999'
-                                    productName='{{ $i }} - Lorem ipsum dolor sit amet consectetur adipisicing elit.'
-                                    Location='Location'
-                                    img='{{ asset("img\aziz-acharki-boIJluEJEPM-unsplash.jpg") }}'
-                                    link='#'
+                                    productId='{{ $product->id }}'
+                                    basePrice='{{ $product->price }}'
+                                    discount='{{ $product->discount }}'
+                                    umkm='{{ $product->umkm->name }}'
+                                    sold='999'
+                                    stock='{{ $product->stock }}'
+                                    productName='{{ $product->name }}'
+                                    productNameSlug='{{ $product->name_slug }}'
+                                    Location='{{ $product->umkm->district }}'
+                                    img='{{ $product->product_images->first() ? $product->product_images->first()->image : "" }}'
                                 />
                             </div>
                         @endforeach
                     </div>
-                    <button class="section-content-button">Lebih Banyak</button>
+                    @if (!$all_loaded_state)
+                        <button wire:click='load_more' class="section-content-button">Lebih Banyak</button>
+                    @endif
                 </div>
             </div>
         </div>
@@ -84,6 +72,12 @@
             $('#side-menu-toggle-btn').addClass('higher')
         }
     }
+
+    // Toggle Side Menu
+    $('#side-menu-toggle-btn').click(function() {
+        $('#side-menu').toggleClass('hide')
+        $('#side-menu-toggle-btn').toggleClass('hide')
+    })
 
     // Document Mount
     $(document).ready(function() {

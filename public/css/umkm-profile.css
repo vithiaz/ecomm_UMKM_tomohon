@@ -1,0 +1,419 @@
+.umkm-profile-page .container {
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.umkm-profile-page .container .page-title {
+  padding: 10px;
+  background-color: #F9D00F;
+  border-radius: 4px;
+}
+.umkm-profile-page .container .page-title h1 {
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin: 0;
+}
+.umkm-profile-page .container .page-title h1 span {
+  color: #F92727;
+}
+.umkm-profile-page .container .page-content-card {
+  width: 100%;
+  height: -moz-fit-content;
+  height: fit-content;
+  padding: 15px 10px;
+  border-radius: 4px;
+  background-color: white;
+  margin-bottom: 10px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.umkm-profile-page .container .page-content-card .card-title {
+  margin-bottom: 30px;
+}
+.umkm-profile-page .container .page-content-card .card-title::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 50px;
+  width: 40px;
+  border-radius: 4px;
+  background-color: #F9D00F;
+}
+.umkm-profile-page .container .page-content-card .card-title h1 {
+  font-size: 1rem;
+  font-weight: 600;
+  position: absolute;
+  z-index: 1;
+}
+.umkm-profile-page .container .page-content-card .card-content {
+  width: 100%;
+  height: -moz-fit-content;
+  height: fit-content;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  -moz-column-gap: 20px;
+       column-gap: 20px;
+  row-gap: 10px;
+  align-items: flex-start;
+}
+.umkm-profile-page .container .page-content-card .card-content .account-wrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+  flex-basis: 320px;
+  flex-shrink: 1;
+  flex-grow: 1;
+  justify-content: center;
+}
+.umkm-profile-page .container .page-content-card .card-content .account-wrapper .profile-container {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  flex-basis: 280px;
+  flex-grow: 1;
+}
+.umkm-profile-page .container .page-content-card .card-content .account-wrapper .profile-container .image-container {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.umkm-profile-page .container .page-content-card .card-content .account-wrapper .profile-container .image-container .no-image {
+  width: 100%;
+  height: 100%;
+  background-color: #D4D4D4;
+  display: grid;
+  place-items: center;
+}
+.umkm-profile-page .container .page-content-card .card-content .account-wrapper .profile-container .image-container .no-image:hover {
+  cursor: pointer;
+  background-color: #2A2A2A;
+}
+.umkm-profile-page .container .page-content-card .card-content .account-wrapper .profile-container .image-container .no-image:hover i {
+  color: white;
+}
+.umkm-profile-page .container .page-content-card .card-content .account-wrapper .profile-container .image-container .no-image i {
+  font-size: 1.2rem;
+  color: black;
+}
+.umkm-profile-page .container .page-content-card .card-content .account-wrapper .profile-container .image-container img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  transition: all ease-in-out 0.3s;
+}
+.umkm-profile-page .container .page-content-card .card-content .account-wrapper .profile-container .image-container img:hover {
+  cursor: pointer;
+  transform: scale(1.5);
+}
+.umkm-profile-page .container .page-content-card .card-content .account-wrapper .profile-container .profile-id-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.umkm-profile-page .container .page-content-card .card-content .account-wrapper .profile-container .profile-id-wrapper .username {
+  font-weight: 600;
+  font-size: 1em;
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
+}
+.umkm-profile-page .container .page-content-card .card-content .account-wrapper .profile-container .profile-id-wrapper .user-id {
+  font-size: 0.9em;
+}
+.umkm-profile-page .container .page-content-card .card-content .account-wrapper .profile-details-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  max-width: 400px;
+  width: 100%;
+}
+.umkm-profile-page .container .page-content-card .card-content .account-wrapper .profile-details-wrapper p {
+  font-size: 0.9em;
+  margin: 0;
+}
+.umkm-profile-page .container .page-content-card .card-content .account-wrapper .profile-details-wrapper span {
+  font-size: 0.9em;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+.umkm-profile-page .container .page-content-card .card-content .account-wrapper .profile-details-wrapper span.label {
+  font-weight: 600;
+}
+.umkm-profile-page .container .page-content-card .card-content .account-wrapper .profile-details-wrapper .row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  -moz-column-gap: 20px;
+       column-gap: 20px;
+  row-gap: 5px;
+}
+.umkm-profile-page .container .page-content-card .card-content .account-wrapper .profile-details-wrapper .address-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.umkm-profile-page .container .page-content-card .card-content .umkm-details-wrapper {
+  flex-basis: 500px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.umkm-profile-page .container .page-content-card .card-content .umkm-details-wrapper * {
+  font-size: 0.9rem;
+}
+.umkm-profile-page .container .page-content-card .card-content .umkm-details-wrapper .content-label {
+  font-weight: 600;
+  margin-top: 10px;
+}
+.umkm-profile-page .container .page-content-card .card-content .umkm-details-wrapper .table-section {
+  max-height: 160px;
+  overflow-y: auto;
+}
+.umkm-profile-page .container .page-content-card .card-content .umkm-details-wrapper .table-section table tbody td {
+  word-break: break-all;
+}
+.umkm-profile-page .container .page-content-card .card-content .umkm-details-wrapper .table-section table .delete-ic {
+  color: #F92727;
+}
+.umkm-profile-page .container .page-content-card .card-content .umkm-details-wrapper .table-section table .delete-ic:hover {
+  cursor: pointer;
+  color: black;
+}
+.umkm-profile-page .container .page-content-card .card-content .umkm-details-wrapper .message-section {
+  width: 100%;
+  height: -moz-fit-content;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+.umkm-profile-page .container .page-content-card .card-content .umkm-details-wrapper .message-section .paragraph-redirect {
+  color: black;
+  font-weight: 600;
+  text-decoration: none;
+}
+.umkm-profile-page .container .page-content-card .card-content .umkm-details-wrapper .message-section .paragraph-redirect:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+.umkm-profile-page .container .page-content-card .card-content .umkm-details-wrapper .message-section p {
+  width: 100%;
+  text-align: center;
+}
+.umkm-profile-page .container .page-content-card .card-content .umkm-details-wrapper .message-section button {
+  width: -moz-fit-content;
+  width: fit-content;
+}
+.umkm-profile-page .container .page-content-card .card-content .umkm-details-wrapper .account-input-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.umkm-profile-page .container .page-content-card .card-content .umkm-details-wrapper .account-input-form .button-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+}
+.umkm-profile-page .container .page-content-card .card-content .umkm-details-wrapper .account-input-form .button-wrapper .btn-add-account {
+  background-color: #2A2A2A;
+  font-weight: 600;
+  color: white;
+}
+.umkm-profile-page .container .page-content-card .card-content .umkm-details-wrapper .account-input-form .button-wrapper .btn-add-account:hover {
+  cursor: pointer;
+  background-color: #F9D00F;
+  color: black;
+}
+.umkm-profile-page .container .page-section-title {
+  width: 100%;
+  margin-top: 5px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.umkm-profile-page .container .page-section-title h2 {
+  font-size: 1rem;
+  font-weight: 600;
+  display: inline-block;
+}
+.umkm-profile-page .container .page-section-title a {
+  text-decoration: none;
+  font-weight: 600;
+  color: black;
+}
+.umkm-profile-page .container .page-section-title a:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+.umkm-profile-page .container .umkm-card * {
+  font-size: 0.9rem;
+}
+.umkm-profile-page .container .umkm-card .card-header {
+  display: flex;
+  flex-direction: row;
+  -moz-column-gap: 20px;
+       column-gap: 20px;
+  row-gap: 10px;
+  flex-wrap: wrap;
+  background-color: unset;
+  padding-bottom: 10px;
+}
+.umkm-profile-page .container .umkm-card .card-header .umkm-profile-wrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.umkm-profile-page .container .umkm-card .card-header .umkm-profile-wrapper .image-container {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.umkm-profile-page .container .umkm-card .card-header .umkm-profile-wrapper .image-container img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  transition: all ease-in-out 0.3s;
+}
+.umkm-profile-page .container .umkm-card .card-header .umkm-profile-wrapper .image-container img:hover {
+  cursor: pointer;
+  transform: scale(1.5);
+}
+.umkm-profile-page .container .umkm-card .card-header .umkm-profile-wrapper .image-container .no-image {
+  width: 100%;
+  height: 100%;
+  background-color: #D4D4D4;
+  display: grid;
+  place-items: center;
+}
+.umkm-profile-page .container .umkm-card .card-header .umkm-profile-wrapper .image-container .no-image:hover {
+  cursor: pointer;
+  background-color: #2A2A2A;
+}
+.umkm-profile-page .container .umkm-card .card-header .umkm-profile-wrapper .image-container .no-image:hover i {
+  color: white;
+}
+.umkm-profile-page .container .umkm-card .card-header .umkm-profile-wrapper .image-container .no-image i {
+  font-size: 1.2rem;
+  color: black;
+}
+.umkm-profile-page .container .umkm-card .card-header .umkm-profile-wrapper .profile-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.umkm-profile-page .container .umkm-card .card-header .umkm-profile-wrapper .profile-wrapper .umkm-name {
+  font-weight: 600;
+  font-size: 1rem;
+  color: black;
+  text-decoration: none;
+}
+.umkm-profile-page .container .umkm-card .card-header .umkm-profile-wrapper .profile-wrapper .umkm-name:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+.umkm-profile-page .container .umkm-card .card-header .umkm-profile-wrapper .profile-wrapper .product-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  -moz-column-gap: 10px;
+       column-gap: 10px;
+  row-gap: 5px;
+}
+.umkm-profile-page .container .umkm-card .card-header .address-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  flex-basis: 350px;
+  flex-grow: 1;
+}
+.umkm-profile-page .container .umkm-card .card-header .address-wrapper i {
+  font-size: 1.2rem;
+}
+.umkm-profile-page .container .umkm-card .card-header .address-wrapper p {
+  margin: 0;
+}
+.umkm-profile-page .container .umkm-card .card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0 20px;
+}
+.umkm-profile-page .container .umkm-card .card-body .body-title-wrapper {
+  display: flex;
+  flex-direction: row;
+  -moz-column-gap: 20px;
+       column-gap: 20px;
+  row-gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap-reverse;
+}
+.umkm-profile-page .container .umkm-card .card-body .body-title-wrapper .label {
+  font-weight: 600;
+}
+.umkm-profile-page .container .umkm-card .card-body .body-title-wrapper .btn-add-product {
+  background-color: #F9D00F;
+  font-weight: 600;
+  color: white;
+}
+.umkm-profile-page .container .umkm-card .card-body .body-title-wrapper .btn-add-product:hover {
+  cursor: pointer;
+  background-color: #F0AE2C;
+  color: black;
+}
+.umkm-profile-page .container .umkm-card .card-body table td.break {
+  word-break: break-all;
+}
+.umkm-profile-page .container .umkm-card .card-body table td a {
+  font-weight: 600;
+  text-decoration: none;
+  color: black;
+}
+.umkm-profile-page .container .umkm-card .card-body table td a:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+.umkm-profile-page .container .umkm-card .card-body table td a.edit-btn {
+  text-decoration: underline;
+  color: #F92727;
+}
+.umkm-profile-page .container .umkm-card .card-body table td a.edit-btn:hover {
+  font-weight: 600;
+}
+.umkm-profile-page .container .umkm-card .card-body .pagination-wrapper {
+  width: 100%;
+  height: -moz-fit-content;
+  height: fit-content;
+  display: grid;
+  place-items: center;
+}/*# sourceMappingURL=umkm-profile.css.map */

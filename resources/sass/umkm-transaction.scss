@@ -1,0 +1,133 @@
+@import '_var.scss';
+
+.umkm-transaction-page {
+
+    .container {
+        padding-top: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        .page-title {
+            padding: 10px;
+            background-color: $LightenOrange;
+            border-radius: 4px;
+
+            h1 {
+                @include section-header-title();
+
+                span {
+                    color: $PrimaryRed;
+                }
+            }
+        }
+
+        .page-nav-menu-wrapper {
+            width: 100%;
+            height: fit-content;
+            padding: 10px 0;
+
+            ul {
+                width: 100%;
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                column-gap: 10px;
+                row-gap: 5px;
+                height: fit-content;
+
+                li {
+                    background-color: $SecondaryWhite;
+                    border-radius: 4px;
+                    
+                    &:hover {
+                        cursor: pointer;
+                        background-color: $LightenOrange;
+                    }
+
+                    &.active {
+                        background-color: $LightenOrange;
+                    }
+                    
+                    a {
+                        padding: 10px 20px;
+                        width: 100%;
+                        height: 100%;
+                        text-decoration: none;
+                        color: black;
+                        font-size: 0.9rem;
+                        display: block;
+                    }
+                }
+            }
+        }
+
+        .page-content-card {
+            width: 100%;
+            height: fit-content;
+            padding: 10px;
+            border-radius: 4px;
+            background-color: white;
+            margin-bottom: 10px;
+            
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+
+            * {
+                font-size: 0.8rem;
+            }
+
+            .table-responsive {
+
+                table {
+
+                    tbody {
+
+                        tr {
+
+                            td {
+
+                                a {
+                                    font-weight: 600;
+                                    text-decoration: none;
+                                    color: $PrimaryRed;
+
+                                    &:hover {
+                                        cursor: pointer;
+                                        text-decoration: underline;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            .pagination-wrapper {
+                width: 100%;
+                height: fit-content;
+                padding: 10px;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+            }
+
+        }
+
+    }
+}
+
+// Responsive
+@media screen and (max-width: 576px) {
+    .umkm-transaction-page {
+
+        .container {
+            max-width: 100vw;
+        }
+    }
+}

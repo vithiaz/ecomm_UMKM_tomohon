@@ -1,0 +1,225 @@
+.cart-page .container {
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.cart-page .container .page-title {
+  padding: 10px;
+  background-color: #F9D00F;
+  border-radius: 4px;
+}
+.cart-page .container .page-title h1 {
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin: 0;
+}
+.cart-page .container .page-title h1 span {
+  color: #F92727;
+}
+.cart-page .container .page-nav-menu-wrapper {
+  width: 100%;
+  height: -moz-fit-content;
+  height: fit-content;
+  padding: 10px 0;
+}
+.cart-page .container .page-nav-menu-wrapper ul {
+  width: 100%;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  -moz-column-gap: 10px;
+       column-gap: 10px;
+  row-gap: 5px;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+.cart-page .container .page-nav-menu-wrapper ul li {
+  background-color: #EDF0F3;
+  border-radius: 4px;
+}
+.cart-page .container .page-nav-menu-wrapper ul li:hover {
+  cursor: pointer;
+  background-color: #F9D00F;
+}
+.cart-page .container .page-nav-menu-wrapper ul li.active {
+  background-color: #F9D00F;
+}
+.cart-page .container .page-nav-menu-wrapper ul li a {
+  padding: 10px 20px;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  color: black;
+  font-size: 0.9rem;
+  display: block;
+}
+.cart-page .container .page-content-card {
+  width: 100%;
+  height: -moz-fit-content;
+  height: fit-content;
+  padding: 10px;
+  border-radius: 4px;
+  background-color: #FBF7F7;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.cart-page .container .page-content-card .card-id-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.cart-page .container .page-content-card .card-id-wrapper .status {
+  font-weight: 600;
+}
+.cart-page .container .page-content-card .address-wrapper {
+  display: flex;
+  flex-direction: row;
+  row-gap: 10px;
+  -moz-column-gap: 20px;
+       column-gap: 20px;
+  align-items: center;
+  justify-content: flex-start;
+}
+.cart-page .container .page-content-card .address-wrapper .label {
+  font-weight: 600;
+}
+.cart-page .container .page-content-card .address-wrapper p {
+  margin: 0;
+}
+.cart-page .container .page-content-card .table-responsive {
+  width: 100%;
+  height: -moz-fit-content;
+  height: fit-content;
+  overflow: auto;
+}
+.cart-page .container .page-content-card .table-responsive table thead tr td {
+  font-size: 0.9em;
+  font-weight: 600;
+}
+.cart-page .container .page-content-card .table-responsive table tbody tr td {
+  font-size: 0.9em;
+}
+.cart-page .container .page-content-card .table-responsive table tbody tr td a {
+  text-decoration: none;
+  color: black;
+  font-weight: 600;
+  font-size: 0.9em;
+}
+.cart-page .container .page-content-card .table-responsive table tbody tr td a:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+.cart-page .container .page-content-card .table-responsive table tbody tr td .qty-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 3px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.cart-page .container .page-content-card .table-responsive table tbody tr td .qty-wrapper input {
+  flex-grow: 1;
+  flex-basis: 20px;
+}
+.cart-page .container .page-content-card .table-responsive table tbody tr td .qty-wrapper i {
+  padding: 0 5px;
+  color: black;
+}
+.cart-page .container .page-content-card .table-responsive table tbody tr td .qty-wrapper i:hover {
+  cursor: pointer;
+  color: #F92727;
+}
+.cart-page .container .page-content-card .table-responsive table tbody tr td .table-text {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.cart-page .container .page-content-card .table-responsive table tbody tr td .image-container {
+  width: 60px;
+  height: 60px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.cart-page .container .page-content-card .table-responsive table tbody tr td .image-container img {
+  transition: all ease-in-out 0.3s;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.cart-page .container .page-content-card .table-responsive table tbody tr td .image-container img:hover {
+  cursor: pointer;
+  transform: scale(1.5);
+}
+.cart-page .container .page-content-card .table-responsive table tbody tr td .prices {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+}
+.cart-page .container .page-content-card .table-responsive table tbody tr td .prices .base-price {
+  font-size: 0.9em;
+  color: #F0AE2C;
+  text-decoration: line-through;
+  word-break: break-all;
+}
+.cart-page .container .page-content-card .table-responsive table tbody tr td .prices .final-price {
+  font-size: 0.9em;
+  word-break: break-all;
+}
+.cart-page .container .page-content-card .table-responsive table tbody tr td.amount {
+  text-align: right;
+  word-break: break-all;
+}
+.cart-page .container .page-content-card .table-responsive table tbody tr td .sub-total-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  justify-content: flex-end;
+  -moz-column-gap: 20px;
+       column-gap: 20px;
+  row-gap: 10px;
+  flex-wrap: wrap;
+}
+.cart-page .container .page-content-card .table-responsive table tbody tr td .sub-total-label {
+  font-size: 0.9em;
+}
+.cart-page .container .page-content-card .table-responsive table tbody tr td .sub-total {
+  font-size: 1.1em;
+  font-weight: 600;
+}
+.cart-page .container .page-content-card .button-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+}
+.cart-page .container .page-content-card .button-wrapper .checkout-btn {
+  background-color: #F9D00F;
+  font-weight: 600;
+  color: black;
+  font-size: 0.9rem;
+}
+.cart-page .container .page-content-card .button-wrapper .checkout-btn:hover {
+  cursor: pointer;
+  background-color: #F0AE2C;
+  color: white;
+}/*# sourceMappingURL=cart-page.css.map */

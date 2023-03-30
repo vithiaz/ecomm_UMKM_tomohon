@@ -1,0 +1,134 @@
+.admin-product-verification-page,
+.admin-product-page {
+  padding: 20px 10px;
+}
+.admin-product-verification-page .container,
+.admin-product-page .container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.admin-product-verification-page .container .page-title,
+.admin-product-page .container .page-title {
+  padding: 10px;
+  background-color: #F9D00F;
+  border-radius: 4px;
+}
+.admin-product-verification-page .container .page-title h1,
+.admin-product-page .container .page-title h1 {
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin: 0;
+}
+.admin-product-verification-page .container .page-title h1 span,
+.admin-product-page .container .page-title h1 span {
+  color: #F92727;
+}
+.admin-product-verification-page .container .content-menu-wrapper,
+.admin-product-page .container .content-menu-wrapper {
+  width: 100%;
+  height: -moz-fit-content;
+  height: fit-content;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+.admin-product-verification-page .container .content-menu-wrapper .menu-item,
+.admin-product-page .container .content-menu-wrapper .menu-item {
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 5px 10px;
+  color: black;
+  border-radius: 4px;
+  background-color: #EDF0F3;
+  text-decoration: none;
+}
+.admin-product-verification-page .container .content-menu-wrapper .menu-item:hover,
+.admin-product-page .container .content-menu-wrapper .menu-item:hover {
+  cursor: pointer;
+  background-color: #F9D00F;
+}
+.admin-product-verification-page .container .content-menu-wrapper .menu-item.active,
+.admin-product-page .container .content-menu-wrapper .menu-item.active {
+  background-color: #F9D00F;
+}
+.admin-product-verification-page .container .page-content-card,
+.admin-product-page .container .page-content-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  height: -moz-fit-content;
+  height: fit-content;
+  padding: 10px;
+  background-color: white;
+  border-radius: 4px;
+}
+.admin-product-verification-page .container .page-content-card *,
+.admin-product-page .container .page-content-card * {
+  font-size: 0.9rem;
+}
+.admin-product-verification-page .container .page-content-card .card-title-wrapper,
+.admin-product-page .container .page-content-card .card-title-wrapper {
+  width: 100%;
+  height: -moz-fit-content;
+  height: fit-content;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  -moz-column-gap: 20px;
+       column-gap: 20px;
+  row-gap: 10px;
+  flex-wrap: wrap;
+}
+.admin-product-verification-page .container .page-content-card .card-title-wrapper .card-title,
+.admin-product-page .container .page-content-card .card-title-wrapper .card-title {
+  font-weight: 600;
+  margin: 0;
+  flex-grow: 4;
+}
+.admin-product-verification-page .container .page-content-card .card-title-wrapper .card-search-input,
+.admin-product-page .container .page-content-card .card-title-wrapper .card-search-input {
+  flex-basis: 240px;
+  flex-grow: 1;
+  border: none;
+  background-color: #FBF7F7;
+  padding: 3px 10px;
+}
+.admin-product-verification-page .container .page-content-card .card-title-wrapper .card-search-input:focus,
+.admin-product-page .container .page-content-card .card-title-wrapper .card-search-input:focus {
+  border: 0;
+  outline: none;
+}
+.admin-product-verification-page .container .page-content-card table thead tr td,
+.admin-product-page .container .page-content-card table thead tr td {
+  font-weight: 600;
+}
+.admin-product-verification-page .container .page-content-card table .table-a,
+.admin-product-page .container .page-content-card table .table-a {
+  color: #F92727;
+  text-decoration: underline;
+}
+.admin-product-verification-page .container .page-content-card table .table-a:hover,
+.admin-product-page .container .page-content-card table .table-a:hover {
+  cursor: pointer;
+  font-weight: 600;
+}
+.admin-product-verification-page .container .page-content-card .pagination-wrapper,
+.admin-product-page .container .page-content-card .pagination-wrapper {
+  width: 100%;
+  height: -moz-fit-content;
+  height: fit-content;
+  display: grid;
+  place-items: center;
+}
+
+@media screen and (max-width: 576px) {
+  .admin-product-verification-page .container {
+    max-width: 100vw;
+  }
+}/*# sourceMappingURL=admin-product-verification.css.map */

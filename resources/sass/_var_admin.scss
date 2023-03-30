@@ -1,0 +1,263 @@
+$PrimaryBlack: #1C1C1C;
+$PrimaryBlackFade60: rgba(28, 28, 28, 0.6);
+$PrimaryRed: #DD3333;
+$PrimaryYellow: #E3E31F;
+$PrimaryGreen: #58EF3A;
+$SecondaryGreen: #1ED189;
+$PrimaryBlue: #4270EE;
+$PrimaryBlueLight: #1EBFD1;
+$PrimaryOrange: #D1771E;
+$BorderLight: #E8E8E8;
+$BorderVeryLight: #F8F8F8;
+$ImageContainerDefault: #CECECE;
+$TextLighter: #747474;
+$TextDarker: #110606;
+
+$LightenOrange: #F9D00F;
+$DarkerOrange: #F0AE2C;
+
+
+
+$CardBorder: #C9C9C9;
+
+$BoxShadow: 0px 3px 6px rgba(0,0,0,0.2);
+
+$NavbarDefaultHeight: 60px;
+
+$BoxBeforeTitleWidth: 10px;
+$TextAfterBoxPaddingLeft: 20px;
+
+$ScreenMinWidth: 280px;
+
+@mixin slot-title-style($box_color: $PrimaryBlack) {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    column-gap: 20px;
+    height: 35px;
+
+    span {
+        text-transform: uppercase;
+        font-size: 1rem;
+        letter-spacing: 1px;
+        font-weight: 600;
+        position: relative;
+        padding-left: $TextAfterBoxPaddingLeft;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: black;
+
+        &::before {
+            content: '';
+            width: $BoxBeforeTitleWidth;
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            background-color: $box_color;
+        }
+    }
+}
+
+@mixin button-default ($font_weight: 600, $bg_color: $PrimaryBlue) {
+    width: fit-content;
+    padding-left: 18px;
+    padding-right: 18px;
+    height: 40px;
+    font-size: 0.9rem;
+    font-weight: $font_weight;
+    color: white;
+    background-color: $bg_color;
+    outline: none;
+    border: none;
+    transition: all 0.1s ease-in-out;
+}
+
+@mixin social-media-icon-hover {
+    a, span {
+        text-decoration: none;
+        position: relative;
+        
+        svg {
+            transition: 0.1s all ease-in-out;
+        }
+    }
+    a:hover svg, span:hover svg{
+        cursor: pointer;
+        transform: scale(1.2);
+    }
+}
+
+@mixin navbar-search-input-group ($primary_color, $focus_color, $input_bg: white, $input_col: black) {
+    .input-group {
+        height: 100%;
+        
+        input, button {
+            border-radius: 4px;
+            height: 100%;
+        }
+        input {
+            background-color: $input_bg;
+            border: none;
+            color: $input_col;
+        }
+        input:focus {
+            border-color: rgba($focus_color, 0.8);
+            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba($focus_color, 0.6);
+            outline: 0 none;
+        }
+
+        button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        button:hover i {
+            color: $primary_color;
+        }
+    }    
+}
+
+@mixin text-column-limit($limit, $orient: vertical) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: $limit; /* number of lines to show */
+            line-clamp: $limit; 
+    -webkit-box-orient: $orient;
+}
+
+@mixin category-card-small () {
+    display: block;
+    padding: 5px 10px;
+    width: fit-content;
+    height: fit-content;
+    background-color: $PrimaryBlack;
+    color: white;
+    font-weight: 600;
+    font-size: 0.8em;
+    border-radius: 0;
+    text-decoration: none;
+    transition: all .3 ease-in-out;
+
+    &:hover, &.active {
+        background-color: white;
+        color: black;
+        border: 1px solid black;
+    }
+    &.active:hover {
+        background-color: $PrimaryBlack;
+        color: white;
+    }
+}
+
+@mixin wrapper-empty {
+    width: 100%;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    color: rgb(70, 70, 70);
+
+    i {
+        font-size: 1.8rem;
+    }
+    span {
+        font-size: 0.8rem;
+    }
+}
+
+@mixin no-image-i() {
+    width: 100%;
+    height: 100%;
+    background-color: $BorderVeryLight;
+    display: grid;
+    place-items: center;
+
+    &:hover {
+        cursor: pointer;
+        background-color: $PrimaryBlack;
+
+        i {
+            color:  white;
+        }
+    }
+    
+    i {
+        font-size: 1.2rem;
+        color: black;
+    }
+}
+
+
+
+// Pagination
+@mixin pagination-style($bg_color: $PrimaryBlue, $links_color: $PrimaryBlue) {
+    .pagination {
+        // gap: 10px;
+
+        .page-item {
+
+            .page-link {
+                color: $links_color;
+            }
+        }
+
+        .page-item:first-child,
+        .page-item:last-child {
+
+            .page-link {
+                border-radius: 0;
+                color: $TextLighter;
+            }
+        }
+
+        .page-item.active {
+            
+            .page-link {
+                background-color: $bg_color;
+                color: white;
+                border-color: transparent;
+            }
+        }
+    }
+}
+
+// Summernote Editor
+@mixin summernote-styles() {
+    .note-editor {
+        border-radius: 0;
+        
+        .note-toolbar {
+            background-color: $BorderVeryLight;
+        }
+    }
+
+    .note-toolbar.floating {
+        position: fixed;
+        top: 0;
+        z-index: 139;
+        border: 1px $CardBorder solid;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .dropdown-fontname, .dropdown-fontsize, .dropdown-line-height {
+        max-height: 250px;
+        overflow: auto;
+    }
+
+    .note-editing-area {
+        padding: 5px 20px 20px 30px;
+        height: fit-content;
+    }
+
+    .note-image-popover {
+        left: 50% !important;
+        transform: translateX(-50%);
+    }
+
+    
+}

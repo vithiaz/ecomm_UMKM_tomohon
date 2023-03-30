@@ -1,0 +1,101 @@
+.umkm-transaction-page .container {
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.umkm-transaction-page .container .page-title {
+  padding: 10px;
+  background-color: #F9D00F;
+  border-radius: 4px;
+}
+.umkm-transaction-page .container .page-title h1 {
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin: 0;
+}
+.umkm-transaction-page .container .page-title h1 span {
+  color: #F92727;
+}
+.umkm-transaction-page .container .page-nav-menu-wrapper {
+  width: 100%;
+  height: -moz-fit-content;
+  height: fit-content;
+  padding: 10px 0;
+}
+.umkm-transaction-page .container .page-nav-menu-wrapper ul {
+  width: 100%;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  -moz-column-gap: 10px;
+       column-gap: 10px;
+  row-gap: 5px;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+.umkm-transaction-page .container .page-nav-menu-wrapper ul li {
+  background-color: #FBF7F7;
+  border-radius: 4px;
+}
+.umkm-transaction-page .container .page-nav-menu-wrapper ul li:hover {
+  cursor: pointer;
+  background-color: #F9D00F;
+}
+.umkm-transaction-page .container .page-nav-menu-wrapper ul li.active {
+  background-color: #F9D00F;
+}
+.umkm-transaction-page .container .page-nav-menu-wrapper ul li a {
+  padding: 10px 20px;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  color: black;
+  font-size: 0.9rem;
+  display: block;
+}
+.umkm-transaction-page .container .page-content-card {
+  width: 100%;
+  height: -moz-fit-content;
+  height: fit-content;
+  padding: 10px;
+  border-radius: 4px;
+  background-color: white;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.umkm-transaction-page .container .page-content-card * {
+  font-size: 0.8rem;
+}
+.umkm-transaction-page .container .page-content-card .table-responsive table tbody tr td a {
+  font-weight: 600;
+  text-decoration: none;
+  color: #F92727;
+}
+.umkm-transaction-page .container .page-content-card .table-responsive table tbody tr td a:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+.umkm-transaction-page .container .page-content-card .pagination-wrapper {
+  width: 100%;
+  height: -moz-fit-content;
+  height: fit-content;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+@media screen and (max-width: 576px) {
+  .umkm-transaction-page .container {
+    max-width: 100vw;
+  }
+}/*# sourceMappingURL=umkm-transaction.css.map */

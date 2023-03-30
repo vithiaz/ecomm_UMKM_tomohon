@@ -1,0 +1,94 @@
+@import '_var.scss';
+
+
+.admin-product-category-page {
+    padding: 20px 10px;
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        .page-title {
+            padding: 10px;
+            background-color: $LightenOrange;
+            border-radius: 4px;
+
+            h1 {
+                @include section-header-title();
+
+                span {
+                    color: $PrimaryRed;
+                }
+            }
+        }
+
+        .page-content-card {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 100%;
+            height: fit-content;
+            padding: 10px;
+            background-color: white;
+            border-radius: 4px;
+
+            * {
+                font-size: 0.9rem;
+            }
+
+            .add-category-form {
+                display: flex;
+                flex-direction: row;
+                gap: 10px;
+                flex-wrap: wrap;
+
+                .form-floating {
+                    flex-basis: 240px;
+                }
+
+                .error {
+                    margin-left: 10px;
+                    color: $PrimaryRed;
+                }
+
+                .btn {
+                    transition: all 0.3s ease-in-out;
+                }
+            }
+
+            table {
+
+                .table-a {
+                    color: $PrimaryRed;
+                    text-decoration: underline;
+
+                    &:hover {
+                        cursor: pointer;
+                        font-weight: 600;
+                    }
+                }
+            }
+
+            .pagination-wrapper {
+                width: 100%;
+                height: fit-content;
+                display: grid;
+                place-items: center;
+            }
+
+        }
+
+
+    }
+}
+
+// Responsive
+@media screen and (max-width: 576px) {
+    .admin-product-category-page {
+
+        .container {
+            max-width: 100vw;
+        }
+    }
+}

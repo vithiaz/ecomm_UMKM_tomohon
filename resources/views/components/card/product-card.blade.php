@@ -1,21 +1,31 @@
 <div class="swiper-slide product-card">
     <div class="image-container">
-        <img src="{{ $img }}" alt="">
+        @if ($img)
+            <img src="{{ asset('storage/'.$img) }}" alt="">
+        @else
+            <div class="no-image">
+                <i class="fa-solid fa-image"></i>
+            </div>
+        @endif
     </div>
     <div class="card-content">
         <div class="price-wrapper">
             <span class="main">Rp. {{ $price }}</span>
-            <span class="secondary">Rp. {{ $basePrice }}</span>
+            @if ($discount > 0)
+                <span class="secondary">Rp. {{ $basePrice }}</span>
+            @endif
         </div>
         <div class="store-wrapper">
             <span class="store">{{ $umkm }}</span>
-            <span class="discount">-{{ $discount }}%</span>
+            @if ($discount > 0)
+                <span class="discount">-{{ $discount }}%</span>
+            @endif
         </div>
         <div class="stock-wrapper">
             <div class="sale">Terjual {{ $sold }}</div>
             <div class="stock">Tersisa {{ $stock }}</div>
         </div>
-        <a href="{{ $link }}" class="card-title">
+        <a href="{{ route('product-details', [$productId, $productNameSlug]) }}" class="card-title">
             {{ $productName }}
         </a>
         <div class="bottom-wrapper">

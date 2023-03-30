@@ -1,0 +1,50 @@
+.register-page .container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+.register-page .container .register-card {
+  padding: 20px 10px;
+  margin: 20px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  border-radius: 4px;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
+  background-color: white;
+  width: 100%;
+  max-width: 500px;
+}
+.register-page .container .register-card .register-card-title h1 {
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin: 0;
+}
+.register-page .container .register-card .register-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+.register-page .container .register-card .register-card-content * {
+  font-size: 0.9rem;
+}
+.register-page .container .register-card .register-card-content .form-floating {
+  width: 100%;
+}
+.register-page .container .register-card .register-card-content .form-floating .error-msg {
+  color: #F92727;
+}
+.register-page .container .register-card .register-card-content .button-wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+}/*# sourceMappingURL=register-page.css.map */

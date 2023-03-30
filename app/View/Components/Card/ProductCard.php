@@ -7,6 +7,7 @@ use Illuminate\View\Component;
 class ProductCard extends Component
 {
     
+   public $productId;
    public $basePrice;
    public $price;
    public $discount;
@@ -14,31 +15,33 @@ class ProductCard extends Component
    public $sold;
    public $stock;
    public $productName;
+   public $productNameSlug;
    public $location;
    public $img;
-   public $link;
     
     public function __construct(
+        $productId,
         $basePrice,
         $discount,
         $umkm,
         $sold,
         $stock,
         $productName,
+        $productNameSlug,
         $location,
         $img,
-        $link
         )
     {
+        $this->productId = $productId;
         $this->basePrice = number_format($basePrice, 2, ",", '.');
         $this->discount = $discount;
         $this->umkm = $umkm;
         $this->sold = $this->simplify_number($sold);
         $this->stock = $stock;
         $this->productName = $productName;
+        $this->productNameSlug = $productNameSlug;
         $this->location = $location;
         $this->img = $img;
-        $this->link = $link;
 
         // Calculate Discount
         $Amount = (int)$basePrice;
@@ -46,11 +49,6 @@ class ProductCard extends Component
         $this->price = number_format($CalculatedAmount, 2, ",", '.');
     }
 
-    /**
-     * Get the view / contents that represent the component.
-     *
-     * @return \Illuminate\Contracts\View\View|\Closure|string
-     */
     public function render()
     {
         return view('components.card.product-card');

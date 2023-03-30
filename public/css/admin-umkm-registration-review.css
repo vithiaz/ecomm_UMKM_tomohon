@@ -1,0 +1,259 @@
+.admin-umkm-registration-review {
+  padding: 20px 10px;
+}
+.admin-umkm-registration-review .container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.admin-umkm-registration-review .container .page-title {
+  padding: 10px;
+  background-color: #F9D00F;
+  border-radius: 4px;
+}
+.admin-umkm-registration-review .container .page-title h1 {
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin: 0;
+}
+.admin-umkm-registration-review .container .page-title h1 span {
+  color: #F92727;
+}
+.admin-umkm-registration-review .container .page-content-card {
+  width: 100%;
+  height: -moz-fit-content;
+  height: fit-content;
+  padding: 15px 10px;
+  border-radius: 4px;
+  background-color: white;
+  margin-bottom: 10px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.admin-umkm-registration-review .container .page-content-card .card-title {
+  margin-bottom: 30px;
+}
+.admin-umkm-registration-review .container .page-content-card .card-title::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 50px;
+  width: 40px;
+  border-radius: 4px;
+  background-color: #F9D00F;
+}
+.admin-umkm-registration-review .container .page-content-card .card-title h1 {
+  font-size: 1rem;
+  font-weight: 600;
+  position: absolute;
+  z-index: 1;
+}
+.admin-umkm-registration-review .container .page-content-card .card-content {
+  width: 100%;
+  height: -moz-fit-content;
+  height: fit-content;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  -moz-column-gap: 20px;
+       column-gap: 20px;
+  row-gap: 10px;
+  align-items: stretch;
+}
+.admin-umkm-registration-review .container .page-content-card .card-content .account-wrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+  flex-basis: 320px;
+  flex-shrink: 1;
+  flex-grow: 1;
+  justify-content: center;
+}
+.admin-umkm-registration-review .container .page-content-card .card-content .account-wrapper .profile-container {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  flex-basis: 280px;
+  flex-grow: 1;
+}
+.admin-umkm-registration-review .container .page-content-card .card-content .account-wrapper .profile-container .image-container {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.admin-umkm-registration-review .container .page-content-card .card-content .account-wrapper .profile-container .image-container .no-image {
+  width: 100%;
+  height: 100%;
+  background-color: #D4D4D4;
+  display: grid;
+  place-items: center;
+}
+.admin-umkm-registration-review .container .page-content-card .card-content .account-wrapper .profile-container .image-container .no-image:hover {
+  cursor: pointer;
+  background-color: #2A2A2A;
+}
+.admin-umkm-registration-review .container .page-content-card .card-content .account-wrapper .profile-container .image-container .no-image:hover i {
+  color: white;
+}
+.admin-umkm-registration-review .container .page-content-card .card-content .account-wrapper .profile-container .image-container .no-image i {
+  font-size: 1.2rem;
+  color: black;
+}
+.admin-umkm-registration-review .container .page-content-card .card-content .account-wrapper .profile-container .image-container img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  transition: all ease-in-out 0.3s;
+}
+.admin-umkm-registration-review .container .page-content-card .card-content .account-wrapper .profile-container .image-container img:hover {
+  cursor: pointer;
+  transform: scale(1.5);
+}
+.admin-umkm-registration-review .container .page-content-card .card-content .account-wrapper .profile-container .profile-id-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.admin-umkm-registration-review .container .page-content-card .card-content .account-wrapper .profile-container .profile-id-wrapper .username {
+  font-weight: 600;
+  font-size: 1em;
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
+}
+.admin-umkm-registration-review .container .page-content-card .card-content .account-wrapper .profile-container .profile-id-wrapper .user-id {
+  font-size: 0.9em;
+}
+.admin-umkm-registration-review .container .page-content-card .card-content .account-wrapper .profile-details-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  max-width: 400px;
+  width: 100%;
+}
+.admin-umkm-registration-review .container .page-content-card .card-content .account-wrapper .profile-details-wrapper p {
+  font-size: 0.9em;
+  margin: 0;
+}
+.admin-umkm-registration-review .container .page-content-card .card-content .account-wrapper .profile-details-wrapper span {
+  font-size: 0.9em;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+.admin-umkm-registration-review .container .page-content-card .card-content .account-wrapper .profile-details-wrapper span.label {
+  font-weight: 600;
+}
+.admin-umkm-registration-review .container .page-content-card .card-content .account-wrapper .profile-details-wrapper .row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  -moz-column-gap: 20px;
+       column-gap: 20px;
+  row-gap: 5px;
+}
+.admin-umkm-registration-review .container .page-content-card .card-content .account-wrapper .profile-details-wrapper .address-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.admin-umkm-registration-review .container .page-content-card .card-content .response-wrapper {
+  height: auto;
+  flex-basis: 500px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.admin-umkm-registration-review .container .page-content-card .card-content .response-wrapper .request-wrapper {
+  width: 100%;
+  height: 100%;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.admin-umkm-registration-review .container .page-content-card .card-content .response-wrapper .request-wrapper .button-wrapper {
+  width: 100%;
+  height: -moz-fit-content;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 10px;
+  flex-wrap: wrap;
+  transition: all ease-in-out 0.3s;
+  max-height: 100vh;
+  overflow: hidden;
+}
+.admin-umkm-registration-review .container .page-content-card .card-content .response-wrapper .request-wrapper .button-wrapper.hide {
+  max-height: 0vh;
+}
+.admin-umkm-registration-review .container .page-content-card .card-content .response-wrapper .request-wrapper .button-wrapper.hide > * {
+  opacity: 0;
+}
+.admin-umkm-registration-review .container .page-content-card .card-content .response-wrapper .request-wrapper .decline-form {
+  width: 100%;
+  height: -moz-fit-content;
+  height: fit-content;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  justify-content: flex-end;
+  transition: all ease-in-out 0.3s;
+  max-height: 0vh;
+  overflow: hidden;
+}
+.admin-umkm-registration-review .container .page-content-card .card-content .response-wrapper .request-wrapper .decline-form > * {
+  position: relative;
+  transform: translateY(-100vh);
+  opacity: 0;
+  transition: all ease 0.3s;
+}
+.admin-umkm-registration-review .container .page-content-card .card-content .response-wrapper .request-wrapper .decline-form.active {
+  max-height: 100vh;
+  padding: 5px 0;
+}
+.admin-umkm-registration-review .container .page-content-card .card-content .response-wrapper .request-wrapper .decline-form.active > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+.admin-umkm-registration-review .container .page-content-card .card-content .response-wrapper .request-wrapper .decline-form .form-floating {
+  width: 80%;
+  flex-basis: 100%;
+  padding: 5px;
+}
+.admin-umkm-registration-review .container .page-content-card .card-content .response-wrapper .edit-status {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.admin-umkm-registration-review .container .page-content-card .card-content .response-wrapper .edit-status .form-label {
+  font-weight: 600;
+}
+.admin-umkm-registration-review .container .page-content-card .card-content .response-wrapper .edit-status .button-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+}/*# sourceMappingURL=admin-umkm-registration-review.css.map */

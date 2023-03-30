@@ -1,0 +1,153 @@
+@import '_var.scss';
+
+.register-umkm-page {
+
+    .container {
+        padding-top: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        .page-title {
+            padding: 10px;
+            background-color: $LightenOrange;
+            border-radius: 4px;
+
+            h1 {
+                @include section-header-title();
+
+                span {
+                    color: $PrimaryRed;
+                }
+            }
+        }
+
+        .page-content-card {
+            width: 100%;
+            height: fit-content;
+            padding: 15px 10px;
+            border-radius: 4px;
+            background-color: white;
+            margin-bottom: 10px;
+            position: relative;
+            
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+
+            * {
+                font-size: 0.9rem;
+            }
+
+            .row {
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                column-gap: 20px;
+                row-gap: 10px;
+                align-items: center;
+                justify-content: space-around;
+
+                .image-wrapper {
+                    flex-basis: 180px;
+                    height: fit-content;
+                    display: grid;
+                    place-items: center;
+
+                    .image-container {
+                        width: 120px;
+                        height: 120px;
+                        border-radius: 50%;
+                        overflow: hidden;
+                        flex-shrink: 0;
+                        position: relative;
+                        flex-shrink: 0;
+    
+                        img {
+                            @include image-hover-animate();
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                        }
+    
+                        .delete-image {
+                            position: absolute;
+                            top: 0;
+                            bottom: 0;
+                            left: 0;
+                            right: 0;
+                            display: none;
+                            place-items: center;
+                            background-color: rgba(0, 0, 0, 0.3);
+    
+                            &:hover {
+                                cursor: pointer;
+                            }
+    
+                            i {
+                                font-size: 1.2rem;
+                                color: white;
+                            }
+                        }
+    
+                        &:hover {
+                            .delete-image {
+                                display: grid;
+                            }
+                        }
+    
+                        .no-image {
+                            width: 100%;
+                            height: 100%;
+                            background-color: $LightWhite;
+                            display: grid;
+                            place-items: center;
+    
+                            i {
+                                font-size: 1.2rem;
+                                color: $PrimaryDark;
+                            }
+    
+                            &:hover {
+                                cursor: pointer;
+                                
+                                i {
+                                    color: $LightenOrange;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                form {
+                    width: 60%;
+                    flex-grow: 1;
+
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px;
+
+                    textarea {
+                        height: 120px;
+                    }
+
+                    .button-wrapper {
+                        width: 100%;
+                        flex-basis: 100%;
+                        height: fit-content;
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        justify-content: flex-end;
+                        gap: 10px;
+
+                        .btn-submit {
+                            @include button-default($bg: $PrimaryDark, $color: white, $bg_hover: $LightenOrange, $color_hover: white);
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+}

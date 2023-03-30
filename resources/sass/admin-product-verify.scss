@@ -1,0 +1,195 @@
+@import '_var.scss';
+
+
+.admin-product-verify {
+    padding: 20px 10px;
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        .page-title {
+            padding: 10px;
+            background-color: $LightenOrange;
+            border-radius: 4px;
+
+            h1 {
+                @include section-header-title();
+
+                span {
+                    color: $PrimaryRed;
+                }
+            }
+        }
+
+        .page-content-card {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 100%;
+            height: fit-content;
+            background-color: white;
+            border-radius: 4px;
+
+            * {
+                font-size: 0.9rem;
+            }
+
+            .product-detail-wrapper {
+                display: flex;
+                flex-direction: row;
+                column-gap: 15px;
+                row-gap: 10px;
+                align-items: flex-start;
+                justify-content: center;
+                padding: 10px;
+                flex-wrap: wrap;
+
+                .image-container {
+                    width: 300px;
+                    height: fit-content;
+                    overflow: hidden;
+
+                    img {
+                        width: 100%;
+                        height: fit-content;
+                        object-fit: cover;
+
+                        @include image-hover-animate();
+                    }
+
+                    .no-image {
+                        height: 250px !important;
+                        @include no-image-i();
+                    }
+                }
+
+                .content-container {
+                    flex-basis: 400px;
+                    flex-grow: 1;
+                    height: fit-content;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px;
+
+                    .content-head-wrapper {
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-between;
+                        flex-wrap: wrap-reverse;
+                        width: 100%;
+                        
+                        .title {
+                            font-size: 1em;
+                            font-weight: 600;
+                            text-align: justify;
+                        }
+
+                        .form-check-input:checked {
+                            background-color: $LightenOrange;
+                            border-color: $LightenOrange;
+                        }
+                    }
+
+                    .content-neck-wrapper {
+                        display: flex;
+                        flex-direction: row;
+                        gap: 10px;
+                        flex-wrap: wrap-reverse;
+                        align-items: center;
+                        justify-content: flex-start;
+
+                        span {
+                            font-size: 0.9em;
+                        }
+
+                        .main {
+                            display: flex;
+                            flex-direction: row;
+                            gap: 20px;
+                            align-items: center;
+                            justify-content: flex-start;
+                            flex-wrap: wrap;
+                            flex-grow: 1;
+
+                            .location-container {
+                                display: flex;
+                                flex-direction: row;
+                                gap: 5px;
+                                align-items: center;
+                                justify-content: flex-start;
+                            }
+                        }
+
+                    }
+
+                    .price-wrapper {
+                        display: flex;
+                        flex-direction: row;
+                        gap: 10px;
+                        align-items: center;
+                        justify-content: space-between;
+                        flex-wrap: wrap;
+
+                        .discount-box {
+                            padding: 5px 10px;
+                            background-color: $LightenOrange;
+                            border-radius: 4px;
+                            font-weight: 600;
+                            color: white;
+                            font-size: 0.9em;
+                        }
+
+                        .main-price, .secondary-price {
+                            font-size: 0.9em;
+                        }
+                        
+                        .main-price {
+                            font-weight: 600;
+                            flex-grow: 1;
+                        }
+
+                        .secondary-price {
+                            text-decoration: line-through;
+                        }
+                    }
+
+                    .description-wrapper {
+                        width: 100%;
+                        display: flex;
+                        flex-direction: column;
+                        gap: 5px;
+
+                        .title {
+                            font-weight: 600;
+                            font-size: 0.9em;
+                        }
+
+                        .description {
+                            width: 100%;
+                            text-align: justify;
+                            font-size: 0.9em;
+                        }
+                    }
+
+                }
+
+
+            }
+
+            .button-wrapper {
+                flex-basis: 100%;
+                width: 100%;
+                height: fit-content;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: flex-end;
+                gap: 10px;
+            }
+        }
+
+
+    }
+}

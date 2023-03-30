@@ -36,13 +36,25 @@
     @stack('stylesheet')
 
     @livewireStyles
+    @powerGridStyles
 </head>
 <body>
 
     {{-- Content Here --}}
     @yield('base_layout_content')
 
-
+    {{-- Session Message --}}
+    <div id="session-message" class="session-message-card" data-notify='{{ session('message') }}'>
+        <div class="content">
+            <i class="success fa-solid fa-circle-check"></i>
+            <i class="info fa-solid fa-circle-info"></i>
+            <i class="danger fa-solid fa-circle-exclamation"></i>
+            <span class="message">Message Placeholder</span>
+        </div>
+        <div class="close-button">
+            <i class="success fa-solid fa-xmark"></i>
+        </div>
+    </div>
 
     {{-- Dependencies /////////////////////// --}}
 
@@ -55,9 +67,61 @@
     {{-- SwiperJS CDN --}}
     <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
 
+    {{-- Session Message Events Scripts--}}
+    <script>
+        function show_message($msg, $class) {
+            $('.session-message-card').addClass($class);
+            $('.session-message-card .message').text($msg);
+            $('.session-message-card').addClass('active');
+            setTimeout(function() {
+                $('.session-message-card').removeClass('active');
+            }, 3000);
+        }
+
+        $(document).ready(function () {
+            $('.session-message-card').removeClass('success');
+            $('.session-message-card').removeClass('danger');
+            $('.session-message-card').removeClass('info');
+
+            if( $('#session-message').data('notify') ) {
+                show_message($('#session-message').data('notify'), 'success');
+            }
+        });
+
+        $('.session-message-card .close-button').click(function () {
+            $('.session-message-card').removeClass('active');
+        });
+
+        $(window).on('display-message', function (event) {
+            $('.session-message-card').removeClass('success');
+            $('.session-message-card').removeClass('danger');
+            $('.session-message-card').removeClass('info');
+
+            if (event.detail.success) {
+                show_message(event.detail.success, 'success');
+            }
+            else if (event.detail.error) {
+                show_message(event.detail.error, 'danger');          
+            }
+            else {
+                show_message(event.detail.info, 'info');          
+            }
+        });
+    </script>
+
+    {{-- PowerGrid Scripts --}}
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" 
+            integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" 
+            crossorigin="anonymous"></script>
+    
     @stack('script')
 
+    {{-- AlpineJS  --}}
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
     @livewireScripts
+    @powerGridScripts
 </body>
 
 </html>

@@ -1,0 +1,74 @@
+.admin-product-category-page {
+  padding: 20px 10px;
+}
+.admin-product-category-page .container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.admin-product-category-page .container .page-title {
+  padding: 10px;
+  background-color: #F9D00F;
+  border-radius: 4px;
+}
+.admin-product-category-page .container .page-title h1 {
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin: 0;
+}
+.admin-product-category-page .container .page-title h1 span {
+  color: #F92727;
+}
+.admin-product-category-page .container .page-content-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  height: -moz-fit-content;
+  height: fit-content;
+  padding: 10px;
+  background-color: white;
+  border-radius: 4px;
+}
+.admin-product-category-page .container .page-content-card * {
+  font-size: 0.9rem;
+}
+.admin-product-category-page .container .page-content-card .add-category-form {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.admin-product-category-page .container .page-content-card .add-category-form .form-floating {
+  flex-basis: 240px;
+}
+.admin-product-category-page .container .page-content-card .add-category-form .error {
+  margin-left: 10px;
+  color: #F92727;
+}
+.admin-product-category-page .container .page-content-card .add-category-form .btn {
+  transition: all 0.3s ease-in-out;
+}
+.admin-product-category-page .container .page-content-card table .table-a {
+  color: #F92727;
+  text-decoration: underline;
+}
+.admin-product-category-page .container .page-content-card table .table-a:hover {
+  cursor: pointer;
+  font-weight: 600;
+}
+.admin-product-category-page .container .page-content-card .pagination-wrapper {
+  width: 100%;
+  height: -moz-fit-content;
+  height: fit-content;
+  display: grid;
+  place-items: center;
+}
+
+@media screen and (max-width: 576px) {
+  .admin-product-category-page .container {
+    max-width: 100vw;
+  }
+}/*# sourceMappingURL=admin-product-category.css.map */

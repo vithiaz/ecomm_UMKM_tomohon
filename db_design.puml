@@ -8,9 +8,9 @@ entity User {
     * last_name VARCHAR(255)
     * password TEXT
     * email VARCHAR(255)
-    * phone_number VARCHAR(255)
     * umkm_status BOOLEAN
     --
+    phone_number VARCHAR(255)
     address TEXT
     profile_img TEXT
     --
@@ -32,7 +32,10 @@ entity User_Cart {
 entity UMKM {
     * id BIGINT PRIMARY KEY
     * name VARCHAR(255)
+    * status BOOLEAN
     --
+    city TEXT
+    district TEXT
     address TEXT
     profile_img TEXT
     --
@@ -45,8 +48,13 @@ entity UMKM {
 entity Bank_Account {
     * id BIGINT PRIMARY KEY
     * bank_name VARCHAR(255)
-    * bank_account VARCHAR(255)
+    * account_number VARCHAR(255)
+    * account_name VARCHAR(255)
     * status VARCHAR(255)
+    ' request
+    ' acc
+    ' revoked
+    ' rejected
     --
     * user_id BIGINT FOUREIGN(User.id)
     --
@@ -57,11 +65,15 @@ entity Bank_Account {
 entity Product {
     * id BIGINT PRIMARY KEY
     * name VARCHAR(255)
+    * name_slug VARCHAR(255)
     * stock INT
     * discount FLOAT
     * price INT
     * description TEXT
     * status VARCHAR(255)
+    ' active
+    ' disabled
+    ' revoked
     --
     * umkm_id BIGINT FOUREIGN(UMKM.id)
     --
@@ -71,7 +83,7 @@ entity Product {
 
 entity Product_Image {
     * id BIGINT PRIMARY KEY
-    * img TEXT
+    * image TEXT
     --
     * product_id BIGINT FOUREIGN(Product.id)
     --
@@ -82,22 +94,53 @@ entity Product_Image {
 entity Product_Category {
     * id BIGINT PRIMARY KEY
     * name VARCHAR(255)
-    --
-    * product_id BIGINT FOUREIGN(Product.id)
+    * name_slug VARCHAR(255)
     --
     * created DATE
     * updated DATE
 }
 
+entity Product_Categories {
+    * id BIGINT PRIMARY KEY
+    --
+    * category_id BIGINT FOUREIGN(Product_Category.id)
+    * product_id BIGINT FOUREIGN(Product.id)
+    --
+    * created DATE
+    * updated DATE
+
+}
+
+entity Umkm_Registrations {
+    * id BIGINT PRIMARY KEY
+    --
+    * user_id BIGINT FOUREIGN(User.id)
+    * status VARCHAR(255) 
+    ' request
+    ' acc
+    ' rejected
+    ' revoked
+    message VARCHAR(255)
+    --
+    * created DATE
+    * updated DATE
+
+}
+
+
 ' Relation
 User ||--o{ UMKM
 User ||--o{ Bank_Account
 User ||--o{ User_Cart
+User ||--o| UmkmRegistration
 
 UMKM ||--o{ Product
 
 Product ||--o{ Product_Image
-Product }|--|{ Product_Category
+Product ||--o{ Product_Categories
+
+Product_Categories }o--|| Product_Category
+
 Product ||--o{ User_Cart
 
 @enduml
