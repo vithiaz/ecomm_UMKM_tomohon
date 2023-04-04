@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Card;
 
+use App\Models\UserCart;
 use Illuminate\View\Component;
 
 class ProductCard extends Component
@@ -52,6 +53,16 @@ class ProductCard extends Component
     public function render()
     {
         return view('components.card.product-card');
+    }
+
+    public function add_to_cart() {
+        dd(Auth::check());
+        // if (Auth::) {
+
+        // }
+        
+        // $userCart = new UserCart;
+        // $userCart->user_id = 
     }
 
     public function simplify_number($number) {

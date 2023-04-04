@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Umkm;
+use App\Models\UserCart;
 use App\Models\BankAccount;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
@@ -48,4 +49,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Umkm::class, 'user_id', 'id');
     }
+
+    public function user_carts() {
+        return $this->hasMany(UserCart::class, 'user_id', 'id');
+    }
+
 }

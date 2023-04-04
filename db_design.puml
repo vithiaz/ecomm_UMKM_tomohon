@@ -18,12 +18,12 @@ entity User {
     * updated DATE
 }
 
-entity User_Cart {
+entity User_Carts {
     * id BIGINT PRIMARY KEY
-    * qty INT
     --
     * user_id BIGINT FOUREIGN(User.id)
     * product_id BIGINT FOUREIGN(Product.id)
+    * qty INT
     --
     * created DATE
     * updated DATE
@@ -127,12 +127,11 @@ entity Umkm_Registrations {
 
 }
 
-
 ' Relation
 User ||--o{ UMKM
 User ||--o{ Bank_Account
-User ||--o{ User_Cart
-User ||--o| UmkmRegistration
+User ||--o{ User_Carts
+User ||--o| Umkm_Registrations
 
 UMKM ||--o{ Product
 
@@ -141,6 +140,6 @@ Product ||--o{ Product_Categories
 
 Product_Categories }o--|| Product_Category
 
-Product ||--o{ User_Cart
+Product ||--o{ User_Carts
 
 @enduml

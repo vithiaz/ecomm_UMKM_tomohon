@@ -11,10 +11,6 @@
                 </div>
                 <div class="nav-content">
                     <ul class="category-list">
-                        {{-- <li class="nav-item active">
-                            <span class="nav-item-main">Makanan</span>
-                            <span class="nav-item-secondary">(123)</span>
-                        </li> --}}
                         @foreach ($categories as $category)
                             <li class="nav-item">
                                 <a href="{{ route('product-page', [$category->name_slug]) }}">
@@ -36,7 +32,7 @@
                     <div class="product-wrapper">
                         @foreach ($products as $product)
                             <div class="item">
-                                <x-card.product-card 
+                                {{-- <x-card.product-card 
                                     productId='{{ $product->id }}'
                                     basePrice='{{ $product->price }}'
                                     discount='{{ $product->discount }}'
@@ -47,7 +43,10 @@
                                     productNameSlug='{{ $product->name_slug }}'
                                     Location='{{ $product->umkm->district }}'
                                     img='{{ $product->product_images->first() ? $product->product_images->first()->image : "" }}'
-                                />
+                                /> --}}
+
+                                <livewire:component.product-card :product='$product' />
+
                             </div>
                         @endforeach
                     </div>

@@ -109,6 +109,21 @@
         });
     </script>
 
+    {{-- Helper Function --}}
+    <script>
+        function formatRupiah(number) {
+            const formatter = new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            });
+
+            return formatter.format(number).replace(/(\,00$)|(\.00$)/, '');
+        }
+
+    </script>
+
     {{-- PowerGrid Scripts --}}
     <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" 

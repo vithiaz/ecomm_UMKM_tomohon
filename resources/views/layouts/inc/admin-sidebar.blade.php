@@ -61,7 +61,7 @@
                             class="active"
                         @endif
                     >
-                        <a href="{{ route('admin.umkm-account-verification') }}">Verifikasi Rekening</a>
+                        <a href="{{ route('admin.umkm-account-verification', ['status' => 'request']) }}">Verifikasi Rekening</a>
                     </li>
                 </ul>
             </div>

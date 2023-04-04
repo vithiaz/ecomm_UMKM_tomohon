@@ -5,5 +5,4 @@ function format_rupiah($num){
     return $rupiah;
 }
 
-
 ?>

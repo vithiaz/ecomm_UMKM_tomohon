@@ -40,7 +40,7 @@
                                 productName='{{ $i }} - Lorem ipsum dolor sit amet consectetur adipisicing elit.'
                                 productNameSlug='slug'
                                 Location='Location'
-                                img='{{ asset("img\aziz-acharki-boIJluEJEPM-unsplash.jpg") }}'
+                                img='product_images/9u1AxVUSvRPVydLnRioN78GFIcqmrYz2Dj4SPjBE.jpg'
                                 link='#'
                             />
                         @endforeach
@@ -107,7 +107,7 @@
                                 productName='{{ $i }} - Lorem ipsum dolor sit amet consectetur adipisicing elit.'
                                 productNameSlug='slug'
                                 Location='Location'
-                                img='{{ asset("img\aziz-acharki-boIJluEJEPM-unsplash.jpg") }}'
+                                img='product_images/9u1AxVUSvRPVydLnRioN78GFIcqmrYz2Dj4SPjBE.jpg'
                                 link='#'
                             />
                         </div>

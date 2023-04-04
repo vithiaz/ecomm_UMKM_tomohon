@@ -20,20 +20,18 @@
                 <li><a href="#">Dibatalkan</a></li>
             </ul>
         </div> --}}
-
-        @foreach (range(0,3) as $item)
+        @forelse ($Umkm as $umkm_cart)
             <div class="page-content-card">
                 <div class="table-responsive">
                     <table class="table table-striped table-hover">
                         <thead>
                             <tr>
-                                <td>02-02-2023</td>
-                                <td colspan="3">Mitra UMKM</td>
+                                <td colspan="5">{{ $umkm_cart->name }}</td>
                                 <td></td>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (range(0,3) as $item)
+                            @foreach ($Cart[$umkm_cart->id] as $product)
                                 <tr>
                                     <td>
                                         <div class="image-container">
@@ -41,31 +39,51 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <a href="#">Lorem ipsum dolor sit amet consectetur</a>
+                                        <a href="{{ route('product-details', [$product['product']['id'], $product['product']['name_slug']]) }}">{{ $product['product']['name'] }}</a>
                                     </td>
                                     <td>
                                         <div class="prices">
-                                            <span class="base-price">Rp. 120.000.000,00</span>
-                                            <span class="final-price">Rp. 60.000.000,00</span>
+                                            @if ($product['product']['discount'] > 0)
+                                                <span class="base-price">{{ format_rupiah($product['product']['price']) }}</span>
+                                                <span class="final-price" data-amount="{{ $this->get_final_price($product['product']['price'], $product['product']['discount']) }}">{{ format_rupiah($this->get_final_price($product['product']['price'], $product['product']['discount'])) }}</span>
+                                            @else
+                                                <span class="final-price" data-amount="{{ $product['product']['price'] }}">{{ format_rupiah($product['product']['price']) }}</span>
+                                            @endif
                                         </div>
                                     </td>
                                     <td>
                                         <div class="qty-wrapper">
                                             <span>x</span>
-                                            <input class="form-control" type="number" placeholder="qty">
+                                            <input wire:change="collect_modify_cart({{ $product['id'] }}, $event.target.value, {{ $umkm_cart->id }})" class="form-control" type="number" placeholder="qty" value="{{ $product['qty'] }}" min="1" max="{{ $product['product']['stock'] }}">
                                             <i class="fa-solid fa-trash delete-ic"></i>
+                                            {{-- <button type="submit" class="fa-solid fa-trash delete-ic"></button> --}}
                                         </div>
                                     </td>
-                                    <td class="amount">
-                                        Rp. 180.000.000,00
+                                    <td class="amount" data-calcamount="{{                                     
+                                            $this->calculate_amount(
+                                                        $this->get_final_price($product['product']['price'], $product['product']['discount']),
+                                                        $product['qty']
+                                                    )
+                                        }}" >
+                                        {{ format_rupiah(
+                                            $this->calculate_amount(
+                                                $this->get_final_price($product['product']['price'], $product['product']['discount']),
+                                                $product['qty']
+                                            )
+                                        ) }}
+                                    </td>
+                                    <td>
+                                        <div class="form-check">
+                                            <input wire:model.defer='checked_cart' class="form-check-input checked_cart" type="checkbox" value="{{ $umkm_cart->id }}-{{ $product['id'] }}" checked>
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach
                             <tr>
-                                <td colspan="5">
+                                <td colspan="6">
                                     <div class="sub-total-wrapper">
                                         <span class="sub-total-label">Sub Total</span> 
-                                        <div class="sub-total">Rp. 888.000,00</div>
+                                        <div class="sub-total" data-subtotal="">Rp. 0,00</div>
                                     </div>
                                 </td>
                             </tr>
@@ -73,10 +91,84 @@
                     </table>
                 </div>
                 <div class="button-wrapper">
-                    <button class="btn checkout-btn">Checkout</button>
+                    <button wire:click='item_checkout({{ $umkm_cart->id }})' type="button" class="btn checkout-btn">Checkout</button>
                 </div>
             </div>
-        @endforeach
+        @empty
+            <div class="page-content-card">
+                <span>Tidak ada produk di keranjang</span>
+            </div>
+        @endforelse
 
     </div>
 </div>
+
+
+@push('script')
+<script>
+    
+    // Handle Sub Total
+    function calculate_subtotal() {
+        let subtotalsElem = $('.sub-total-wrapper .sub-total')
+        
+        subtotalsElem.each(function() {
+            let amounts = $( this ).parentsUntil('table').find('.amount')
+            
+            let calculated_amount = 0;
+            amounts.each(function() {
+                amount = $( this ).attr('data-calcamount')
+                let isChecked = $(this).parent().find('.checked_cart').prop('checked')
+
+                if (isChecked) {
+                    calculated_amount += parseInt(amount)
+                }
+            })
+
+            $( this ).text( formatRupiah(calculated_amount) )
+            $( this ).attr('data-subtotal', calculated_amount )
+        })
+    }
+
+    function calculate_item_amount( qty ) {
+        if (parseInt(qty.val()) >= parseInt(qty.attr('max'))) {
+            qty.val(qty.attr('max'))
+        }
+        else if (parseInt(qty.val()) < 1) {
+            qty.val(1)
+        }
+    
+        // Handle Calculated Item Price
+        let itemAmount = qty.parentsUntil('tbody').find('.final-price').data('amount')
+        
+        // Set item calculated price adapt on qty input
+        let itemCalcPriceElem = qty.parentsUntil('tbody').find('.amount')
+    
+        itemCalcPriceElem.text(formatRupiah(itemAmount * qty.val()))
+        itemCalcPriceElem.attr('data-calcamount', itemAmount * qty.val())
+    }
+
+    // Fix product stock issues
+    $('.qty-wrapper input').on('change', function() {
+        calculate_item_amount( $( this ) )
+        calculate_subtotal()
+    })
+    
+    $('.checked_cart').on('change', function () {
+        calculate_subtotal()
+    })
+
+    // OnLoad
+    $( document ).ready(function() {
+        calculate_subtotal()
+    })
+    
+    $( window ).on('refreshScript', function() {
+        $('.qty-wrapper input').each(function() {
+            calculate_item_amount( $( this ) )
+        })
+        calculate_subtotal()
+    })
+
+
+</script>
+@endpush

@@ -23,6 +23,7 @@ use App\Http\Livewire\Admin\UmkmRegistration;
 use App\Http\Livewire\Admin\ProductVerification;
 use App\Http\Livewire\Admin\UmkmRegistrationReview;
 use App\Http\Livewire\Admin\UmkmAccountVerification;
+use App\Http\Controllers\Admin\UmkmBankAccountMethods;
 use App\Http\Controllers\Admin\ProductCategory as ProductCategoryMethods;
 
 
@@ -54,12 +55,15 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'admin'])->prefix('/admin')->group(function () {
     Route::get('/product-categories', ProductCategory::class)->name('admin.product-categories');
     Route::delete('/product-categories/delete/{id}', [ProductCategoryMethods::class, 'delete'])->name('admin.product-categories.delete');
+    
     Route::get('/products/{status}', Products::class)->name('admin.products');
     Route::get('/product/{product_id}-{name_slug}', ProductReview::class)->name('admin.product-review');
     
-    // Route::get('/product-verification', ProductVerification::class)->name('admin.product-verification');
-    
     Route::get('/umkm/registrations/{status}', UmkmRegistration::class)->name('admin.umkm-registration');
     Route::get('/umkm/registration/{user_id}-{reg_id}', UmkmRegistrationReview::class)->name('admin.umkm-registration-review');
-    Route::get('/umkm/account', UmkmAccountVerification::class)->name('admin.umkm-account-verification');    
+    
+    Route::get('/umkm/accounts/{status}', UmkmAccountVerification::class)->name('admin.umkm-account-verification');    
+    Route::post('/umkm/account/confirm/{account_number}-{id}', [UmkmBankAccountMethods::class, 'confirm_request'])->name('admin.umkm-account.confirm');    
+    Route::post('/umkm/account/reject/{account_number}-{id}', [UmkmBankAccountMethods::class, 'reject_request'])->name('admin.umkm-account.reject');    
+    Route::post('/umkm/account/revoke/{account_number}-{id}', [UmkmBankAccountMethods::class, 'revoke_request'])->name('admin.umkm-account.revoke');    
 });
