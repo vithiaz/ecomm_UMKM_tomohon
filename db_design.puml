@@ -24,6 +24,7 @@ entity User_Carts {
     * user_id BIGINT FOUREIGN(User.id)
     * product_id BIGINT FOUREIGN(Product.id)
     * qty INT
+    message VARCHAR
     --
     * created DATE
     * updated DATE
@@ -127,13 +128,50 @@ entity Umkm_Registrations {
 
 }
 
+entity User_Order {
+    * id UUID PRIMARY KEY
+    --
+    * buyer_id BIGINT FOUREIGN(User.id)
+    * umkm_id BIGINT FOUREIGN(UMKM.id)
+    --
+    * order_address TEXT
+    * payment_status VARCHAR
+    ' pending
+    ' ...
+    payment_amount INT
+    --
+    * created DATE
+    * updated DATE
+}
+
+entity User_Order_Item {
+    * id UUID PRIMARY KEY
+    --
+    * order_id UUID FOUREIGN(User_Order.id)
+    * product_id BIGINT FOUREIGN(Product.id)
+    --
+    * qty INT
+    * amount INT
+    * delivery_status VARCHAR
+    ' pending
+    ' onsite
+    ' return
+    message VARCHAR
+    --
+    * created DATE
+    * updated DATE
+}
+
 ' Relation
 User ||--o{ UMKM
 User ||--o{ Bank_Account
 User ||--o{ User_Carts
 User ||--o| Umkm_Registrations
+User ||--o{ User_Order
 
 UMKM ||--o{ Product
+UMKM ||--o{ User_Order
+Product ||--o{ User_Order_Item
 
 Product ||--o{ Product_Image
 Product ||--o{ Product_Categories
@@ -141,5 +179,7 @@ Product ||--o{ Product_Categories
 Product_Categories }o--|| Product_Category
 
 Product ||--o{ User_Carts
+
+User_Order ||--|{ User_Order_Item
 
 @enduml

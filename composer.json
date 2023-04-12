@@ -6,6 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.0.2",
+        "doctrine/dbal": "^3.6",
         "guzzlehttp/guzzle": "^7.2",
         "haruncpi/laravel-id-generator": "^1.1",
         "laravel/framework": "^9.19",
@@ -13,6 +14,7 @@
         "laravel/tinker": "^2.7",
         "laravel/ui": "^4.2",
         "livewire/livewire": "^2.11",
+        "midtrans/midtrans-php": "^2.5",
         "power-components/livewire-powergrid": "^1.0"
     },
     "require-dev": {

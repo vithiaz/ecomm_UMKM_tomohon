@@ -27,6 +27,10 @@
     <link href="{{ asset('/fontawesome/css/brands.css') }}" rel="stylesheet">
     <link href="{{ asset('/fontawesome/css/solid.css') }}" rel="stylesheet">
 
+    {{-- Midtrans --}}
+    <script type="text/javascript"
+      src="https://app.sandbox.midtrans.com/snap/snap.js"
+      data-client-key="{{ config('midtrans.client_key'); }}"></script>
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])

@@ -12,6 +12,7 @@ use App\Http\Livewire\User\AddProduct;
 use App\Http\Livewire\Base\ProductPage;
 use App\Http\Livewire\User\EditProduct;
 use App\Http\Livewire\User\UmkmProfile;
+use App\Http\Livewire\User\CheckoutPage;
 use App\Http\Livewire\User\RegisterUmkm;
 use App\Http\Livewire\Base\ProductDetail;
 use App\Http\Livewire\Admin\ProductReview;
@@ -41,6 +42,9 @@ Route::get('/logout', function () {
 Route::middleware('auth')->group(function () {
     Route::get('/account-settings', AccountSettings::class)->name('account-settings');
     Route::get('/my-cart', CartPage::class)->name('cart-page');
+    Route::get('/checkout', CheckoutPage::class)->name('checkout');
+
+
     Route::get('/{umkm}/add-product', AddProduct::class)->name('add-product');
     Route::get('/{umkm}/{product}/edit', EditProduct::class)->name('edit-product');
     

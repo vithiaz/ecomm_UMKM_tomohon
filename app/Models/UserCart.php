@@ -15,6 +15,7 @@ class UserCart extends Model
         'user_id',
         'product_id',
         'qty',
+        'message',
     ];
 
     public function umkm()
