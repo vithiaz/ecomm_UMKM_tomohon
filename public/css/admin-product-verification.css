@@ -7,6 +7,7 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  width: calc(100vw - 320px);
 }
 .admin-product-verification-page .container .page-title,
 .admin-product-page .container .page-title {

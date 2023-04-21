@@ -138,7 +138,13 @@ entity User_Order {
     * payment_status VARCHAR
     ' pending
     ' ...
-    payment_amount INT
+    * order_status VARCHAR
+    ' pending
+    ' progress
+    ' settlement
+    ' abort
+    * payment_amount INT
+    payment_token TEXT
     --
     * created DATE
     * updated DATE
@@ -154,6 +160,7 @@ entity User_Order_Item {
     * amount INT
     * delivery_status VARCHAR
     ' pending
+    ' processed
     ' onsite
     ' return
     message VARCHAR
@@ -161,6 +168,19 @@ entity User_Order_Item {
     * created DATE
     * updated DATE
 }
+
+entity Success_Transaction {
+    * id UUID PRIMARY KEY
+    --
+    * order_id UUID FOUREIGN(User_Order.id)
+    * seller_payment_status VARCHAR
+    ' pending 
+    ' settlement 
+    --
+    * created DATE
+    * updated DATE
+}
+
 
 ' Relation
 User ||--o{ UMKM
@@ -181,5 +201,7 @@ Product_Categories }o--|| Product_Category
 Product ||--o{ User_Carts
 
 User_Order ||--|{ User_Order_Item
+
+Success_Transaction |o--|| User_Order
 
 @enduml

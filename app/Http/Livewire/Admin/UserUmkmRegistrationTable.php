@@ -3,38 +3,50 @@
 namespace App\Http\Livewire\Admin;
 
 use App\Models\UmkmRegistration;
-use Carbon\Carbon;
+use Illuminate\Support\Carbon;
 use Illuminate\Database\QueryException;
-use Illuminate\Support\Collection;
-use PowerComponents\LivewirePowerGrid\Button;
-use PowerComponents\LivewirePowerGrid\Column;
-use PowerComponents\LivewirePowerGrid\PowerGrid;
-use PowerComponents\LivewirePowerGrid\PowerGridComponent;
+use Illuminate\Database\Eloquent\Builder;
+use PowerComponents\LivewirePowerGrid\Rules\{Rule, RuleActions};
+use PowerComponents\LivewirePowerGrid\Filters\Filter;
 use PowerComponents\LivewirePowerGrid\Traits\ActionButton;
+use PowerComponents\LivewirePowerGrid\{Button, Column, Exportable, Footer, Header, PowerGrid, PowerGridComponent, PowerGridEloquent};
 
-class UserUmkmRegistrationTable extends PowerGridComponent
+final class UserUmkmRegistrationTable extends PowerGridComponent
 {
     use ActionButton;
 
     // Binding Variable
     public string $status;
 
-    
-    public function setUp()
+    public function setUp(): array
     {
-        $this->showPerPage()
-            // ->showCheckBox()    
-            ->showSearchInput();
+        return [
+            Exportable::make('export')
+                ->striped()
+                ->type(Exportable::TYPE_XLS, Exportable::TYPE_CSV),
+            Header::make()->showSearchInput(),
+            Footer::make()
+                ->showPerPage()
+                ->showRecordCount(),
+        ];
     }
 
-    public function dataSource(): array
+    public function datasource(): Builder
     {
-        $model = UmkmRegistration::query()
-                    ->with(
-                        'user',
-                    )->where('status' , '=', $this->status)->get();
-        
-        return PowerGrid::eloquent($model)
+        return UmkmRegistration::query()
+                ->with(
+                    'user',
+                )->where('status' , '=', $this->status);
+    }
+
+    public function relationSearch(): array
+    {
+        return [];
+    }
+
+    public function addColumns(): PowerGridEloquent
+    {
+        return PowerGrid::eloquent()
             ->addColumn('user_id', function(UmkmRegistration $model) {
                 return $model->user->id;
             })
@@ -54,173 +66,111 @@ class UserUmkmRegistrationTable extends PowerGridComponent
             ->addColumn('address', function(UmkmRegistration $model) {
                 return $model->user->address;
             })
-            // ->addColumn('name')
             ->addColumn('updated_at')
-            ->addColumn('updated_at_formatted', function(UmkmRegistration $model) {
-                return Carbon::parse($model->updated_at)->format('d/m/Y H:i:s');
-            })
-            ->make();
+            ->addColumn('updated_at_formatted', fn (UmkmRegistration $model) => Carbon::parse($model->updated_at)->format('d/m/Y H:i:s'));
     }
 
     public function columns(): array
     {
         if ($this->status == 'acc') {
-            $column_return = [
-                Column::add()
-                    ->title(__('User ID'))
-                    ->field('user_id')
+            return [
+                Column::make('User ID', 'user_id')
                     ->searchable()
                     ->sortable(),
     
-                Column::add()
-                    ->title(__('Username'))
-                    ->field('username')
+                Column::make('Username', 'username')
                     ->searchable(),
     
-                Column::add()
-                    ->title(__('Nama Lengkap'))
-                    ->field('full_name')
+                Column::make('Nama Lengkap', 'full_name')
                     ->searchable(),
     
-                Column::add()
-                    ->title(__('Alamat'))
-                    ->field('address')
+                Column::make('Alamat', 'address')
                     ->searchable(),
     
-                Column::add()
-                    ->title(__('Status'))
-                    ->field('status')
+                Column::make('Status', 'status')
                     ->hidden(),
     
-                Column::add()
-                    ->title(__('Pesan'))
-                    ->field('message')
+                Column::make('Pesan', 'message')
                     ->hidden(),
     
-                Column::add()
-                    ->title(__('Tanggal'))
-                    ->field('updated_at')
+                Column::make('Tanggal', 'updated_at_formatted', 'updated_at')
                     ->sortable()
-                    ->searchable()
-                    ->hidden(),
-    
-                Column::add()
-                    ->title(__('Tanggal'))
-                    ->field('updated_at_formatted')
-                    ->makeInputDatePicker('updated_at')
-                    ->sortable()
-                    ->searchable()
+                    ->searchable(),
             ];
         } else {
-            $column_return = [
-                Column::add()
-                    ->title(__('User ID'))
-                    ->field('user_id')
+            return [
+                Column::make('User ID', 'user_id')
                     ->searchable()
                     ->sortable(),
     
-                Column::add()
-                    ->title(__('Username'))
-                    ->field('username')
+                Column::make('Username', 'username')
                     ->searchable(),
     
-                Column::add()
-                    ->title(__('Nama Lengkap'))
-                    ->field('full_name')
+                Column::make('Nama Lengkap', 'full_name')
                     ->searchable(),
     
-                Column::add()
-                    ->title(__('Alamat'))
-                    ->field('address')
+                Column::make('Alamat', 'address')
                     ->searchable(),
-    
-                Column::add()
-                    ->title(__('Status'))
-                    ->field('status'),
-    
-                Column::add()
-                    ->title(__('Pesan'))
-                    ->field('message'),
-    
-                Column::add()
-                    ->title(__('Tanggal'))
-                    ->field('updated_at')
-                    ->sortable()
-                    ->searchable()
-                    ->hidden(),
-    
-                Column::add()
-                    ->title(__('Tanggal'))
-                    ->field('updated_at_formatted')
-                    ->makeInputDatePicker('updated_at')
-                    ->sortable()
-                    ->searchable()
-            ];
 
+                Column::make('Status', 'status'),
+    
+                Column::make('Pesan', 'message'),
+    
+                Column::make('Tanggal', 'updated_at_formatted', 'updated_at')
+                    ->sortable()
+                    ->searchable(),
+            ];
         }
 
-        return $column_return;
     }
 
-    /*
-    |--------------------------------------------------------------------------
-    | Actions Method
-    |--------------------------------------------------------------------------
-    | Enable this section only when you have defined routes for these actions.
-    |
-    */
+    public function filters(): array
+    {
+        return [
+            // Filter::inputText('name'),
+            // Filter::datepicker('created_at_formatted', 'created_at'),
+        ];
+    }
 
     
     public function actions(): array
     {
-        return  [
-            Button::add('tinjau')
-            ->caption(__('Verifikasi'))
-            ->class('btn btn-default-orange')
-            ->route('admin.umkm-registration-review', [
-                'user_id' => 'user_id',
-                'reg_id' => 'id',
-            ]),
+       return [
+           Button::make('Verifikasi', 'tinjau')
+               ->class('btn btn-default-orange')
+               ->target('_self')
+               ->route('admin.umkm-registration-review', [
+                    'user_id' => 'user_id',
+                    'reg_id' => 'id',
+                ]),
         ];
     }
+    
 
     /*
     |--------------------------------------------------------------------------
-    | Edit Method
+    | Actions Rules
     |--------------------------------------------------------------------------
-    | Enable this section to use editOnClick() or toggleable() methods
+    | Enable the method below to configure Rules for your Table and Action Buttons.
     |
     */
 
+    /**
+     * PowerGrid UmkmRegistration Action Rules.
+     *
+     * @return array<int, RuleActions>
+     */
+
     /*
-    public function update(array $data ): bool
+    public function actionRules(): array
     {
-       try {
-           $updated = UmkmRegistration::query()->find($data['id'])->update([
-                $data['field'] => $data['value']
-           ]);
-       } catch (QueryException $exception) {
-           $updated = false;
-       }
-       return $updated;
-    }
+       return [
 
-    public function updateMessages(string $status, string $field = '_default_message'): string
-    {
-        $updateMessages = [
-            'success'   => [
-                '_default_message' => __('Data has been updated successfully!'),
-                //'custom_field' => __('Custom Field updated successfully!'),
-            ],
-            "error" => [
-                '_default_message' => __('Error updating the data.'),
-                //'custom_field' => __('Error updating custom field.'),
-            ]
+           //Hide button edit for ID 1
+            Rule::button('edit')
+                ->when(fn($umkm-registration) => $umkm-registration->id === 1)
+                ->hide(),
         ];
-
-        return ($updateMessages[$status][$field] ?? $updateMessages[$status]['_default_message']);
     }
     */
-
-
 }

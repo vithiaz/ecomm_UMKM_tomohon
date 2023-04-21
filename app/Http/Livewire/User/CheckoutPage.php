@@ -86,69 +86,70 @@ class CheckoutPage extends Component
         $server_key = config('midtrans.server_key');
         $request_url = config('midtrans.snap_request_url');
 
-        // Handle UserOrder
-        $userOrder = new UserOrder;
-        $orderId = Str::uuid()->toString();
-        $userOrder->id = $orderId;
-        $userOrder->buyer_id = Auth::user()->id;
-        $userOrder->umkm_id = $this->umkm->id;
-        $userOrder->order_address = $this->delivery_address;
-        $userOrder->payment_status = 'pending';
-        $userOrder->payment_amount = $this->gross_amount;
-        $userOrder->save();
-
-        // Handle UserOrderItem
-        $item_details = [];
-        foreach($this->userCart as $cart) {
-            $userOrderItem = new UserOrderItem;
-            $itemOrderId = Str::uuid()->toString();
-            $userOrderItem->id = $itemOrderId;
-            $userOrderItem->order_id = $orderId;
-            $userOrderItem->product_id = $cart->product->id;
-            $userOrderItem->qty = $cart->qty;
-
-            $basePrice = (int)$cart->product->price;
-            $itemPrice = $basePrice - ($basePrice * ((float)$cart->product->discount) / 100);
-
-            $userOrderItem->amount = $itemPrice;
-            $userOrderItem->delivery_status = 'pending';
-            $userOrderItem->message = $cart->message;
-            $userOrderItem->save();
-            
-            $item_detail = array(
-                'id' => $itemOrderId,
-                'price' => (int)$itemPrice,
-                'quantity' => $cart->qty,
-                'name' => $cart->product->name_slug
-            );
-            array_push($item_details, $item_detail);
-        }
-
-        // Set the request data
-        $request_data = array(
-            'transaction_details' => array(
-                'order_id' => $orderId,
-                'gross_amount' => $this->gross_amount,
-            ),
-            'customer_details' => array(
-                'first_name' => Auth::user()->first_name,
-                'last_name' => Auth::user()->last_name,
-                'email' => Auth::user()->email,
-                'phone' => Auth::user()->phone_number,
-                'delivery_address' => $this->delivery_address,
-            ),
-        );
-        $request_data['item_details'] = $item_details;
-        
-        // Set the request headers
-        $request_headers = array(
-            'Content-Type: application/json',
-            'Accept: application/json',
-            'Authorization: Basic ' . base64_encode($server_key . ':')
-        );
-
+        // Begin Transaction
         try {
             DB::beginTransaction();
+            // Handle UserOrder
+            $userOrder = new UserOrder;
+            $orderId = Str::uuid()->toString();
+            $userOrder->id = $orderId;
+            $userOrder->buyer_id = Auth::user()->id;
+            $userOrder->umkm_id = $this->umkm->id;
+            $userOrder->order_address = $this->delivery_address;
+            $userOrder->payment_status = 'pending';
+            $userOrder->order_status = 'pending';
+            $userOrder->payment_amount = $this->gross_amount;
+            $userOrder->save();
+    
+            // Handle UserOrderItem
+            $item_details = [];
+            foreach($this->userCart as $cart) {
+                $userOrderItem = new UserOrderItem;
+                $itemOrderId = Str::uuid()->toString();
+                $userOrderItem->id = $itemOrderId;
+                $userOrderItem->order_id = $orderId;
+                $userOrderItem->product_id = $cart->product->id;
+                $userOrderItem->qty = $cart->qty;
+    
+                $basePrice = (int)$cart->product->price;
+                $itemPrice = $basePrice - ($basePrice * ((float)$cart->product->discount) / 100);
+    
+                $userOrderItem->amount = $itemPrice;
+                $userOrderItem->delivery_status = 'pending';
+                $userOrderItem->message = $cart->message;
+                $userOrderItem->save();
+                
+                $item_detail = array(
+                    'id' => $itemOrderId,
+                    'price' => (int)$itemPrice,
+                    'quantity' => $cart->qty,
+                    'name' => $cart->product->name_slug
+                );
+                array_push($item_details, $item_detail);
+            }
+    
+            // Set the request data
+            $request_data = array(
+                'transaction_details' => array(
+                    'order_id' => $orderId,
+                    'gross_amount' => $this->gross_amount,
+                ),
+                'customer_details' => array(
+                    'first_name' => Auth::user()->first_name,
+                    'last_name' => Auth::user()->last_name,
+                    'email' => Auth::user()->email,
+                    'phone' => Auth::user()->phone_number,
+                    'delivery_address' => $this->delivery_address,
+                ),
+            );
+            $request_data['item_details'] = $item_details;
+            
+            // Set the request headers
+            $request_headers = array(
+                'Content-Type: application/json',
+                'Accept: application/json',
+                'Authorization: Basic ' . base64_encode($server_key . ':')
+            );
 
             // Create the HTTP client and request object
             $client = curl_init($request_url);
@@ -168,9 +169,18 @@ class CheckoutPage extends Component
                 $response_json = json_decode($response);
                 $token = $response_json->token;
                 $redirect_url = $response_json->redirect_url;
-                
                 DB::commit();
                 
+                // Move UserCart to UserOrder Table
+                if ($token) {
+                    foreach ($this->userCart as $cart) {
+                        $cart->delete();
+                    }
+
+                    $userOrder->payment_token = $token;
+                    $userOrder->save();
+                }
+
                 $this->dispatchBrowserEvent('snap-popup', ['token' => $token]);
             }
 

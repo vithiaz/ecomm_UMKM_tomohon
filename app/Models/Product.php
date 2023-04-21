@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Umkm;
 use App\Models\ProductImage;
+use App\Models\UserOrderItem;
 use App\Models\ProductCategory;
 use App\Models\ProductCategories;
 use Illuminate\Database\Eloquent\Model;
@@ -71,5 +72,10 @@ class Product extends Model
             'category_id',
         );
     }
+
+    public function order_item() {
+        return $this->hasMany(UserOrderItem::class, 'product_id', 'id');
+    }
+
 
 }

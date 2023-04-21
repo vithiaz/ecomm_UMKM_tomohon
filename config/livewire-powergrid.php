@@ -61,7 +61,13 @@ return [
                     'dateFormat' => 'd/m/Y H:i',
                     'enableTime' => true,
                     'time_24hr' => true
-                ]
+                ],
+                'uk' => [
+                    'locale'     => 'uk',
+                    'dateFormat' => 'd/m/Y',
+                    'enableTime' => false,
+                    'time_24hr'  => true,
+                ],
             ]
         ]
     ],

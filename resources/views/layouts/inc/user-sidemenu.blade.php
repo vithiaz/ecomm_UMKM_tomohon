@@ -44,7 +44,7 @@
                         >
                         <ul>
                             <li><a href="{{ route('cart-page') }}">Keranjang</a></li>
-                            <li><a href="{{ route('transaction-page') }}">Transaksi</a></li>
+                            <li><a href="{{ route('transaction-page', ['status' => 'pending']) }}">Transaksi</a></li>
                         </ul>
                     </div>
                 </li>
@@ -72,7 +72,7 @@
                         >
                         <ul>
                             <li><a href="{{ route('umkm.profile') }}">Profil</a></li>
-                            <li><a href="{{ route('umkm.transaction') }}">Transaksi</a></li>
+                            <li><a href="{{ route('umkm.transaction', ['status' => 'pending']) }}">Transaksi</a></li>
                         </ul>
                     </div>
                 </li>

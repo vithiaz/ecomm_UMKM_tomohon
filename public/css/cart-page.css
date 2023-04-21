@@ -102,6 +102,27 @@
   height: fit-content;
   overflow: auto;
 }
+.cart-page .container .page-content-card .table-responsive .no-image {
+  width: 100%;
+  height: 100%;
+  background-color: #D4D4D4;
+  display: grid;
+  place-items: center;
+  background-color: transparent;
+  height: 50px;
+  border-radius: 4px;
+}
+.cart-page .container .page-content-card .table-responsive .no-image:hover {
+  cursor: pointer;
+  background-color: #2A2A2A;
+}
+.cart-page .container .page-content-card .table-responsive .no-image:hover i {
+  color: white;
+}
+.cart-page .container .page-content-card .table-responsive .no-image i {
+  font-size: 1.2rem;
+  color: black;
+}
 .cart-page .container .page-content-card .table-responsive table thead tr td {
   font-size: 0.9em;
   font-weight: 600;
@@ -212,11 +233,13 @@
   align-items: center;
   justify-content: flex-end;
 }
+.cart-page .container .page-content-card .button-wrapper * {
+  font-size: 0.9rem;
+}
 .cart-page .container .page-content-card .button-wrapper .checkout-btn {
   background-color: #F9D00F;
   font-weight: 600;
   color: black;
-  font-size: 0.9rem;
 }
 .cart-page .container .page-content-card .button-wrapper .checkout-btn:hover {
   cursor: pointer;

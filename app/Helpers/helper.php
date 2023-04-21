@@ -5,4 +5,11 @@ function format_rupiah($num){
     return $rupiah;
 }
 
+function simplify_number_id($number) {
+    if ($number >= 1000) {
+        return number_format($number / 1000, 1) . 'rb';
+    }
+    return $number;
+}
+
 ?>

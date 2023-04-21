@@ -29,20 +29,21 @@
             <div class="section-content">
                 <div class="swiper HeroProductSwiper">
                     <div class="swiper-wrapper">
-                        @foreach (range(1,8) as $i)
-                            <x-card.product-card 
-                                productId='1'
-                                basePrice='220000'
-                                discount='50'
-                                umkm='Mitra UMKM'
-                                sold='2130'
-                                stock='999'
-                                productName='{{ $i }} - Lorem ipsum dolor sit amet consectetur adipisicing elit.'
-                                productNameSlug='slug'
-                                Location='Location'
-                                img='product_images/9u1AxVUSvRPVydLnRioN78GFIcqmrYz2Dj4SPjBE.jpg'
-                                link='#'
-                            />
+                        @foreach ($hero_product_id as $product_id)
+                            {{-- <x-card.product-card 
+                                productId='{{ $product["id"] }}'
+                                basePrice='{{ $product["price"] }}'
+                                discount='{{ $product["discount"] }}'
+                                umkm='{{ $product["umkm"]["name"] }}'
+                                sold='{{ $product["sales_qty"] }}'
+                                stock='{{ $product["stock"] }}'
+                                productName='{{ $product["name"] }}'
+                                productNameSlug='{{ $product["name_slug"] }}'
+                                Location='{{ $product["umkm"]["district"] }}'
+                                img='{{ $product["profile_image"]["image"] }}'
+                            /> --}}
+                            {{-- @dump($this->get_product_model($product_id)) --}}
+                            <livewire:component.product-card :product='$this->get_product_model($product_id)' />
                         @endforeach
                     </div>
                     <div class="swiper-pagination product-swiper-pagination"></div>

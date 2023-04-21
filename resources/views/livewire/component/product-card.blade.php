@@ -22,7 +22,7 @@
             @endif
         </div>
         <div class="stock-wrapper">
-            <div class="sale">Terjual 99</div>
+            <div class="sale">Terjual {{ simplify_number_id($sales_qty) }}</div>
             <div class="stock">Tersisa {{ $product->stock }}</div>
         </div>
         <a href="{{ route('product-details', [$product->id, $product->name_slug]) }}" class="card-title">

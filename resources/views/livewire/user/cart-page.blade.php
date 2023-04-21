@@ -7,19 +7,6 @@
         <div class="page-title">
             <h1>Keranjang</h1>
         </div>
-        {{-- <div class="page-nav-menu-wrapper">
-            <ul>
-                <li
-                    @if (\Request::route()->getName() == 'cart-page')
-                        class='active'
-                    @endif
-                ><a 
-                    href="{{ route('cart-page') }}">Keranjang</a></li>
-                <li><a href="#">Dalam Proses</a></li>
-                <li><a href="#">Selesai</a></li>
-                <li><a href="#">Dibatalkan</a></li>
-            </ul>
-        </div> --}}
         @forelse ($Umkm as $umkm_cart)
             <div class="page-content-card">
                 <div class="table-responsive">
@@ -34,9 +21,17 @@
                             @foreach ($Cart[$umkm_cart->id] as $product)
                                 <tr>
                                     <td>
-                                        <div class="image-container">
-                                            <img src="{{ 'img\aziz-acharki-boIJluEJEPM-unsplash.jpg' }}" alt="FILL THIS">
-                                        </div>
+                                        @php
+                                            $product_image = $this->get_product_image($product['product']['id']);
+                                        @endphp
+                                        @if ($product_image)
+                                            <div class="image-container">
+                                                <img src="{{ asset('storage/'.$product_image) }}" alt="FILL THIS">
+                                            </div>
+                                        @else
+                                            <div class="no-image">
+                                                <i class="fa-regular fa-image"></i>                                            </div>  
+                                        @endif
                                     </td>
                                     <td>
                                         <a href="{{ route('product-details', [$product['product']['id'], $product['product']['name_slug']]) }}">{{ $product['product']['name'] }}</a>
@@ -55,8 +50,7 @@
                                         <div class="qty-wrapper">
                                             <span>x</span>
                                             <input wire:change="collect_modify_cart({{ $product['id'] }}, $event.target.value, {{ $umkm_cart->id }})" class="form-control" type="number" placeholder="qty" value="{{ $product['qty'] }}" min="1" max="{{ $product['product']['stock'] }}">
-                                            <i class="fa-solid fa-trash delete-ic"></i>
-                                            {{-- <button type="submit" class="fa-solid fa-trash delete-ic"></button> --}}
+                                            <i wire:click='delete_user_cart({{ $product['id'] }})' class="fa-solid fa-trash delete-ic"></i>
                                         </div>
                                     </td>
                                     <td class="amount" data-calcamount="{{                                     

@@ -44,15 +44,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/my-cart', CartPage::class)->name('cart-page');
     Route::get('/checkout', CheckoutPage::class)->name('checkout');
 
-
     Route::get('/{umkm}/add-product', AddProduct::class)->name('add-product');
     Route::get('/{umkm}/{product}/edit', EditProduct::class)->name('edit-product');
     
-    Route::get('/transactions', TransactionPage::class)->name('transaction-page');
+    Route::get('/transactions/{status}', TransactionPage::class)->name('transaction-page');
     Route::get('/umkm/register', RegisterUmkm::class)->name('umkm.register');
     Route::get('/umkm/edit/{umkm}', EditUmkm::class)->name('umkm.edit');
     Route::get('/umkm/profile', UmkmProfile::class)->name('umkm.profile');
-    Route::get('/umkm/transaction', UmkmTransaction::class)->name('umkm.transaction');    
+    Route::get('/umkm/transaction/{status}', UmkmTransaction::class)->name('umkm.transaction');    
 });
 
 // Admin Auth Middleware Group
@@ -71,3 +70,6 @@ Route::middleware(['auth', 'admin'])->prefix('/admin')->group(function () {
     Route::post('/umkm/account/reject/{account_number}-{id}', [UmkmBankAccountMethods::class, 'reject_request'])->name('admin.umkm-account.reject');    
     Route::post('/umkm/account/revoke/{account_number}-{id}', [UmkmBankAccountMethods::class, 'revoke_request'])->name('admin.umkm-account.revoke');    
 });
+
+// Checkpoint
+// handle product stock

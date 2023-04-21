@@ -3,125 +3,163 @@
 namespace App\Http\Livewire\Admin;
 
 use \App\Models\ProductCategory;
-use Carbon\Carbon;
+use Illuminate\Support\Carbon;
 use Illuminate\Database\QueryException;
-use Illuminate\Support\Collection;
-use PowerComponents\LivewirePowerGrid\Button;
-use PowerComponents\LivewirePowerGrid\Column;
-use PowerComponents\LivewirePowerGrid\Header;
-use PowerComponents\LivewirePowerGrid\PowerGrid;
-use PowerComponents\LivewirePowerGrid\PowerGridComponent;
+use Illuminate\Database\Eloquent\Builder;
+use PowerComponents\LivewirePowerGrid\Rules\{Rule, RuleActions};
+use PowerComponents\LivewirePowerGrid\Filters\Filter;
 use PowerComponents\LivewirePowerGrid\Traits\ActionButton;
+use PowerComponents\LivewirePowerGrid\{Button, Column, Exportable, Footer, Header, PowerGrid, PowerGridComponent, PowerGridEloquent};
 
-
-class ProductCategoryTable extends PowerGridComponent
+final class ProductCategoryTable extends PowerGridComponent
 {
     use ActionButton;
 
-    protected $listeners = ['refreshComponent' => '$refresh'];
+    public $name;
 
-    public function setUp()
+    // public ?string $name = null;
+
+    // protected array $rules = [
+    //     'name' => ['required'],
+    // ];
+
+    // public string $name;
+
+    public function setUp(): array
     {
-        $this->showPerPage()
-            // ->showCheckBox()
-            ->showSearchInput();
+
+        return [
+            Exportable::make('export')
+                ->striped()
+                ->type(Exportable::TYPE_XLS, Exportable::TYPE_CSV),
+            Header::make()->showSearchInput(),
+            Footer::make()
+                ->showPerPage()
+                ->showRecordCount(),
+        ];
     }
 
-    public function dataSource(): array
+    public function datasource(): Builder
     {
-        $model = ProductCategory::query()->with('product')->get();
-        return PowerGrid::eloquent($model)
+        return ProductCategory::query()->with('product');
+    }
+
+    public function relationSearch(): array
+    {
+        return [];
+    }
+
+    public function addColumns(): PowerGridEloquent
+    {
+        return PowerGrid::eloquent()
             ->addColumn('id')
             ->addColumn('name')
             ->addColumn('products_count', function(ProductCategory $model) {
                 return $model->product->count();
-            })
-            // ->addColumn('created_at')
-            // ->addColumn('created_at_formatted', function(ProductCategory $model) {
-            //     return Carbon::parse($model->created_at)->format('d/m/Y H:i:s');
-            // })
-            ->make();
+            });
+
+
+
+        //     // ->addColumn('id')
+        //     // ->addColumn('name')
+        //     // ->addColumn('name_lower', fn (ProductCategory $model) => strtolower(e($model->name)))
+        //     // ->addColumn('created_at')
+        //     // ->addColumn('created_at_formatted', fn (ProductCategory $model) => Carbon::parse($model->created_at)->format('d/m/Y H:i:s'));
     }
 
     public function columns(): array
     {
         return [
-            Column::add()
-                ->title(__('ID'))
-                ->field('id')
+            Column::make('ID', 'id')
                 ->searchable()
                 ->sortable(),
 
-            Column::add()
-                ->title(__('Jumlah Produk'))
-                ->field('products_count')
-                ->sortable(),
-
-            Column::add()
-                ->title(__('Nama Kategori'))
+                Column::make('Nama Kategori', 'name')
                 ->field('name')
                 ->editOnClick(true)
-                ->searchable()
-
+                ->searchable(),
+                
+            Column::make('Jumlah Produk', 'products_count')
+                ->sortable(),
+    
             // Column::add()
-            //     ->title(__('Created at'))
-            //     ->field('created_at')
+            //     ->title(__('Nama Kategori'))
+            //     ->field('name')
+            //     ->editOnClick(true)
+            //     ->searchable(),
+
+            // Column::make('Jumlah Produk', 'products_count')    
+            //     ->sortable()
+    
+            // Column::make('Created at', 'created_at')
             //     ->hidden(),
 
-            // Column::add()
-            //     ->title(__('Created at'))
-            //     ->field('created_at_formatted')
-            //     ->makeInputDatePicker('created_at')
+            // Column::make('Created at', 'created_at_formatted', 'created_at')
             //     ->searchable()
         ];
     }
-    
-    public function actions(): array
+
+    public function filters(): array
     {
-       return [
-           Button::add('deleteCat')
-                ->caption(__('hapus'))
-                ->class('btn btn-default-red')
-                ->method('delete')
-                ->route('admin.product-categories.delete', ['id' => 'id']),
+        return [
+            // Filter::inputText('name'),
+            // Filter::datepicker('created_at_formatted', 'created_at'),
         ];
     }
-    
 
-    public function update(array $data ): bool
+    public function onUpdatedEditable($id, $field, $value): void
     {
         try {
-            $updated = ProductCategory::query()->find($data['id'])->update([
-                $data['field'] => $data['value']
+            $updated = ProductCategory::query()->find($id)->update([
+                $field => $value
             ]);
         } catch (QueryException $exception) {
             $updated = false;
         }
 
         if ($updated) {
-            $this->dispatchBrowserEvent('reload_page');
+            $this->fillData();
         }
-
-        return $updated;
     }
 
-    public function updateMessages(string $status, string $field = '_default_message'): string
+
+    public function actions(): array
     {
-        $updateMessages = [
-            'success'   => [
-                '_default_message' => __('Data berhasil diupdate!'),
-                //'custom_field' => __('Custom Field updated successfully!'),
-            ],
-            "error" => [
-                '_default_message' => __('Gagal melakukan update data.'),
-                //'custom_field' => __('Error updating custom field.'),
-            ]
-        ];
-
-        return ($updateMessages[$status][$field] ?? $updateMessages[$status]['_default_message']);
-
+        return [
+            Button::add('deleteCat')
+                ->caption(__('hapus'))
+                ->class('btn btn-default-red')
+                ->method('delete')
+                ->target('_self')
+                ->route('admin.product-categories.delete', ['id' => 'id']),
+         ];
     }
     
 
+    /*
+    |--------------------------------------------------------------------------
+    | Actions Rules
+    |--------------------------------------------------------------------------
+    | Enable the method below to configure Rules for your Table and Action Buttons.
+    |
+    */
 
+    /**
+     * PowerGrid ProductCategory Action Rules.
+     *
+     * @return array<int, RuleActions>
+     */
+
+    /*
+    public function actionRules(): array
+    {
+       return [
+
+           //Hide button edit for ID 1
+            Rule::button('edit')
+                ->when(fn($product-category) => $product-category->id === 1)
+                ->hide(),
+        ];
+    }
+    */
 }

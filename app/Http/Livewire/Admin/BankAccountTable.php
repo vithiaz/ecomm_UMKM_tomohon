@@ -3,36 +3,51 @@
 namespace App\Http\Livewire\Admin;
 
 use App\Models\BankAccount;
-use Carbon\Carbon;
+use Illuminate\Support\Carbon;
 use Illuminate\Database\QueryException;
-use Illuminate\Support\Collection;
-use PowerComponents\LivewirePowerGrid\Button;
-use PowerComponents\LivewirePowerGrid\Column;
-use PowerComponents\LivewirePowerGrid\PowerGrid;
-use PowerComponents\LivewirePowerGrid\PowerGridComponent;
+use Illuminate\Database\Eloquent\Builder;
+use PowerComponents\LivewirePowerGrid\Rules\{Rule, RuleActions};
+use PowerComponents\LivewirePowerGrid\Filters\Filter;
 use PowerComponents\LivewirePowerGrid\Traits\ActionButton;
+use PowerComponents\LivewirePowerGrid\{Button, Column, Exportable, Footer, Header, PowerGrid, PowerGridComponent, PowerGridEloquent};
 
-class BankAccountTable extends PowerGridComponent
+final class BankAccountTable extends PowerGridComponent
 {
     use ActionButton;
 
     // Binding Variable
     public string $status;
 
-    public function setUp()
+    public function setUp(): array
     {
-        $this->showPerPage()
-            ->showSearchInput();
+
+        return [
+            Exportable::make('export')
+                ->striped()
+                ->type(Exportable::TYPE_XLS, Exportable::TYPE_CSV),
+            Header::make()->showSearchInput(),
+            Footer::make()
+                ->showPerPage()
+                ->showRecordCount(),
+        ];
     }
 
-    public function dataSource(): array
-    {
-        $model = BankAccount::query()->
-                    with('user')->
-                    where('status', '=', $this->status)->
-                    get();
 
-        return PowerGrid::eloquent($model)
+    public function datasource(): Builder
+    {
+        return BankAccount::query()
+                ->with('user')
+                ->where('status', '=', $this->status);
+    }
+
+    public function relationSearch(): array
+    {
+        return [];
+    }
+
+    public function addColumns(): PowerGridEloquent
+    {
+        return PowerGrid::eloquent()
             ->addColumn('id')
             ->addColumn('user_id', function(BankAccount $model) {
                 return $model->user->id;
@@ -40,54 +55,47 @@ class BankAccountTable extends PowerGridComponent
             ->addColumn('bank_name')
             ->addColumn('account_number')
             ->addColumn('account_name')
-            // ->addColumn('name')
             ->addColumn('updated_at')
-            ->addColumn('updated_at_formatted', function(BankAccount $model) {
-                return Carbon::parse($model->updated_at)->format('d/m/Y H:i:s');
-            })
-            ->make();
+            ->addColumn('updated_at_formatted', fn (BankAccount $model) => Carbon::parse($model->updated_at)->format('d/m/Y H:i:s'));
     }
+
 
     public function columns(): array
     {
         return [
-            Column::add()
-                ->title(__('ID'))
-                ->field('id')
+            Column::make('ID', 'id')
                 ->hidden(),
 
-            Column::add()
-                ->title(__('User ID'))
-                ->field('user_id')
+            Column::make('User ID', 'user_id')
                 ->searchable(),
 
-            Column::add()
-                ->title(__('Bank'))
-                ->field('bank_name')
+            Column::make('Bank', 'bank_name')
                 ->searchable(),
 
-            Column::add()
-                ->title(__('No. Rekening'))
-                ->field('account_number')
+            Column::make('No. Rekening', 'account_number')
                 ->searchable(),
 
-            Column::add()
-                ->title(__('Atas Nama'))
-                ->field('account_name')
+            Column::make('Atas Nama', 'account_name')
                 ->searchable(),
 
-            Column::add()
-                ->title(__('Tanggal'))
-                ->field('updated_at')
-                ->sortable()
+            Column::make('Tanggal', 'updated_at')
                 ->hidden(),
 
-            Column::add()
-                ->title(__('Tanggal'))
-                ->field('updated_at_formatted')
-                ->makeInputDatePicker('updated_at')
-                ->sortable()
+            Column::make('Tanggal', 'updated_at_formatted', 'updated_at')
                 ->searchable()
+        ];
+    }
+
+    /**
+     * PowerGrid Filters.
+     *
+     * @return array<int, Filter>
+     */
+    public function filters(): array
+    {
+        return [
+            // Filter::inputText('name'),
+            // Filter::datepicker('created_at_formatted', 'created_at'),
         ];
     }
 
@@ -95,10 +103,17 @@ class BankAccountTable extends PowerGridComponent
     |--------------------------------------------------------------------------
     | Actions Method
     |--------------------------------------------------------------------------
-    | Enable this section only when you have defined routes for these actions.
+    | Enable the method below only if the Routes below are defined in your app.
     |
     */
 
+    /**
+     * PowerGrid BankAccount Action Buttons.
+     *
+     * @return array<int, Button>
+     */
+
+    
     public function actions(): array
     {
         if ($this->status == 'request') {
@@ -107,6 +122,7 @@ class BankAccountTable extends PowerGridComponent
                     ->caption(__('Validasi'))
                     ->class('btn btn-default-dark')
                     ->method('post')
+                    ->target('_self')
                     ->route('admin.umkm-account.confirm', [
                         'account_number' => 'account_number',
                         'id' => 'id',
@@ -116,18 +132,19 @@ class BankAccountTable extends PowerGridComponent
                     ->caption(__('Tolak'))
                     ->class('btn btn-default-red')
                     ->method('post')
+                    ->target('_self')
                     ->route('admin.umkm-account.reject', [
                         'account_number' => 'account_number',
                         'id' => 'id',
                     ]),
             ];
-        }
-        else if ($this->status == 'revoked') {
+        }else if ($this->status == 'revoked') {
             $actions = [
                 Button::add('Aktivasi')
                     ->caption(__('Aktivasi'))
                     ->class('btn btn-default-dark')
                     ->method('post')
+                    ->target('_self')
                     ->route('admin.umkm-account.confirm', [
                         'account_number' => 'account_number',
                         'id' => 'id',
@@ -140,6 +157,7 @@ class BankAccountTable extends PowerGridComponent
                 ->caption(__('Nonaktifkan'))
                 ->class('btn btn-default-red')
                 ->method('post')
+                ->target('_self')
                 ->route('admin.umkm-account.revoke', [
                     'account_number' => 'account_number',
                     'id' => 'id',
@@ -152,53 +170,52 @@ class BankAccountTable extends PowerGridComponent
                     ->caption(__('Aktivasi'))
                     ->class('btn btn-default-dark')
                     ->method('post')
+                    ->target('_self')
                     ->route('admin.umkm-account.confirm', [
                         'account_number' => 'account_number',
                         'id' => 'id',
                 ]),  
             ];
         }
+    //    return [
+    //        Button::make('edit', 'Edit')
+    //            ->class('bg-indigo-500 cursor-pointer text-white px-3 py-2.5 m-1 rounded text-sm')
+    //            ->route('bank-account.edit', ['bank-account' => 'id']),
+
+    //        Button::make('destroy', 'Delete')
+    //            ->class('bg-red-500 cursor-pointer text-white px-3 py-2 m-1 rounded text-sm')
+    //            ->route('bank-account.destroy', ['bank-account' => 'id'])
+    //            ->method('delete')
+    //     ];
 
         return $actions;
     }
+    
 
     /*
     |--------------------------------------------------------------------------
-    | Edit Method
+    | Actions Rules
     |--------------------------------------------------------------------------
-    | Enable this section to use editOnClick() or toggleable() methods
+    | Enable the method below to configure Rules for your Table and Action Buttons.
     |
     */
 
+    /**
+     * PowerGrid BankAccount Action Rules.
+     *
+     * @return array<int, RuleActions>
+     */
+
     /*
-    public function update(array $data ): bool
+    public function actionRules(): array
     {
-       try {
-           $updated = BankAccount::query()->find($data['id'])->update([
-                $data['field'] => $data['value']
-           ]);
-       } catch (QueryException $exception) {
-           $updated = false;
-       }
-       return $updated;
-    }
+       return [
 
-    public function updateMessages(string $status, string $field = '_default_message'): string
-    {
-        $updateMessages = [
-            'success'   => [
-                '_default_message' => __('Data has been updated successfully!'),
-                //'custom_field' => __('Custom Field updated successfully!'),
-            ],
-            "error" => [
-                '_default_message' => __('Error updating the data.'),
-                //'custom_field' => __('Error updating custom field.'),
-            ]
+           //Hide button edit for ID 1
+            Rule::button('edit')
+                ->when(fn($bank-account) => $bank-account->id === 1)
+                ->hide(),
         ];
-
-        return ($updateMessages[$status][$field] ?? $updateMessages[$status]['_default_message']);
     }
     */
-
-
 }

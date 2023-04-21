@@ -1,0 +1,205 @@
+<?php
+
+namespace App\Http\Livewire\User;
+
+use Carbon\Carbon;
+use App\Models\Umkm;
+use App\Models\UserOrder;
+use App\Models\UserOrderItem;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\QueryException;
+use PowerComponents\LivewirePowerGrid\Button;
+use PowerComponents\LivewirePowerGrid\Column;
+use PowerComponents\LivewirePowerGrid\PowerGrid;
+use PowerComponents\LivewirePowerGrid\PowerGridComponent;
+use PowerComponents\LivewirePowerGrid\Traits\ActionButton;
+
+class UserOrderItemTable extends PowerGridComponent
+{
+    use ActionButton;
+
+    // Binding Variable
+    public string $status;
+
+    public function setUp()
+    {
+        $this->showPerPage()
+            ->showSearchInput();
+
+        return [
+            Header::make()
+                ->showSearchInput(),
+    
+        ];
+       
+    }
+
+    public function dataSource(): array
+    {
+        $umkms = Umkm::with('user')->whereHas('user', function ($query) {
+            return $query->where('id', '=', Auth::user()->id);
+        })->get();
+
+        $umkm_id = [];
+        foreach ($umkms as $umkm) {
+            array_push($umkm_id, $umkm->id);
+        }
+
+        $model = UserOrderItem::query()->with([
+            'product',
+            'order',
+            'order_by',
+        ])->get();
+
+        return PowerGrid::eloquent($model)
+            ->addColumn('id')
+            ->addColumn('user_ordered', function(UserOrderItem $model) {
+                $full_name = $model->order_by->first_name;
+                if ($model->order_by->last_name) {
+                    $full_name += $model->order_by->last_name;
+                }
+                return $full_name;
+            })
+            ->addColumn('product_name', function(UserOrderItem $model) {
+                return $model->product->name;
+            })
+            ->addColumn('qty')
+            ->addColumn('amount')
+            ->addColumn('amount_formatted', function(UserOrderItem $model) {
+                return format_rupiah($model->amount);
+            })
+            ->addColumn('message')
+            ->addColumn('address', function(UserOrderItem $model) {
+                return $model->order->order_address;
+            })
+            ->addColumn('created_at')
+            ->addColumn('created_at_formatted', function(UserOrderItem $model) {
+                return Carbon::parse($model->created_at)->format('d/m/Y H:i:s');
+            })
+            ->make();
+    }
+
+    public function columns(): array
+    {
+        return [
+            Column::add()
+                ->title(__('ID'))
+                ->field('id')
+                ->hidden(),
+
+            Column::add()
+                ->title(__('Pemesan'))
+                ->field('user_ordered')
+                ->searchable(),
+            
+            Column::add()
+                ->title(__('Produk'))
+                ->field('product_name')
+                ->searchable(),
+            
+            Column::add()
+                ->title(__('qty'))
+                ->field('qty')
+                ->sortable(),
+
+            Column::add()
+                ->title(__('Dibayarkan'))
+                ->field('amount')
+                ->sortable()
+                ->hidden(),
+
+            Column::add()
+                ->title(__('Dibayarkan'))
+                ->field('amount_formatted')
+                ->sortable(),
+
+            Column::add()
+                ->title(__('Catatan'))
+                ->field('message')
+                ->searchable(),
+
+            Column::add()
+                ->title(__('Alamat Pengiriman'))
+                ->field('address')
+                ->searchable(),
+
+            Column::add()
+                ->title(__('Tanggal'))
+                ->field('created_at')
+                ->hidden(),
+
+            Column::add()
+                ->title(__('Tanggal'))
+                ->field('created_at_formatted')
+                ->makeInputDatePicker('created_at')
+                ->searchable()
+        ];
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Actions Method
+    |--------------------------------------------------------------------------
+    | Enable this section only when you have defined routes for these actions.
+    |
+    */
+
+    /*
+    public function actions(): array
+    {
+       return [
+           Button::add('edit')
+               ->caption(__('Edit'))
+               ->class('bg-indigo-500 text-white')
+               ->route('user-order.edit', ['user-order' => 'id']),
+
+           Button::add('destroy')
+               ->caption(__('Delete'))
+               ->class('bg-red-500 text-white')
+               ->route('user-order.destroy', ['user-order' => 'id'])
+               ->method('delete')
+        ];
+    }
+    */
+
+    /*
+    |--------------------------------------------------------------------------
+    | Edit Method
+    |--------------------------------------------------------------------------
+    | Enable this section to use editOnClick() or toggleable() methods
+    |
+    */
+
+    /*
+    public function update(array $data ): bool
+    {
+       try {
+           $updated = UserOrder::query()->find($data['id'])->update([
+                $data['field'] => $data['value']
+           ]);
+       } catch (QueryException $exception) {
+           $updated = false;
+       }
+       return $updated;
+    }
+
+    public function updateMessages(string $status, string $field = '_default_message'): string
+    {
+        $updateMessages = [
+            'success'   => [
+                '_default_message' => __('Data has been updated successfully!'),
+                //'custom_field' => __('Custom Field updated successfully!'),
+            ],
+            "error" => [
+                '_default_message' => __('Error updating the data.'),
+                //'custom_field' => __('Error updating custom field.'),
+            ]
+        ];
+
+        return ($updateMessages[$status][$field] ?? $updateMessages[$status]['_default_message']);
+    }
+    */
+
+
+}

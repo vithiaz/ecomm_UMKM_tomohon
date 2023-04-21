@@ -19,7 +19,7 @@
                 <button class="btn btn-default-orange">Tambahkan</button>
             </form>
 
-            <livewire:admin.product-category-table/>
+            <livewire:admin.product-category-table />
 
             {{-- <div class="table-responsive">
                 <table class="table table-striped table-hover">

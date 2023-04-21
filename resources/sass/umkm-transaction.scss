@@ -1,5 +1,9 @@
 @import '_var.scss';
 
+.app-content {
+    width: 60vw;
+}
+
 .umkm-transaction-page {
 
     .container {
@@ -7,6 +11,7 @@
         display: flex;
         flex-direction: column;
         gap: 10px;
+        // width: calc(100vw - 360px);
 
         .page-title {
             padding: 10px;

@@ -37,5 +37,4 @@ class Umkm extends Model
     {
         return $this->hasMany(Product::class, 'umkm_id', 'id');
     }
-
 }

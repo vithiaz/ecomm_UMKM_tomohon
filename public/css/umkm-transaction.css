@@ -1,3 +1,7 @@
+.app-content {
+  width: 60vw;
+}
+
 .umkm-transaction-page .container {
   padding-top: 20px;
   display: flex;

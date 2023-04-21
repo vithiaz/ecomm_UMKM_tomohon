@@ -9,15 +9,21 @@
         </div>
         <div class="page-nav-menu-wrapper">
             <ul>
-                <li class="active">
-                    <a href="#">Order</a>
+                <li @if($status == 'pending') class="active" @endif>
+                    <a href="{{ route('umkm.transaction', ['status' => 'pending']) }}">Order</a>
                 </li>
-                <li><a href="#">Dalam Pengiriman</a></li>
-                <li><a href="#">Selesai</a></li>
-                <li><a href="#">Dibatalkan</a></li>
+                <li @if($status == 'processed') class="active" @endif>
+                    <a href="{{ route('umkm.transaction', ['status' => 'processed']) }}">Dalam Pengiriman</a></li>
+                <li @if($status == 'onsite') class="active" @endif>
+                    <a href="{{ route('umkm.transaction', ['status' => 'onsite']) }}">Selesai</a></li>
+                <li @if($status == 'return') class="active" @endif>
+                    <a href="{{ route('umkm.transaction', ['status' => 'return']) }}">Dibatalkan</a></li>
             </ul>
         </div>
         <div class="page-content-card">
+            <livewire:user.user-order-item-table status='{{ $status }}' />
+        </div>
+        {{-- <div class="page-content-card">
             <div class="table-responsive">
                 <table class="table table-striped table-hover">
                     <thead>
@@ -51,7 +57,7 @@
             <div class="pagination-wrapper">
                 
             </div>
-        </div>
+        </div> --}}
     </div>
 </div>
 

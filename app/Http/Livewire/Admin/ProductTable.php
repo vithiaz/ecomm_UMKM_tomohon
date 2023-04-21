@@ -3,195 +3,163 @@
 namespace App\Http\Livewire\Admin;
 
 use App\Models\Product;
-use Carbon\Carbon;
-use Illuminate\Database\QueryException;
-use Illuminate\Support\Collection;
-use PowerComponents\LivewirePowerGrid\Button;
-use PowerComponents\LivewirePowerGrid\Column;
-use PowerComponents\LivewirePowerGrid\PowerGrid;
-use PowerComponents\LivewirePowerGrid\PowerGridComponent;
-use PowerComponents\LivewirePowerGrid\Traits\ActionButton;
+use Illuminate\Support\Carbon;
+use Illuminate\Database\Eloquent\Builder;
+use PowerComponents\LivewirePowerGrid\Rules\{Rule, RuleActions};
+use PowerComponents\LivewirePowerGrid\Traits\{ActionButton, WithExport};
+use PowerComponents\LivewirePowerGrid\Filters\Filter;
+use PowerComponents\LivewirePowerGrid\{Button, Column, Exportable, Footer, Header, PowerGrid, PowerGridComponent, PowerGridEloquent};
 
-class ProductTable extends PowerGridComponent
+final class ProductTable extends PowerGridComponent
 {
     use ActionButton;
+    use WithExport;
 
     // Binding Variable
     public string $status;
 
-    protected $listeners = ['refreshComponent' => '$refresh'];
-
-    public function setUp()
+    public function setUp(): array
     {
-        $this->showPerPage()
-            ->showSearchInput();
+        // $this->showCheckBox();
+
+        return [
+            Exportable::make('export')
+                ->striped()
+                ->type(Exportable::TYPE_XLS, Exportable::TYPE_CSV),
+            Header::make()->showSearchInput(),
+            Footer::make()
+                ->showPerPage()
+                ->showRecordCount(),
+        ];
     }
 
-    public function dataSource(): array
+    public function datasource(): Builder
     {
-        $model = Product::query()->with([
+        return Product::query()->with([
             'umkm',
             'user',
             'categories',
-        ])->where('status', '=', $this->status)->get();
-        
-        return PowerGrid::eloquent($model)
-            ->addColumn('id')
-            ->addColumn('name')
-            ->addColumn('name_slug')
-            ->addColumn('price')
-            ->addColumn('price_formatted', function(Product $model) {
-                return format_rupiah($model->price);
-            })
-            ->addColumn('discount')
-            ->addColumn('discount_formatted', function(Product $model) {
-                return $model->discount . ' %';
-            })
-            ->addColumn('umkm_name', function(Product $model) {
-                return $model->umkm->name;
-            })
-            ->addColumn('categories', function(Product $model) {
-                $categories_list = '';
-                foreach ($model->categories as $category) {
-                    $categories_list = $category->name . ', ' . $categories_list;
-                }
-                return $categories_list;
-                // return $model->product_categories->first_name . ($model->user->last_name ? ' '.$model->user->last_name : '');
-            })
-            ->addColumn('updated_at')
-            ->addColumn('updated_at_formatted', function(Product $model) {
-                return Carbon::parse($model->updated_at)->format('d/m/Y H:i:s');
-            })
-            ->make();
+        ])->where('status', '=', $this->status);
+    }
+
+
+    public function relationSearch(): array
+    {
+        return [];
+    }
+
+
+    public function addColumns(): PowerGridEloquent
+    {
+        return PowerGrid::eloquent()
+        ->addColumn('id')
+        ->addColumn('name')
+        ->addColumn('name_slug')
+        ->addColumn('price')
+        ->addColumn('price_formatted', function(Product $model) {
+            return format_rupiah($model->price);
+        })
+        ->addColumn('discount')
+        ->addColumn('discount_formatted', function(Product $model) {
+            return $model->discount . ' %';
+        })
+        ->addColumn('umkm_name', function(Product $model) {
+            return $model->umkm->name;
+        })
+        ->addColumn('categories', function(Product $model) {
+            $categories_list = '';
+            foreach ($model->categories as $category) {
+                $categories_list = $category->name . ', ' . $categories_list;
+            }
+            return $categories_list;
+            // return $model->product_categories->first_name . ($model->user->last_name ? ' '.$model->user->last_name : '');
+        })
+        ->addColumn('updated_at')
+        ->addColumn('updated_at_formatted', function(Product $model) {
+            return Carbon::parse($model->updated_at)->format('d/m/Y H:i:s');
+        });
+
     }
 
     public function columns(): array
     {
         return [
-            Column::add()
-                ->title(__('ID'))
-                ->field('id')
+            Column::make('Id', 'id')
                 ->searchable(),
 
-            Column::add()
-                ->title(__('Nama'))
-                ->field('name')
-                ->searchable()
+            Column::make('Name', 'name')
+                    ->sortable()
+                    ->searchable(),
+
+            Column::make('Harga', 'price_formatted', 'price')
+                    ->sortable(),
+
+            Column::make('Diskon', 'discount_formatted', 'discount')
                 ->sortable(),
 
-            Column::add()
-                ->title(__('Harga'))
-                ->field('price')
-                ->sortable()
-                ->hidden(),
-            
-            Column::add()
-                ->title(__('Harga'))
-                ->field('price_formatted')
-                ->sortable(),
-            
-            Column::add()
-                ->title(__('Diskon'))
-                ->field('discount')
-                ->sortable()
-                ->hidden(),
-
-            Column::add()
-                ->title(__('Diskon'))
-                ->field('discount_formatted')
-                ->sortable(),
-
-            Column::add()
-                ->title(__('Umkm'))
-                ->field('umkm_name')
-                ->searchable(),
-            
-            Column::add()
-                ->title(__('Kategori'))
-                ->field('categories')
-                // ->makeInputText('categories')
+            Column::make('Umkm', 'umkm_name')
                 ->searchable(),
 
-            // Column::add()
-            //     ->title(__('Penjual'))
-            //     ->field('user_name')
-            //     ->searchable(),
-
-            Column::add()
-                ->title(__('Diubah'))
-                ->field('updated_at')
-                ->sortable()
-                ->hidden(),
-
-            Column::add()
-                ->title(__('Diubah'))
-                ->field('updated_at_formatted')
-                ->makeInputDatePicker('updated_at')
+            Column::make('Kategori', 'categories')
+                ->searchable(),
+                
+            Column::make('Diubah', 'updated_at_formatted', 'updated_at')
                 ->sortable()
                 ->searchable(),
 
         ];
     }
 
-    /*
-    |--------------------------------------------------------------------------
-    | Actions Method
-    |--------------------------------------------------------------------------
-    | Enable this section only when you have defined routes for these actions.
-    |
-    */
-
+    public function filters(): array
+    {
+        return [
+            // Filter::inputText('name')->operators(['contains']),
+            // Filter::inputText('name_slug')->operators(['contains']),
+            // Filter::inputText('status')->operators(['contains']),
+            // Filter::datetimepicker('updated_at', 'updated_at_formatted'),
+        ];
+    }
+    
     public function actions(): array
     {
        return [
-           Button::add('tinjau')
-               ->caption(__('tinjau'))
-               ->class('btn btn-default-orange')
-               ->method('get')
-               ->route('admin.product-review', [
-                'product_id' => 'id',
-                'name_slug' => 'name_slug',
-               ]),
+            Button::make('tinjau', 'tinjau')
+                ->class('btn btn-default-orange')
+                ->route('product.edit', ['product' => 'id'])
+                ->method('get')
+                ->target('_self')
+                ->route('admin.product-review', [
+                    'product_id' => 'id',
+                    'name_slug' => 'name_slug',
+                ]),
         ];
     }
+    
 
     /*
     |--------------------------------------------------------------------------
-    | Edit Method
+    | Actions Rules
     |--------------------------------------------------------------------------
-    | Enable this section to use editOnClick() or toggleable() methods
+    | Enable the method below to configure Rules for your Table and Action Buttons.
     |
     */
 
+    /**
+     * PowerGrid Product Action Rules.
+     *
+     * @return array<int, RuleActions>
+     */
+
     /*
-    public function update(array $data ): bool
+    public function actionRules(): array
     {
-       try {
-           $updated = Product::query()->find($data['id'])->update([
-                $data['field'] => $data['value']
-           ]);
-       } catch (QueryException $exception) {
-           $updated = false;
-       }
-       return $updated;
-    }
+       return [
 
-    public function updateMessages(string $status, string $field = '_default_message'): string
-    {
-        $updateMessages = [
-            'success'   => [
-                '_default_message' => __('Data has been updated successfully!'),
-                //'custom_field' => __('Custom Field updated successfully!'),
-            ],
-            "error" => [
-                '_default_message' => __('Error updating the data.'),
-                //'custom_field' => __('Error updating custom field.'),
-            ]
+           //Hide button edit for ID 1
+            Rule::button('edit')
+                ->when(fn($product) => $product->id === 1)
+                ->hide(),
         ];
-
-        return ($updateMessages[$status][$field] ?? $updateMessages[$status]['_default_message']);
     }
     */
-
-
 }
