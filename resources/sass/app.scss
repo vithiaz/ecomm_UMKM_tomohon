@@ -112,6 +112,7 @@ body {
                     .section-header-title {
                         background-color: white;
                     }
+
                 }
 
                 &.wrapped {
@@ -131,6 +132,10 @@ body {
                         @include section-header-title();
                         color: $PrimaryRed;
                     }
+                }
+
+                .section-header-subtitle {
+                    font-size: 1rem;
                 }
             }
 
@@ -1066,6 +1071,10 @@ body {
             object-fit: cover;
             @include image-hover-animate();
         }
+
+        .no-image {
+            @include no-image-i();
+        }
     }
 
     .card-content {
@@ -1241,7 +1250,7 @@ body {
 }
 
 // Livewire Login Components / Login Modal
-#auth_modal {
+#auth_modal, #umkm_bank_account_modal {
     .modal-dialog {
         display: flex;
         align-items: center;
@@ -1393,6 +1402,88 @@ body {
                     text-decoration: underline;
                 }
             }
+        }
+    }
+}
+
+#umkm_bank_account_modal {
+
+    .modal-content {
+
+        .profile-wrapper {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 5;
+            align-items: center;
+            justify-content: center;
+
+            .profile-head-wrapper {
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                gap: 10;
+                align-items: center;
+                justify-content: space-evenly;
+
+                .profile-name {
+                    font-size: 1rem;
+                    font-weight: 600;
+                    letter-spacing: 1px;
+                }
+
+                .image-container {
+                    width: 80px;
+                    height: 80px;
+                    overflow: hidden;
+                    border-radius: 50%;
+                    display: grid;
+                    place-items: 'center';
+
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+
+                        @include image-hover-animate();
+                    }
+
+                    .no-image {
+                        height: 250px !important;
+                        @include no-image-i();
+                    }
+                }
+            }
+            .card-content-wrapper {
+                width: 100%;
+                padding: 20px 0;
+                display: flex;
+                flex-direction: column;
+                gap: 20;
+                
+                .card-content-wrapper-title {
+                    width: 100%;
+                    font-weight: 600;
+                    margin-bottom: 10px;
+                }
+
+                .wrapper-col {
+                    width: 100%;
+                    display: flex;
+                    flex-direction: row;
+                    gap: 10;
+                    align-items: center;
+                    justify-content: space-between;
+                    flex-wrap: wrap;
+                    
+                    .col-title {
+                        font-weight: 600;
+                    }
+                }
+                
+
+            }
+
         }
     }
 }

@@ -12,4 +12,5 @@ function simplify_number_id($number) {
     return $number;
 }
 
+
 ?>

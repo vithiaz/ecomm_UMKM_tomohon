@@ -74,6 +74,7 @@ final class UserOrderItemTable extends PowerGridComponent
 
         foreach($checkbox_id as $id) {
             $this->set_delivery_status($id, 'processed');
+            $this->update_product_stock($id);
         }
 
         $this->checkboxValues = [];
@@ -81,6 +82,20 @@ final class UserOrderItemTable extends PowerGridComponent
         $msg = ['success' => 'Pengiriman Diproses'];
         $this->dispatchBrowserEvent('display-message', $msg);    
     }
+
+    // Handle Product Stock after product delivery is proccessed
+    private function update_product_stock($order_item_id) {
+        $orderItem = UserOrderItem::with('product')->find($order_item_id);
+        $product_stock = $orderItem->product->stock;
+        $buy_qty = $orderItem->qty;
+        if (($product_stock - $buy_qty) >= 0) {
+            $orderItem->product->stock = $product_stock - $buy_qty;                
+        } else {
+            $orderItem->product->stock = 0;
+        }
+        $orderItem->product->save();
+}
+    
 
     public function deliveryOnsite(): void
     {

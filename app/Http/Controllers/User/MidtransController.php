@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Models\UserOrder;
 use Illuminate\Http\Request;
+use App\Models\UserOrderItem;
 use App\Http\Controllers\Controller;
 
 class MidtransController extends Controller

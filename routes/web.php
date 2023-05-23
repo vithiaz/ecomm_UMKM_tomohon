@@ -8,10 +8,12 @@ use App\Http\Livewire\User\EditUmkm;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Livewire\Admin\Products;
 use Illuminate\Support\Facades\Route;
+use App\Http\Livewire\Base\SearchPage;
 use App\Http\Livewire\User\AddProduct;
 use App\Http\Livewire\Base\ProductPage;
 use App\Http\Livewire\User\EditProduct;
 use App\Http\Livewire\User\UmkmProfile;
+use App\Http\Livewire\Admin\UmkmPayment;
 use App\Http\Livewire\User\CheckoutPage;
 use App\Http\Livewire\User\RegisterUmkm;
 use App\Http\Livewire\Base\ProductDetail;
@@ -31,6 +33,7 @@ use App\Http\Controllers\Admin\ProductCategory as ProductCategoryMethods;
 Route::get('/', Homepage::class)->name('homepage');
 Route::get('/products/{category_slug}', ProductPage::class)->name('product-page');
 Route::get('/umkm', UmkmPage::class)->name('umkm-page');
+Route::get('/search/{search_key}', SearchPage::class)->name('search-page');
 Route::get('/product/{product_id}-{name_slug}', ProductDetail::class)->name('product-details');
 Route::get('/register', RegisterPage::class)->name('register');
 Route::get('/logout', function () {
@@ -69,6 +72,8 @@ Route::middleware(['auth', 'admin'])->prefix('/admin')->group(function () {
     Route::post('/umkm/account/confirm/{account_number}-{id}', [UmkmBankAccountMethods::class, 'confirm_request'])->name('admin.umkm-account.confirm');    
     Route::post('/umkm/account/reject/{account_number}-{id}', [UmkmBankAccountMethods::class, 'reject_request'])->name('admin.umkm-account.reject');    
     Route::post('/umkm/account/revoke/{account_number}-{id}', [UmkmBankAccountMethods::class, 'revoke_request'])->name('admin.umkm-account.revoke');    
+
+    Route::get('/umkm/payment/{status}', UmkmPayment::class)->name('admin.umkm-payment');    
 });
 
 // Checkpoint

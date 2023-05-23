@@ -134,12 +134,21 @@
             integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" 
             crossorigin="anonymous"></script>
     
-    @stack('script')
-
+            
     {{-- AlpineJS  --}}
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-
+            
     @livewireScripts
+
+    {{-- Livewire Events Triggered --}}
+    <script>
+        Livewire.on('add_to_cart', function(product_id){
+            Livewire.emit('storeCart', product_id)
+        })
+    </script>
+
+
+    @stack('script')
     {{-- @powerGridScripts --}}
 </body>
 

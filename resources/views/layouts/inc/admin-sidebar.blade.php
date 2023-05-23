@@ -63,6 +63,13 @@
                     >
                         <a href="{{ route('admin.umkm-account-verification', ['status' => 'request']) }}">Verifikasi Rekening</a>
                     </li>
+                    <li
+                        @if (\Request::route()->getName() == 'admin.umkm-payment')
+                            class="active"
+                        @endif
+                    >
+                        <a href="{{ route('admin.umkm-payment', ['status' => 'pending']) }}">Pembayaran ke UMKM</a>
+                    </li>
                 </ul>
             </div>
         </div>

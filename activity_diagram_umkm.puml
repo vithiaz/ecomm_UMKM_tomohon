@@ -1,0 +1,25 @@
+@startuml
+
+|User|
+start
+if (Sudah memiliki akun?) then (ya)
+    :Login;
+else (tidak)
+    :Register;
+endif
+|User|
+repeat :Pengajuan status aktivasi UMKM;
+:Konfirmasi pengajuan status aktivasi UMKM;
+|Admin|
+:Validasi pengajuan status aktivasi UMKM;
+repeat while (Pengajuan diterima) is (Tidak) not (Ya)
+|User|
+repeat :Tambahkan Rekening;
+:Aktivasi rekening;
+|Admin|
+:Validasi aktivasi rekening;
+repeat while (Aktivasi diterima) is (Tidak) not (Ya)
+:Daftarkan UMKM;
+:Daftarkan Produk;
+stop
+@enduml

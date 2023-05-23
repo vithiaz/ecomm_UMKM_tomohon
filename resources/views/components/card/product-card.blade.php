@@ -1,7 +1,7 @@
 <div class="swiper-slide product-card">
     <div class="image-container">
         @if ($img)
-            <img src="{{ asset('storage/'.$img) }}" alt="">
+            <img src="{{ asset('storage/'.$img) }}" alt="{{ $productNameSlug }}-image">
         @else
             <div class="no-image">
                 <i class="fa-solid fa-image"></i>
@@ -33,10 +33,22 @@
                 <i class="fa-solid fa-location-dot"></i>
                 <span>{{ $location }}</span>
             </div>
-            <button class="btn cart-btn">
-                <i class="fa-solid fa-cart-shopping"></i>
-            </button>
+            @if (Auth::check())
+                <button onclick="add_to_cart({{ $productId }})" class="btn cart-btn">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                </button>                
+            @endif
+
         </div>
     </div>
 </div>
 
+@push('script')
+<script>
+
+    function add_to_cart (product_id) {
+        Livewire.emit('add_to_cart', product_id);
+    }
+    
+</script>
+@endpush

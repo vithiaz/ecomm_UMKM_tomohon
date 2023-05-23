@@ -16,12 +16,12 @@
                 <div class="content">
                     <p>Aplikasi ini membantu pengusaha UMKM di Kota Tomohon untuk mengenalkan produk yang dijual kepada masyarakat umum dengan media internet sehingga dapat meningkatkan penjualan.</p>
                 </div>
-                <a href="#" class="link-href">DAFTAR SEKARANG</a>
+                <a href="{{ route('umkm.profile') }}" class="link-href">DAFTAR SEKARANG</a>
             </div>
         </div>
     </section>
 
-    <section class="page-section">
+    <section wire:ignore class="page-section">
         <div class="container">
             <div class="row-content-wrapper">
                 <div class="row-section-header">
@@ -31,15 +31,15 @@
                     <div class="swiper HeroUMKMSwiper">
                         <div class="swiper-wrapper">
 
-                            @foreach (range(0,12) as $i)
-                               <x-card.umkm-card
-                                    image='{{ asset("img\aziz-acharki-boIJluEJEPM-unsplash.jpg") }}'
-                                    name='Lorem ipsum dolor sit amet.' 
-                                    location='Location'
-                                    sold='2340'
-                                    link='#'
-                               />
-                            @endforeach
+                            @foreach ($popularUmkm as $umkm)
+                            <x-card.umkm-card
+                                image='{{ $umkm->profile_img }}'
+                                name='{{ $umkm->name }}' 
+                                location='{{ $umkm->district }}'
+                                sold='{{ $umkm->success_transaction_count }}'
+                                link='#'
+                            />
+                    @endforeach
                         
                         </div>
                     </div>
@@ -58,19 +58,21 @@
             </div>
             <div class="section-content">
                 <div class="umkm-wrapper">
-                    @foreach (range(0,8) as $item)
+                    @foreach ($other_umkm as $umkm)
                         <div class="item">
                             <x-card.umkm-card
-                                image='{{ asset("img\aziz-acharki-boIJluEJEPM-unsplash.jpg") }}'
-                                name='Lorem ipsum dolor siLorem ipsum dolor sit amet Lipsums.' 
-                                location='Location'
-                                sold='2340'
+                                image='{{ $umkm->profile_img }}'
+                                name='{{ $umkm->name }}' 
+                                location='{{ $umkm->district }}'
+                                sold='{{ $umkm->success_transaction_count }}'
                                 link='#'
                             />
                         </div>                        
                     @endforeach
                 </div>
-                <button class="section-content-button">Lebih Banyak</button>
+                @if (!$all_loaded_state)
+                    <button wire:click='load_more' class="section-content-button">Lebih Banyak</button>
+                @endif
             </div>
         </div>
     </section>

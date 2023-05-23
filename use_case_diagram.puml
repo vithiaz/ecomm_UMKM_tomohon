@@ -1,0 +1,76 @@
+@startuml
+actor User as user
+actor Admin as admin #blue
+actor MidtransAdmin as midtransAdmin #green
+package App {
+    usecase "Daftar Akun" as registerAccount
+    usecase "Login" as login
+    usecase "Lihat Produk" as seeProduct
+    usecase "Tambah ke keranjang" as addToCart
+    usecase "Checkout Product" as checkoutProduct
+    usecase "Pembayaran" as userPayment
+
+    package ZonaPenjual as sellerZone {
+        usecase "Aktivasi UMKM" as activateUmkm
+        usecase "Tambahkan Rekening Bank" as registerBankAccount
+        usecase "Tambahkan UMKM" as registerUmkm
+        usecase "Jual Produk" as sellProduct
+        usecase "Proses Pengiriman" as processDelivery
+    }
+
+    package AdminMenu as adminMenu {
+        usecase "Tambahkan Kategori Produk" as addProductCategory
+        usecase "Verifikasi Pendaftar UMKM" as verifyUmkmRegistration
+        usecase "Verifikasi Rekening Bank" as verifyBankAccount
+        usecase "Review Product" as reviewProduct
+    }
+}
+
+package MidtransPaymentGateway {
+    usecase "Terima Pembayaran" as midtransReceivePayment
+}
+
+' left to right direction
+user --> login
+user --> registerAccount
+user --> seeProduct
+user --> addToCart
+user --> checkoutProduct
+user --> userPayment
+user --> sellerZone
+
+login ..> registerAccount : <<include>>
+activateUmkm ..> login : <<include>>
+addToCart ..> seeProduct : <<extends>>
+addToCart ..> login : <<include>>
+
+checkoutProduct ..> userPayment : <<include>>
+checkoutProduct ..> addToCart : <<extends>>
+
+' SellerZone
+activateUmkm ..> verifyUmkmRegistration : <<include>>
+registerBankAccount ..> activateUmkm : <<extends>>
+registerBankAccount ..> verifyBankAccount : <<include>>
+registerUmkm ..> registerBankAccount : <<extends>>
+sellProduct ..> registerUmkm : <<extends>>
+sellProduct ..> addProductCategory : <<extends>>
+processDelivery ..> sellProduct : <<extends>> 
+processDelivery ..> midtransReceivePayment : <<include>>
+
+admin --> login #blue
+' admin --> verifyUmkmRegistration #blue
+' admin --> verifyBankAccount #blue
+' admin --> reviewProduct #blue
+admin --> adminMenu #blue
+
+' AdminMenu
+reviewProduct ..> sellProduct #blue;text:blue : <<extends>>
+verifyUmkmRegistration ..> login #blue;text:blue : <<include>>
+verifyBankAccount ..> login #blue;text:blue : <<include>>
+reviewProduct ..> login #blue;text:blue : <<include>>
+
+' MidtransPaymentGateway
+midtransAdmin --> midtransReceivePayment #green
+midtransReceivePayment ..> userPayment : <<extends>>
+
+@enduml

@@ -26,7 +26,8 @@
         <div class="page-section content-container">
             <div class="container">
                 <div class="section-header wrapped">
-                    <h1 class="section-header-title">Daftar <span>Produk</span></h1>
+                    <h1 class="section-header-title">Hasil <span>Pencarian</span></h1>
+                    <span class="section-header-subtitle">"{{ $search_key }}"</span>
                 </div>
                 <div class="section-content">
                     <div class="product-wrapper">

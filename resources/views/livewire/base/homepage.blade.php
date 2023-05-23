@@ -16,12 +16,12 @@
                 <div class="content">
                     <p>Aplikasi ini membantu pengusaha UMKM di Kota Tomohon untuk mengenalkan produk yang dijual kepada masyarakat umum dengan media internet sehingga dapat meningkatkan penjualan.</p>
                 </div>
-                <a href="#" class="link-href">DAFTAR SEKARANG</a>
+                <a href="{{ route('umkm.profile') }}" class="link-href">DAFTAR SEKARANG</a>
             </div>
         </div>
     </section>
 
-    <section class="page-section">
+    <section wire:ignore class="page-section">
         <div class="container">
             <div class="section-header dashed">
                 <h1 class="section-header-title">Produk <span>Unggulan</span></h1>
@@ -29,8 +29,8 @@
             <div class="section-content">
                 <div class="swiper HeroProductSwiper">
                     <div class="swiper-wrapper">
-                        @foreach ($hero_product_id as $product_id)
-                            {{-- <x-card.product-card 
+                        @foreach ($hero_product as $product)
+                            <x-card.product-card 
                                 productId='{{ $product["id"] }}'
                                 basePrice='{{ $product["price"] }}'
                                 discount='{{ $product["discount"] }}'
@@ -41,9 +41,9 @@
                                 productNameSlug='{{ $product["name_slug"] }}'
                                 Location='{{ $product["umkm"]["district"] }}'
                                 img='{{ $product["profile_image"]["image"] }}'
-                            /> --}}
+                            />
                             {{-- @dump($this->get_product_model($product_id)) --}}
-                            <livewire:component.product-card :product='$this->get_product_model($product_id)' />
+                            {{-- <livewire:component.product-card :product='$this->get_product_model($product_id)' /> --}}
                         @endforeach
                     </div>
                     <div class="swiper-pagination product-swiper-pagination"></div>
@@ -53,7 +53,7 @@
     </section>
 
 
-    <section class="page-section">
+    <section wire:ignore class="page-section">
         <div class="container">
             <div class="row-content-wrapper">
                 <div class="row-section-header">
@@ -62,20 +62,19 @@
                 <div class="row-section-content">
                     <div class="swiper HeroUMKMSwiper">
                         <div class="swiper-wrapper">
-
-                            <x-card.umkm-card
+                            {{-- <x-card.umkm-card
                                  image='{{ asset("img\aziz-acharki-boIJluEJEPM-unsplash.jpg") }}'
                                  name='Lorem ipsum dolor siLorem ipsum dolor sit amet Lipsums.' 
                                  location='Location'
                                  sold='2340'
                                  link='#'
-                            />
-                            @foreach (range(0,12) as $i)
+                            /> --}}
+                            @foreach ($popularUmkm as $umkm)
                                <x-card.umkm-card
-                                    image='{{ asset("img\aziz-acharki-boIJluEJEPM-unsplash.jpg") }}'
-                                    name='Lorem ipsum dolor sit amet.' 
-                                    location='Location'
-                                    sold='2340'
+                                    image='{{ $umkm->profile_img }}'
+                                    name='{{ $umkm->name }}' 
+                                    location='{{ $umkm->district }}'
+                                    sold='{{ $umkm->success_transaction_count }}'
                                     link='#'
                                />
                             @endforeach
@@ -95,26 +94,29 @@
                 <h1 class="section-header-title">Produk Lainnya</h1>
             </div>
             <div class="section-content">
-                <div class="product-wrapper">
-                    @foreach (range(0,8) as $i)
-                        <div class="item">
+                <div wire:ignore.self class="product-wrapper">
+                    @foreach ($other_product as $product)
+                    <div class="item">
                             <x-card.product-card 
-                                productId='1'
-                                basePrice='220000'
-                                discount='50'
-                                umkm='Mitra UMKM'
-                                sold='2130'
-                                stock='999'
-                                productName='{{ $i }} - Lorem ipsum dolor sit amet consectetur adipisicing elit.'
-                                productNameSlug='slug'
-                                Location='Location'
-                                img='product_images/9u1AxVUSvRPVydLnRioN78GFIcqmrYz2Dj4SPjBE.jpg'
-                                link='#'
+                                productId='{{ $product->id }}'
+                                basePrice='{{ $product->price }}'
+                                discount='{{ $product->discount }}'
+                                umkm='{{ $product->umkm->name }}'
+                                sold='{{ $product->sales_qty }}'
+                                stock='{{ $product->stock }}'
+                                productName='{{ $product->name }}'
+                                productNameSlug='{{ $product->name_slug }}'
+                                Location='{{ $product->umkm->district }}'
+                                img='{{ $product->profile_image ? $product->profile_image->image : "" }}'
                             />
                         </div>
                     @endforeach
                 </div>
-                <button class="section-content-button">Lebih Banyak</button>
+                @if (!$all_loaded_state)
+                    <button wire:click='load_more' class="section-content-button">Lebih Banyak</button>
+                @else
+                    <a href="{{ route('product-page', ['category_slug' => 0]) }}" class="section-content-button" style="text-decoration: none">Lihat Selengkapnya</a>
+                @endif
             </div>
         </div>
     </section>

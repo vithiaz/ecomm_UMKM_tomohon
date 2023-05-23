@@ -1,0 +1,35 @@
+' Activity Diagram Order dan Transaksi User
+
+@startuml
+
+|User (Pembeli)|
+start
+if (Sudah memiliki akun?) then (ya)
+    :Login;
+else (tidak)
+    :Register;
+endif
+:Lihat produk;
+:Tambahkan ke keranjang;
+:Checkout;
+repeat :Pilih metode pembayaran;
+:Melakukan pembayaran;
+repeat while ('Pembayaran berhasil?') is (tidak) not (ya)
+|Admin|
+:Menerima pembayaran;
+|User (Penjual)|
+:Menerima order;
+:Proses pengiriman;
+|User (Pembeli)|
+if (Order terkirim) then (Ya)
+    |Admin|
+    :Proses Pembayaran ke penjual;
+else (Tidak)
+    |Admin|
+    :Refound ke pembeli;
+    :Menerima Pembayaran;
+endif
+
+stop
+
+@enduml

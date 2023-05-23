@@ -6,7 +6,7 @@
                     <img src="{{ asset('storage/'.$umkm->profile_img) }}" alt="{{ $umkm->name }}_profile">
                 @else
                     <div class="no-image">
-                        <i class="fa-   a-store"></i>
+                        <i class="fa-solid fa-store"></i>
                     </div>
                 @endif
             </div>

@@ -8,11 +8,8 @@ use App\Models\UserCart;
 use App\Models\ProductCategory;
 use Illuminate\Support\Facades\Auth;
 
-class ProductPage extends Component
+class SearchPage extends Component
 {
-    // Route Binding Variable
-    public $category_slug;
-
     // Model Variable
     public $categories;
     protected $products_query;
@@ -20,41 +17,44 @@ class ProductPage extends Component
 
     // Binding Variable
     protected $category_filter;
-    
+    public $search_key;
+
+    // public $category_slug;
     public $load_products = 12;
     private $load_products_increment = 12;
     public $all_loaded_state;
     
-    protected $listeners = ['storeCart' => 'store_user_cart'];    
-    
-    public function mount($category_slug) {
-        $this->category_slug = $category_slug;
+    protected $listeners = ['storeCart' => 'store_user_cart'];  
 
-        $category = ProductCategory::where('name_slug', '=', $this->category_slug)->get()->first();
-        if ($category) {
-            $this->category_filter = $category->id;
-        } else {
-            $this->category_filter = null;
-        }
+    public function mount($search_key) {
+        // $this->category_slug = '0';
+
+        // $category = ProductCategory::where('name_slug', '=', $this->category_slug)->get()->first();
+        // if ($category) {
+        //     $this->category_filter = $category->id;
+        // } else {
+        //     $this->category_filter = null;
+        // }
+
+        $this->search_key = $search_key;
+
         $this->categories = ProductCategory::with([
             'product_active',
         ])->whereHas('product_active')->get();
         
-        if ($this->category_filter) {
-            $this->products_query = Product::with([
-                'product_categories',
-                'profile_image',
-                'umkm',
-            ])->where('status', '=', 'active')->whereHas('product_categories', function($query) {
-                $query->where('category_id', '=', $this->category_filter);
-            });
-        } else {
-            $this->products_query = Product::with([
-                'product_categories',
-                'profile_image',
-                'umkm',
-            ])->where('status', '=', 'active');
-        }
+        $this->products_query = Product::with([
+            'product_categories',
+            'profile_image',
+            'umkm',
+            'categories',
+        ])->where([
+            ['status', '=', 'active'],
+            ['name_slug', 'like', '%'.$this->search_key.'%'],
+        ])->orWherehas('umkm', function($q) {
+            return $q->where('name', 'like', '%'.$this->search_key.'%');
+        })->orWherehas('categories', function($q) {
+            return $q->where('name', 'like', '%'.$this->search_key.'%');
+        });
 
         $this->products_result = $this->products_query->get();
 
@@ -64,7 +64,7 @@ class ProductPage extends Component
     public function render()
     {
         $products = $this->products_result->take($this->load_products);
-        return view('livewire.base.product-page', [
+        return view('livewire.base.search-page', [
             'products' => $products,
         ])->layout('layouts.app');
     }

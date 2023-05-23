@@ -125,15 +125,26 @@
 
 <div class="navbar-search-dropdown">
     <div class="container">
-        <div class="input-group">
-            <input type="text" class="form-control" placeholder="Cari Produk atau UMKM">
-            <button class="btn btn-outline-secondary" type="button" id="navbar-search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
-          </div>
+        <form id="navbar-search-form" action="{{ route('search-page', ['search_key' => '__SEARCH_KEY__']) }}" class="input-group">
+            @csrf
+            <input type="text" class="form-control" name="search_key" id="navbar-search-input" placeholder="Cari Produk atau UMKM">
+            <button class="btn btn-outline-secondary" type="submit" id="navbar-search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </form>
     </div>
 </div>
 
 @push('script')
 <script>
+
+    document.getElementById('navbar-search-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        var searchKey = document.getElementById('navbar-search-input').value;
+        var formAction = this.action.replace('__SEARCH_KEY__', encodeURIComponent(searchKey));
+
+        // Redirect to the generated form action
+        window.location.href = formAction;
+    });
 
     function adaptNavbarDropdown(DropdownClass, top = 0) {
         let navbarOffset = $('#navbar').offset().top

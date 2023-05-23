@@ -1,0 +1,83 @@
+@startuml
+
+' Declaration
+actor User_Pembeli as User
+participant Login as login
+boundary TampilanProduk as product_view
+boundary TampilanOrder as order_view
+control ProsesOrder as order_process
+entity UserOrder as user_order
+database UserOrderDB as DB_UserOrder
+participant Checkout as checkout
+boundary PilihMetodePembayaran as select_payment_method
+control ProsesCheckout as checkout_process
+
+' Flow
+activate User
+User -> login : username, password
+activate login
+
+login -> product_view
+activate product_view
+
+product_view->order_view : order produk
+deactivate product_view
+activate order_view
+
+order_view -> order_process : buat order
+deactivate order_view
+activate order_process
+
+order_process -> order_process : verifikasi order
+activate order_process #Yellow
+
+order_process -> order_view : verifikasi ditolak
+activate order_view
+deactivate order_process
+
+order_view -> User : notifikasi order gagal dibuat
+deactivate order_view
+
+order_process -> user_order : order dibuat
+activate user_order
+
+user_order -> DB_UserOrder : simpan order
+deactivate user_order
+activate DB_UserOrder
+
+order_process -> User : notifikasi order dibuat
+deactivate DB_UserOrder
+deactivate order_view
+deactivate order_process
+
+
+User -> checkout
+activate checkout
+
+checkout -> DB_UserOrder : cari order
+activate DB_UserOrder
+
+DB_UserOrder -> user_order : muat order
+deactivate DB_UserOrder
+activate user_order
+
+checkout -> select_payment_method
+activate select_payment_method
+
+select_payment_method -> checkout_process : buat pembayaran
+deactivate select_payment_method
+activate checkout_process
+
+checkout_process -> user_order : update billing pembayaran
+
+user_order -> DB_UserOrder : simpan perubahan
+deactivate user_order
+activate DB_UserOrder
+
+checkout_process -> User : notifikasi checkout berhasil
+deactivate DB_UserOrder
+deactivate checkout_process
+deactivate checkout
+
+
+@enduml
