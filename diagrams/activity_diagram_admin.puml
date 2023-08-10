@@ -1,0 +1,19 @@
+@startuml
+
+
+|Admin|
+start
+:Login;
+:Membuka Menu Admin;
+
+|System|
+:Menampilkan Dashboard Admin;
+
+
+
+
+
+stop
+
+
+@enduml

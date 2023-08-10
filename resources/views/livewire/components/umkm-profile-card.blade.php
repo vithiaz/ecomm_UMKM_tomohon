@@ -14,7 +14,7 @@
                 <a href="{{ route('umkm.edit', [$umkm]) }}" class="umkm-name">{{ $umkm->name }} <i class="fa-solid fa-pen"></i></a>
                 <div class="product-wrapper">
                     <span>{{ $umkm->products->count() }} Produk</span>
-                    <span>xx Penjualan</span>
+                    <span>{{ $umkm->success_transaction_count }} Penjualan</span>
                 </div>
             </div>
         </div>
@@ -49,7 +49,7 @@
                             <td class="break">{{ $product->status }}</td>
                             <td>{{ $product->discount }}%</td>
                             <td class="break">{{ format_rupiah($product->price) }}</td>
-                            <td>xxx Penjualan</td>
+                            <td>{{ $this->get_success_transaction($product->order_item) }} Penjualan</td>
                             <td>
                                 <a class="edit-btn" href="{{ route('edit-product', [$umkm, $product]) }}">
                                     edit

@@ -30,7 +30,8 @@
                                             </div>
                                         @else
                                             <div class="no-image">
-                                                <i class="fa-regular fa-image"></i>                                            </div>  
+                                                <i class="fa-regular fa-image"></i>
+                                            </div>  
                                         @endif
                                     </td>
                                     <td>

@@ -3,7 +3,7 @@
         <div class="container">
             <div class="header-wrapper">
                 <span class="header-title">
-                    E-Commerce Kementrian Koperasi dan UKM
+                    E-Commerce Dinas Koperasi dan UKM
                 </span>
                 <div class="logo-wrapper">
                     <div class="logo-container">
@@ -16,7 +16,11 @@
                 <div class="content">
                     <p>Aplikasi ini membantu pengusaha UMKM di Kota Tomohon untuk mengenalkan produk yang dijual kepada masyarakat umum dengan media internet sehingga dapat meningkatkan penjualan.</p>
                 </div>
-                <a href="{{ route('umkm.profile') }}" class="link-href">DAFTAR SEKARANG</a>
+                @auth
+                    <a href="{{ route('umkm.profile') }}" class="link-href">DAFTAR SEKARANG</a>
+                @else
+                    <a href="{{ route('register') }}" class="link-href">DAFTAR SEKARANG</a>
+                @endauth
             </div>
         </div>
     </section>
@@ -31,15 +35,20 @@
                     <div class="swiper HeroUMKMSwiper">
                         <div class="swiper-wrapper">
 
-                            @foreach ($popularUmkm as $umkm)
-                            <x-card.umkm-card
-                                image='{{ $umkm->profile_img }}'
-                                name='{{ $umkm->name }}' 
-                                location='{{ $umkm->district }}'
-                                sold='{{ $umkm->success_transaction_count }}'
-                                link='#'
-                            />
-                    @endforeach
+                            @forelse ($popularUmkm as $umkm)
+                                <x-card.umkm-card
+                                    image='{{ $umkm->profile_img }}'
+                                    name='{{ $umkm->name }}' 
+                                    location='{{ $umkm->district }}'
+                                    sold='{{ $umkm->success_transaction_count }}'
+                                    link='#'
+                                />
+                            @empty
+                                <div class="swiper-slide UMKM-card empty">
+                                    <i class="fa-solid fa-exclamation"></i>
+                                    <span>Tidak ada UMKM</span>
+                                </div>
+                            @endforelse
                         
                         </div>
                     </div>
@@ -56,9 +65,9 @@
                     UMKM Lainnya
                 </div>
             </div>
-            <div class="section-content">
+            <div class="section-content fill-height">
                 <div class="umkm-wrapper">
-                    @foreach ($other_umkm as $umkm)
+                    @forelse ($other_umkm as $umkm)
                         <div class="item">
                             <x-card.umkm-card
                                 image='{{ $umkm->profile_img }}'
@@ -67,8 +76,13 @@
                                 sold='{{ $umkm->success_transaction_count }}'
                                 link='#'
                             />
-                        </div>                        
-                    @endforeach
+                        </div>
+                    @empty
+                        <div class="empty-card full-basis fill-height">
+                            <i class="fa-solid fa-exclamation"></i>
+                            <span>tidak ada UMKM . . .</span>
+                        </div>
+                    @endforelse
                 </div>
                 @if (!$all_loaded_state)
                     <button wire:click='load_more' class="section-content-button">Lebih Banyak</button>

@@ -6,6 +6,7 @@ use App\Models\Umkm;
 use App\Models\User;
 use App\Models\Product;
 use App\Models\UserOrder;
+use App\Models\SuccessTransaction;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -35,6 +36,17 @@ class UserOrderItem extends Model
     public function order_belongs()
     {
         return $this->belongsTo(UserOrder::class, 'order_id');
+    }
+
+    public function order_success() {
+        return $this->hasOneThrough(
+            SuccessTransaction::class,
+            UserOrder::class,
+            'id',
+            'order_id',
+            'order_id',
+            'id',
+        );
     }
 
     public function order_by()

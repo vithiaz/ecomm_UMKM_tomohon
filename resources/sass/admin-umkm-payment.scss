@@ -129,6 +129,54 @@
     }
 }
 
+
+// UMKM Account Card Styling
+#umkm_bank_account_modal {
+
+    .modal-dialog {
+
+        .modal-content {
+
+            .card-content-wrapper {
+
+                .bank-card-wrapper {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 5px;
+
+                    .bank-card {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 5px;
+                        width: 100%;
+                        padding: 3px 5px;
+                        border-bottom: 1px $BorderVeryLight solid;
+
+                        .bank-acc {
+                            display: flex;
+                            flex-direction: row;
+                            gap: 5px;                            
+                            align-items: center;
+                            justify-content: space-between;
+                            flex-wrap: wrap;
+                        }
+
+                        .owner-name {
+                            display: flex;
+                            flex-direction: row;
+                            gap: 5px;                            
+                            align-items: center;
+                            justify-content: flex-end;
+                            flex-wrap: wrap;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
 // Responsive
 @media screen and (max-width: 576px) {
     .admin-umkm-payment-page {

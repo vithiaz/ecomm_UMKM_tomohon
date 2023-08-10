@@ -54,7 +54,8 @@ final class PaymentToUmkmTable extends PowerGridComponent
     {
         $UmkmId = $umkm_id[0];
         $UmkmModel = Umkm::with(['user', 'bank_accounts'])->find($UmkmId);
-        $this->dispatchBrowserEvent('toggleBankAccountModal', ['data' => $UmkmModel->toArray()]);
+        $BankAccounts = $UmkmModel->bank_accounts->where('status', '=', 'acc');
+        $this->dispatchBrowserEvent('toggleBankAccountModal', ['data' => $UmkmModel->toArray(), 'bank_accounts' => $BankAccounts->toArray()]);
     }
 
 

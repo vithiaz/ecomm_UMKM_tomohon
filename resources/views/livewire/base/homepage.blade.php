@@ -3,7 +3,7 @@
         <div class="container">
             <div class="header-wrapper">
                 <span class="header-title">
-                    E-Commerce Kementrian Koperasi dan UKM
+                    E-Commerce Dinas Koperasi dan UKM
                 </span>
                 <div class="logo-wrapper">
                     <div class="logo-container">
@@ -16,7 +16,11 @@
                 <div class="content">
                     <p>Aplikasi ini membantu pengusaha UMKM di Kota Tomohon untuk mengenalkan produk yang dijual kepada masyarakat umum dengan media internet sehingga dapat meningkatkan penjualan.</p>
                 </div>
-                <a href="{{ route('umkm.profile') }}" class="link-href">DAFTAR SEKARANG</a>
+                @auth
+                    <a href="{{ route('umkm.profile') }}" class="link-href">DAFTAR SEKARANG</a>
+                @else
+                    <a href="{{ route('register') }}" class="link-href">DAFTAR SEKARANG</a>
+                @endauth
             </div>
         </div>
     </section>
@@ -29,7 +33,7 @@
             <div class="section-content">
                 <div class="swiper HeroProductSwiper">
                     <div class="swiper-wrapper">
-                        @foreach ($hero_product as $product)
+                        @forelse ($hero_product as $product)
                             <x-card.product-card 
                                 productId='{{ $product["id"] }}'
                                 basePrice='{{ $product["price"] }}'
@@ -44,7 +48,12 @@
                             />
                             {{-- @dump($this->get_product_model($product_id)) --}}
                             {{-- <livewire:component.product-card :product='$this->get_product_model($product_id)' /> --}}
-                        @endforeach
+                        @empty
+                            <div class="empty-card">
+                                <i class="fa-solid fa-exclamation"></i>
+                                <span>tidak ada produk . . .</span>
+                            </div>
+                        @endforelse
                     </div>
                     <div class="swiper-pagination product-swiper-pagination"></div>
                 </div>
@@ -69,7 +78,7 @@
                                  sold='2340'
                                  link='#'
                             /> --}}
-                            @foreach ($popularUmkm as $umkm)
+                            @forelse ($popularUmkm as $umkm)
                                <x-card.umkm-card
                                     image='{{ $umkm->profile_img }}'
                                     name='{{ $umkm->name }}' 
@@ -77,7 +86,12 @@
                                     sold='{{ $umkm->success_transaction_count }}'
                                     link='#'
                                />
-                            @endforeach
+                            @empty
+                                <div class="swiper-slide UMKM-card empty">
+                                    <i class="fa-solid fa-exclamation"></i>
+                                    <span>Tidak ada UMKM</span>
+                                </div>
+                            @endforelse
                         
                         </div>
                     </div>
@@ -95,27 +109,34 @@
             </div>
             <div class="section-content">
                 <div wire:ignore.self class="product-wrapper">
-                    @foreach ($other_product as $product)
+                    @forelse ($other_product as $product)
                     <div class="item">
-                            <x-card.product-card 
-                                productId='{{ $product->id }}'
-                                basePrice='{{ $product->price }}'
-                                discount='{{ $product->discount }}'
-                                umkm='{{ $product->umkm->name }}'
-                                sold='{{ $product->sales_qty }}'
-                                stock='{{ $product->stock }}'
-                                productName='{{ $product->name }}'
-                                productNameSlug='{{ $product->name_slug }}'
-                                Location='{{ $product->umkm->district }}'
-                                img='{{ $product->profile_image ? $product->profile_image->image : "" }}'
-                            />
+                        <x-card.product-card 
+                            productId='{{ $product->id }}'
+                            basePrice='{{ $product->price }}'
+                            discount='{{ $product->discount }}'
+                            umkm='{{ $product->umkm->name }}'
+                            sold='{{ $product->sales_qty }}'
+                            stock='{{ $product->stock }}'
+                            productName='{{ $product->name }}'
+                            productNameSlug='{{ $product->name_slug }}'
+                            Location='{{ $product->umkm->district }}'
+                            img='{{ $product->profile_image ? $product->profile_image->image : "" }}'
+                        />
+                    </div>
+                    @empty
+                        <div class="empty-card full-basis">
+                            <i class="fa-solid fa-exclamation"></i>
+                            <span>tidak ada produk . . .</span>
                         </div>
-                    @endforeach
+                    @endforelse
                 </div>
                 @if (!$all_loaded_state)
                     <button wire:click='load_more' class="section-content-button">Lebih Banyak</button>
                 @else
-                    <a href="{{ route('product-page', ['category_slug' => 0]) }}" class="section-content-button" style="text-decoration: none">Lihat Selengkapnya</a>
+                    @if (count($other_product) > 0)
+                        <a href="{{ route('product-page', ['category_slug' => 0]) }}" class="section-content-button" style="text-decoration: none">Lihat Selengkapnya</a>
+                    @endif
                 @endif
             </div>
         </div>

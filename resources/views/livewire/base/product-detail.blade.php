@@ -51,38 +51,50 @@
                         </div>
                     </div>
                 </div>
-                <div class="cart-container">
-                    <span class="title">Atur Jumlah Pembelian</span>
-                    <div class="qty-wrapper" >
-                        <div class="input-group">
-                            <input wire:model.defer='qty_input' type="number" id='qty-input' class="form-control @error('qty_input') is-invalid @enderror" placeholder="Qty" min="1" data-stock="{{ $product->stock }}" value="1">
-                            @error('qty_input')
-                                {{ $message }}
-                            @enderror
+                @if ($product->stock > 0)
+                    @if ($product->status == 'active' && $product->umkm->status)
+                        <div class="cart-container">
+                            <span class="title">Atur Jumlah Pembelian</span>
+                            <div class="qty-wrapper" >
+                                <div class="input-group">
+                                    <input wire:model.defer='qty_input' type="number" id='qty-input' class="form-control @error('qty_input') is-invalid @enderror" placeholder="Qty" min="1" data-stock="{{ $product->stock }}" value="1">
+                                    @error('qty_input')
+                                        {{ $message }}
+                                    @enderror
+                                </div>
+                                <div class="stock-container">
+                                    <span>Tersisa {{ $product->stock }}</span>
+                                </div>
+                            </div>
+                            <div class="msg-wrapper hide">
+                                <div id="cart-msg-toggle-btn" class="title-container">
+                                    <i class="fa-solid fa-pen"></i>
+                                    <span>Tambahkan catatan</span>
+                                </div>
+                                <div class="form-floating">
+                                    <textarea wire:model.defer='note_input' class="form-control" placeholder="Catatan" id="cartMsgTextarea"></textarea>
+                                    <label for="cartMsgTextarea">Catatan</label>
+                                </div>
+                            </div>
+                            <div class="price-wrapper">
+                                <span class="label">Sub Total</span>
+                                <span class="price"></span>
+                            </div>
+                            <div class="button-wrapper">
+                                <button wire:click='store_user_cart({{ $product->id }}, {{ true }})' class="btn btn-primary">+ Keranjang</button>
+                                <button wire:click='direct_buy()' class="btn btn-secondary">Beli</button>
+                            </div>
                         </div>
-                        <div class="stock-container">
-                            <span>Tersisa {{ $product->stock }}</span>
+                    @else
+                        <div class="cart-container empty">
+                            <span class="outstock">Produk Tidak Tersedia</span>
                         </div>
+                    @endif
+                @else
+                    <div class="cart-container empty">
+                        <span class="outstock">Produk Habis</span>
                     </div>
-                    <div class="msg-wrapper hide">
-                        <div id="cart-msg-toggle-btn" class="title-container">
-                            <i class="fa-solid fa-pen"></i>
-                            <span>Tambahkan catatan</span>
-                        </div>
-                        <div class="form-floating">
-                            <textarea wire:model.defer='note_input' class="form-control" placeholder="Catatan" id="cartMsgTextarea"></textarea>
-                            <label for="cartMsgTextarea">Catatan</label>
-                        </div>
-                    </div>
-                    <div class="price-wrapper">
-                        <span class="label">Sub Total</span>
-                        <span class="price"></span>
-                    </div>
-                    <div class="button-wrapper">
-                        <button wire:click='store_user_cart({{ $product->id }}, {{ true }})' class="btn btn-primary">+ Keranjang</button>
-                        <button wire:click='direct_buy()' class="btn btn-secondary">Beli</button>
-                    </div>
-                </div>
+                @endif
             </div>
         </div>
     </section>
@@ -94,7 +106,7 @@
             </div>
             <div class="section-content">
                 <div class="product-wrapper">
-                    @foreach ($other_product as $product)
+                    @forelse ($other_product as $product)
                         <div class="item">
                             <x-card.product-card 
                                 productId='{{ $product->id }}'
@@ -109,7 +121,12 @@
                                 img='{{ $product->profile_image ? $product->profile_image->image : "" }}'
                             />
                         </div>
-                    @endforeach
+                    @empty
+                        <div class="empty-card full-basis">
+                            <i class="fa-solid fa-exclamation"></i>
+                            <span>tidak ada produk . . .</span>
+                        </div>
+                    @endforelse
                 </div>
                 {{-- <button class="section-content-button">Lebih Banyak</button> --}}
             </div>

@@ -18,10 +18,10 @@
                     </div>
                     <div class="profile-wrapper">
                         <a href="#" class="umkm-name">{{ $umkm->name }} <i class="fa-solid fa-pen"></i></a>
-                        <div class="product-wrapper">
+                        {{-- <div class="product-wrapper">
                             <span>xx Produk</span>
                             <span>xx Penjualan</span>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
                 <div class="address-wrapper">

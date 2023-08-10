@@ -37,7 +37,10 @@ class Homepage extends Component
             'profile_image',
             'umkm',
         ])
-        ->where('status', '=', 'active');
+        ->where('status', '=', 'active')
+        ->whereHas('umkm', function ($model) {
+            return $model->where('status', '=', true);
+        });
     
         $this->Products = $this->ProductsBase->get()->toArray();
     
@@ -49,8 +52,8 @@ class Homepage extends Component
     
         $userOrderItem = UserOrderItem::with('order_belongs')->get()->groupBy('product_id');
     
-        $this->umkmQuery = Umkm::with(['order', 'success_transaction'])->withCount('success_transaction');
-        $this->popularUmkm = $this->umkmQuery->get()->sortByDesc('success_transaction_count')->take(8);
+        $this->umkmQuery = Umkm::with(['order', 'success_transaction'])->withCount('success_transaction')->where('status', '=', true);
+        $this->popularUmkm = $this->umkmQuery->whereHas('success_transaction')->get()->sortByDesc('success_transaction_count')->take(8);
 
         $hero_product = [];
         foreach(array_keys($userOrderItem->toArray()) as $product_id) {
@@ -104,6 +107,9 @@ class Homepage extends Component
                             'umkm',
                         ])
                         ->where('status', '=', 'active')
+                        ->whereHas('umkm', function ($model) {
+                            return $model->where('status', '=', true);
+                        })
                         ->get();
 
         $other_product = $get_other_product->take($this->load_count);

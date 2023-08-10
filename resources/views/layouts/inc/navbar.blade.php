@@ -2,10 +2,10 @@
     <div class="container">
         <div class="logo-wrapper">
             <div class="logo-img-container">
-                <img src="{{ asset('img\koperasi_dan_UMKM_RI_logo.png') }}" alt="logo_KEMENKOPUKM">
+                <img src="{{ asset('img\koperasi_dan_UMKM_RI_logo.png') }}" alt="logo_DISKOPUKM">
             </div>
             <div class="logo-text-container">
-                <span class="logo-text-main">KEMENKOPUKM</span>
+                <span class="logo-text-main">DISKOPUKM</span>
                 <span class="logo-text-sub">KOTA TOMOHON</span>
             </div>
         </div>
@@ -55,7 +55,7 @@
     </div>
 </nav>
 
-<livewire:components.login/>
+<livewire:components.login />
 
 <div class="navbar-placeholder"></div>
 

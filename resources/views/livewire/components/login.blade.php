@@ -1,6 +1,6 @@
 <div wire:ignore.self class="modal fade" id="auth_modal" tabindex="-1">
     <div class="modal-dialog">
-        <form wire:submit.prevent='login' class="modal-content">
+        <form wire:submit.prevent='login' class="modal-content" id="auth_modal_form">
             @csrf
 
             <button class="close-modal-button" onclick="hide_auth_modal()" data-bs-dismiss="modal">
@@ -8,9 +8,9 @@
             </button>
 
             <div class="logo-wrapper">
-                <img src="{{ asset('img\koperasi_dan_UMKM_RI_logo.png') }}" alt="kemenkopukm-logo">
+                <img src="{{ asset('img\koperasi_dan_UMKM_RI_logo.png') }}" alt="DISKOPUKM-logo">
                 <div class="brand">
-                    <span class="brand-name">KEMENKOPUKM</span>
+                    <span class="brand-name">DISKOPUKM</span>
                 </div>
             </div>
 
@@ -37,13 +37,13 @@
             </button>
             <div class="register-suggest">
                 <span>Belum punya akun?</span>
-                <a href="#" class="register"> Buat Akun</a>
+                <a href="{{ route('register') }}" class="register"> Buat Akun</a>
             </div>
         </form>
     </div>
 </div>
 
-@push('scripts')
+@push('script')
 <script>
 
     function hide_auth_modal() {
@@ -52,6 +52,19 @@
         $('.modal-backdrop').remove();
         // $('.modal-backdrop').remove();
     }
+
+    $('#username_input').keypress(function(event){
+        var keycode = (event.keyCode ? event.keyCode : event.which);
+        if(keycode == '13'){
+            @this.check_login();
+        }
+    });
+    $('#login_password').keypress(function(event){
+        var keycode = (event.keyCode ? event.keyCode : event.which);
+        if(keycode == '13'){
+            @this.check_login();
+        }
+    });
 
 </script>
 @endpush

@@ -1,5 +1,5 @@
 <div class="swiper-slide product-card">
-    <div class="image-container">
+    <div class="image-container" onclick="location.href='{{ route('product-details', [$productId, $productNameSlug]) }}'">
         @if ($img)
             <img src="{{ asset('storage/'.$img) }}" alt="{{ $productNameSlug }}-image">
         @else

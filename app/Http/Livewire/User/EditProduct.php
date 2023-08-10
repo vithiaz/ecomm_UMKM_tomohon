@@ -73,6 +73,7 @@ class EditProduct extends Component
 
     public function mount(Umkm $umkm, Product $product) {
         $this->umkm = $umkm;
+        // dd($this->umkm);
         $this->product = $product;
         
         if ($this->umkm == null || $this->product == null) {

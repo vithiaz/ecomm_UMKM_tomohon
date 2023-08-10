@@ -8,6 +8,7 @@ else (tidak)
     :Register;
 endif
 |User|
+:Tambah UMKM;
 repeat :Pengajuan status aktivasi UMKM;
 :Konfirmasi pengajuan status aktivasi UMKM;
 |Admin|
@@ -19,7 +20,7 @@ repeat :Tambahkan Rekening;
 |Admin|
 :Validasi aktivasi rekening;
 repeat while (Aktivasi diterima) is (Tidak) not (Ya)
+:Daftarkan Rekening;
 :Daftarkan UMKM;
-:Daftarkan Produk;
 stop
 @enduml

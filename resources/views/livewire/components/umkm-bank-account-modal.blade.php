@@ -38,9 +38,24 @@
                         </div>                                        
                     @endif
                 </div>
-                <div class="card-content-wrapper">
-                    <span class="card-content-wrapper-title">Daftar Rekening Aktif</span>
-                </div>
+                @if ($bankAccounts)
+                    <div class="card-content-wrapper">
+                        <span class="card-content-wrapper-title">Daftar Rekening Aktif</span>
+                        <div class="bank-card-wrapper">
+                            @foreach ($bankAccounts as $account)
+                                <div class="bank-card">
+                                    <div class="bank-acc">
+                                        <span>{{ $account['bank_name'] }}</span>
+                                        <span>{{ $account['account_number'] }}</span>
+                                    </div>
+                                    <div class="owner-name">
+                                        <span>{{ $account['account_name'] }}</span>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                @endif
             </div>
 
         </div>
@@ -52,13 +67,10 @@
 
     $( window ).on('toggleBankAccountModal', function (event) {
         const eventData = event.detail.data
-        console.log();
         @this.set('umkmDetail', eventData);
         @this.set('userDetail', eventData['user']);
-        @this.set('bankAccounts', eventData['bank_accounts']);
-
-        console.log(eventData['bank_accounts'])
-
+        @this.set('bankAccounts', event.detail.bank_accounts);
+        
     })
 
     function hide_auth_modal() {

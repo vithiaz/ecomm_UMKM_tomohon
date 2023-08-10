@@ -1,0 +1,23 @@
+@startuml
+
+|User|
+start
+:Login;
+
+|System|
+:Menampilkan Form Login;
+
+|User|
+repeat :Mengisi Form Login;
+:Submit;
+
+|System|
+:Validasi Data Login;
+backward :Notifikasi login error;
+Repeat while (data divalidasi?) is (Tidak) not (Ya)
+
+:Login ke Sistem;
+stop
+
+
+@enduml

@@ -3,6 +3,7 @@
 entity User {
     * id BIGINT PRIMARY KEY
     * user_type INT
+    ' Admin 1
     * username VARCHAR(255)
     * first_name VARCHAR(255)
     * last_name VARCHAR(255)

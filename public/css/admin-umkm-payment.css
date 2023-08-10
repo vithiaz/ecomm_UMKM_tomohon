@@ -109,6 +109,36 @@
   place-items: center;
 }
 
+#umkm_bank_account_modal .modal-dialog .modal-content .card-content-wrapper .bank-card-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+#umkm_bank_account_modal .modal-dialog .modal-content .card-content-wrapper .bank-card-wrapper .bank-card {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 100%;
+  padding: 3px 5px;
+  border-bottom: 1px #D4D4D4 solid;
+}
+#umkm_bank_account_modal .modal-dialog .modal-content .card-content-wrapper .bank-card-wrapper .bank-card .bank-acc {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+#umkm_bank_account_modal .modal-dialog .modal-content .card-content-wrapper .bank-card-wrapper .bank-card .owner-name {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
 @media screen and (max-width: 576px) {
   .admin-umkm-payment-page .container {
     max-width: 100vw;

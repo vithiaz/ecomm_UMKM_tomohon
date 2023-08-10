@@ -15,7 +15,7 @@
                             <li class="nav-item">
                                 <a href="{{ route('product-page', [$category->name_slug]) }}">
                                     <span class="nav-item-main">{{ $category->name }}</span>
-                                    <span class="nav-item-secondary">{{ $category->product_active->count() }}</span>
+                                    <span class="nav-item-secondary">{{ $this->count_filter_product_active_umkm($category->product_active) }}</span>
                                 </a>
                             </li>
                         @endforeach
@@ -28,9 +28,9 @@
                 <div class="section-header wrapped">
                     <h1 class="section-header-title">Daftar <span>Produk</span></h1>
                 </div>
-                <div class="section-content">
+                <div class="section-content fill-height">
                     <div class="product-wrapper">
-                        @foreach ($products as $product)
+                        @forelse ($products as $product)
                             <div class="item">
                                 <x-card.product-card 
                                     productId='{{ $product->id }}'
@@ -48,7 +48,12 @@
                                 {{-- @livewire('component.product-card', ['product' => $product]) --}}
 
                             </div>
-                        @endforeach
+                        @empty
+                            <div class="empty-card full-basis fill-height">
+                                <i class="fa-solid fa-exclamation"></i>
+                                <span>tidak ada produk . . .</span>
+                            </div>
+                        @endforelse
                     </div>
                     @if (!$all_loaded_state)
                         <button wire:click='load_more' class="section-content-button">Lebih Banyak</button>

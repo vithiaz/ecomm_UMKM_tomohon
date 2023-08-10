@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Base;
 
+use App\Models\Umkm;
 use App\Models\Product;
 use Livewire\Component;
 use App\Models\UserCart;
@@ -36,6 +37,7 @@ class ProductPage extends Component
         } else {
             $this->category_filter = null;
         }
+
         $this->categories = ProductCategory::with([
             'product_active',
         ])->whereHas('product_active')->get();
@@ -47,13 +49,18 @@ class ProductPage extends Component
                 'umkm',
             ])->where('status', '=', 'active')->whereHas('product_categories', function($query) {
                 $query->where('category_id', '=', $this->category_filter);
+            })->whereHas('umkm', function ($model) {
+                return $model->where('status', '=', true);
             });
         } else {
             $this->products_query = Product::with([
                 'product_categories',
                 'profile_image',
                 'umkm',
-            ])->where('status', '=', 'active');
+            ])->where('status', '=', 'active')
+            ->whereHas('umkm', function ($model) {
+                return $model->where('status', '=', true);
+            });
         }
 
         $this->products_result = $this->products_query->get();
@@ -105,6 +112,19 @@ class ProductPage extends Component
             $msg = ['success' => 'Ditambahkan ke keranjang'];
             $this->dispatchBrowserEvent('display-message', $msg);
         }
+    }
+
+    public function count_filter_product_active_umkm($products) {
+        $active_umkm_product_count = 0;
+        
+        foreach ($products as $product) {
+            $check_umkm = Umkm::find($product->umkm_id);
+            if ($check_umkm->status) {
+                $active_umkm_product_count += 1;
+            }
+        }
+
+        return $active_umkm_product_count;
     }
 
 }

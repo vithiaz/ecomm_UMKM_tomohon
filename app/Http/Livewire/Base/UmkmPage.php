@@ -20,8 +20,10 @@ class UmkmPage extends Component
     public $all_loaded_state;
 
     public function mount() {
-        $this->umkmQuery = Umkm::with(['order', 'success_transaction'])->withCount('success_transaction');
-        $this->popularUmkm = $this->umkmQuery->get()->sortByDesc('success_transaction_count')->take(2);
+        $this->umkmQuery = Umkm::with(['order', 'success_transaction'])
+                                ->withCount('success_transaction')
+                                ->where('status', '=', true);
+        $this->popularUmkm = $this->umkmQuery->whereHas('success_transaction')->get()->sortByDesc('success_transaction_count')->take(2);
 
         $this->popularUmkmIds = [];
         foreach ($this->popularUmkm as $umkm) {
@@ -34,7 +36,10 @@ class UmkmPage extends Component
 
     public function render()
     {
-        $get_other_umkm = Umkm::with(['order', 'success_transaction'])->withCount('success_transaction')->whereNotIn('id', $this->popularUmkmIds)->get();
+        $get_other_umkm = Umkm::with(['order', 'success_transaction'])
+                            ->withCount('success_transaction')
+                            ->where('status', '=', true)
+                            ->whereNotIn('id', $this->popularUmkmIds)->get();
         $other_umkm = $get_other_umkm->take($this->load_count);
 
         if ($this->load_count >= count($get_other_umkm)) {

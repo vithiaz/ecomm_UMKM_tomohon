@@ -26,8 +26,14 @@ class ProductDetail extends Component
 
 
     protected $rules = [
-        'qty_input' => 'required|numeric',
+        'qty_input' => 'required|numeric|min:1',
         'note_input' => 'nullable',
+    ];
+
+    protected $messages = [
+        'qty_input.required' => 'Jumlah pembelian harus diisi',
+        'qty_input.numeric' => 'Jumlah pembelian harus berupa angka',
+        'qty_input.min' => 'Jumlah pembelian harus lebih dari 1',
     ];
 
     public function mount() {
@@ -49,7 +55,7 @@ class ProductDetail extends Component
         $this->final_price = $basePrice - ($basePrice * ((float)$this->product->discount) / 100);
 
         $this->stock = $this->product->stock;
-        $this->qty_input = '';
+        $this->qty_input = 1;
         $this->note_input = '';
     }
 
@@ -58,11 +64,22 @@ class ProductDetail extends Component
         $other_product = Product::with([
             'profile_image',
             'umkm',
-        ])->whereNotIn('id', [$this->product->id])->get()->take(8);
+        ])->whereNotIn('id', [$this->product->id])
+        ->where('status', '=', 'active')
+        ->whereHas('umkm', function ($model) {
+            return $model->where('status', '=', true);
+        })
+        ->get()->take(8);
         return view('livewire.base.product-detail', ['other_product' => $other_product])->layout('layouts.app');
     }
 
     public function store_user_cart($product_id, $in_detail_page = true) {
+        if (!Auth::check()) {
+            $msg = ['info' => 'Silahkan Login terlebih dahulu'];
+            $this->dispatchBrowserEvent('display-message', $msg);
+            return; 
+        }
+        
         $cart = UserCart::where([
             ['user_id', '=', Auth::user()->id],
             ['product_id', '=', $product_id],
@@ -99,6 +116,12 @@ class ProductDetail extends Component
 
 
     public function direct_buy() {
+        if (!Auth::check()) {
+            $msg = ['info' => 'Silahkan Login terlebih dahulu'];
+            $this->dispatchBrowserEvent('display-message', $msg);
+            return; 
+        }
+
         $this->store_user_cart($this->product->id, true);
         return redirect()->route('cart-page');
     }

@@ -1,0 +1,44 @@
+@startuml
+
+|User (Penjual)|
+start
+if (Sudah memiliki akun?) then (ya)
+    :Login;
+else (tidak)
+    :Register;
+endif
+
+|System|
+:Tampilkan Halaman Utama;
+
+|User (Penjual)|
+:Membuka Halaman Zona UMKM;
+
+if (Sudah mendaftarkan UMKM?) then (ya)
+else (tidak)
+    :Daftarkan UMKM;
+    |System|
+    :Proses Pendaftaran UMKM;
+endif
+
+|User (Penjual)|
+:Membuka menu Transaksi;
+:Memproses Pengiriman Produk;
+:Menekan tombol Proses Pengiriman;
+
+|System|
+:Konfirmasi Produk dalam pengiriman;
+
+|User (Penjual)|
+:Konfirmasi Pengiriman Selesai;
+:Menekan Tombol Pengiriman Selesai;
+
+
+|System|
+:Konfirmasi Selesai Pengiriman;
+:Konfirmasi Selesai Transaksi;
+stop
+
+
+
+@enduml

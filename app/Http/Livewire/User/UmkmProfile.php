@@ -14,7 +14,9 @@ class UmkmProfile extends Component
     public $umkms;
 
     public function mount() {
-        $this->umkms = Umkm::where('user_id', '=', Auth::user()->id)->get()->all();
+        $this->umkms = Umkm::with('success_transaction')
+                        ->withCount('success_transaction')
+                        ->where('user_id', '=', Auth::user()->id)->get()->all();
     }
     
     public function render()

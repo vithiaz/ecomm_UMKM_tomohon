@@ -147,6 +147,11 @@ body {
                 align-items: center;
                 justify-content: center;
 
+                &.fill-height {
+                    min-height: 90vh;
+                    justify-content: flex-start;
+                }
+
                 .product-wrapper, .umkm-wrapper {
                     width: 100%;
                     height: fit-content;
@@ -287,7 +292,8 @@ body {
                 flex-direction: row;
                 column-gap: 15px;
                 row-gap: 10px;
-                align-items: flex-start;
+                align-items: stretch;
+                // align-items: flex-start;
                 justify-content: center;
                 padding: 10px;
                 flex-wrap: wrap;
@@ -536,11 +542,49 @@ body {
                         }
                     }
 
+                    &.empty {
+                        justify-content: center;
+                        min-height: 40px;
+                        height: auto;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        justify-content: center;
 
+                        .outstock {
+                            text-align: center;
+                        }
+                    }
 
                 }
             }
 
+        }
+
+        .empty-card {
+            width: 100%;
+            height: 120px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            row-gap: 10px;
+
+            &.full-basis {
+                grid-column: 1/6;
+            }
+
+            &.fill-height {
+                min-height: 90vh;
+            }
+
+            i {
+                font-size: 1.5rem;
+            }
+
+            span {
+                word-wrap: break-word;
+            }
         }
 
     }
@@ -1056,6 +1100,11 @@ body {
     justify-content: space-around;
     gap: 10px;
     flex-wrap: nowrap;
+
+    &.empty {
+        height: 80px;
+
+    }
 
     .image-container {
         overflow: hidden;

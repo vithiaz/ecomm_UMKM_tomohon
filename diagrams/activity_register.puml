@@ -1,0 +1,27 @@
+@startuml
+
+|User|
+start
+:Register;
+
+|System|
+:Menampilkan Halaman Registrasi;
+
+|User|
+repeat :Mengisi Form Registrasi;
+:Submit;
+
+|System|
+:Validasi Data Registrasi;
+backward :Notifikasi Validasi error;
+Repeat while (data divalidasi?) is (Tidak) not (Ya)
+
+:Simpan Data Registrasi;
+:Login ke Sistem;
+:Tampilkan Halaman Utama;
+
+stop
+
+
+
+@enduml

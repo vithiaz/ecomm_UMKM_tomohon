@@ -37,4 +37,10 @@ class Login extends Component
             session()->flash('error', 'Username atau password salah!');
         }
     }
+
+    public function check_login() {
+        $this->login();
+    }
+
+
 }

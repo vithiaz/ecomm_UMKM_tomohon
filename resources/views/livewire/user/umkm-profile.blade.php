@@ -59,20 +59,23 @@
         </div>
 
         {{-- UMKM Profile Card --}}
-        <div class="page-section-title">
-            <h2>UMKM Saya</h2>
-            <a href="{{ route('umkm.register') }}">+Daftarkan UMKM</a>
-        </div>
-
-        @forelse ($umkms as $umkm)
-            <livewire:components.umkm-profile-card :umkm="$umkm" />
-        @empty
-            <div class="page-content-card umkm-card">
-                <div class="card-body">
-                    <span>Anda belum mendaftarkan UMKM</span>
-                </div>
+        @if (Auth::user()->umkm_status)
+            <div class="page-section-title">
+                <h2>UMKM Saya</h2>
+                <a href="{{ route('umkm.register') }}">+Daftarkan UMKM</a>
             </div>
-        @endforelse
+
+            @forelse ($umkms as $umkm)
+                <livewire:components.umkm-profile-card :umkm="$umkm" />
+            @empty
+                <div class="page-content-card umkm-card">
+                    <div class="card-body">
+                        <span>Anda belum mendaftarkan UMKM</span>
+                    </div>
+                </div>
+            @endforelse
+        @endif
+
 
     </div>
 </div>
