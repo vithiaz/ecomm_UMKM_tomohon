@@ -1,0 +1,58 @@
+@startuml
+
+' declare
+actor "User Penjual" as User
+participant Login as login
+boundary "Tampilan Profil UMKM" as umkm_profile_view
+database "UMKM" as umkm_db
+
+' participant "Tambah Produk" as add_product
+boundary "Tampilan Tambah Produk" as add_product_view
+entity "Data Produk" as product_entity
+database "Product" as product_db
+
+
+
+
+' flow
+activate User
+User -> login : username, password
+activate login
+
+login -> umkm_profile_view : masuk halaman profil UMKM
+activate umkm_profile_view
+activate umkm_db
+umkm_db -> umkm_profile_view : muat data UMKM
+deactivate umkm_db
+
+umkm_profile_view -> add_product_view : tambahkan produk
+activate add_product_view
+
+add_product_view -> product_entity
+activate product_entity
+
+product_entity -> product_db : simpan data
+deactivate product_entity
+activate product_db
+product_db -> add_product_view : produk tersimpan
+deactivate product_db
+add_product_view -> umkm_profile_view : notfikasi produk tersimpan
+deactivate add_product_view
+
+umkm_profile_view -> login
+deactivate umkm_profile_view
+
+login -> User : logout
+deactivate login
+
+' umkm_entity -> umkm_profile_view : data UMKM
+
+' activate umkm_entity
+' deactivate umkm_entity
+
+
+
+
+
+
+@enduml

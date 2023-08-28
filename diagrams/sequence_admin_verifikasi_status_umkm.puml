@@ -1,0 +1,55 @@
+@startuml
+
+' declare
+actor "Admin" as User
+participant Login as login
+boundary "Halaman Verifikasi Pendaftar UMKM" as umkm_profile_view
+
+boundary "Verifikasi Pendaftar" as verify
+control "Aktivasi Status UMKM" as activate_umkm_control
+database "User" as user_db
+entity "Data User" as user_entity
+
+
+
+
+' flow
+activate User
+User -> login : username, password
+activate login
+
+login -> umkm_profile_view
+activate umkm_profile_view
+
+activate user_db
+user_db -> umkm_profile_view : muat data user
+deactivate user_db
+
+umkm_profile_view -> verify
+activate verify
+
+verify -> activate_umkm_control : verifikasi pendaftar
+activate activate_umkm_control
+activate_umkm_control -> user_entity : data pendaftar
+activate user_entity
+user_entity -> user_db : simpan perubahan
+deactivate user_entity
+activate user_db
+user_db -> activate_umkm_control : data disimpan
+deactivate user_db
+
+activate_umkm_control -> verify : verifikasi berhasil
+deactivate activate_umkm_control
+
+verify -> umkm_profile_view : notifikasi verifikasi berhasil
+deactivate verify
+
+umkm_profile_view -> login
+deactivate umkm_profile_view
+login -> User : logout
+deactivate login
+
+
+
+
+@enduml

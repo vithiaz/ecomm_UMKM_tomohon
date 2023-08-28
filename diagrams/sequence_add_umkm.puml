@@ -1,0 +1,119 @@
+@startuml
+
+' declare
+actor "User Penjual" as User
+participant Login as login
+boundary "Tampilan Profil UMKM" as umkm_profile_view
+control "Aktivasi Status UMKM" as activate_umkm
+participant "Tambah Rekening" as add_account
+entity "Rekening Bank" as bank_account
+database "bank_account" as bank_account_db
+
+boundary "Tambah UMKM" as add_umkm
+entity "Data UMKM" as umkm_entity
+database "UMKM" as umkm_db
+
+
+
+
+
+
+' control "Proses Aktivasi Status UMKM" as activate_umkm_control
+' entity "Data User" as user_entity
+' database "User" as user_db
+
+
+
+
+' flow
+activate User
+User -> login : username, password
+activate login
+
+login -> umkm_profile_view : masuk halaman profil UMKM
+activate umkm_profile_view
+
+umkm_profile_view -> activate_umkm : aktivasi status UMKM
+activate activate_umkm
+activate_umkm -> umkm_profile_view : status UMKM aktif
+deactivate activate_umkm
+
+umkm_profile_view -> add_account : tambah rekening
+activate add_account
+add_account -> bank_account
+activate bank_account
+bank_account -> bank_account_db : simpan data rekening
+deactivate bank_account
+activate bank_account_db
+bank_account_db -> add_account : rekening tersimpan
+deactivate bank_account_db
+add_account -> umkm_profile_view : notifikasi rekening tersimpan
+deactivate add_account
+
+
+umkm_profile_view -> add_umkm : tambah UMKM
+activate add_umkm
+add_umkm -> umkm_entity
+activate umkm_entity
+umkm_entity -> umkm_db : simpan data UMKM
+deactivate umkm_entity
+activate umkm_db
+
+umkm_db -> add_umkm : umkm tersimpan
+deactivate umkm_db
+add_umkm -> umkm_profile_view : notifikasi umkm tersimpan
+deactivate add_umkm
+
+umkm_profile_view -> login
+deactivate umkm_profile_view
+login -> User : logout
+deactivate login
+deactivate User
+
+
+
+
+
+
+
+
+
+' activate_umkm -> activate_umkm_control
+' activate activate_umkm_control
+' activate user_db
+' user_db -> user_entity : muat data user
+' deactivate user_db
+' activate user_entity
+' user_entity -> activate_umkm_control : data user
+
+
+' activate_umkm_control -> activate_umkm_control : validasi data
+' activate activate_umkm_control #Yellow
+' activate_umkm_control -> activate_umkm : validasi gagal
+' activate_umkm -> umkm_profile_view : notifikasi validasi gagal
+' deactivate activate_umkm_control
+
+' activate_umkm_control -> user_entity : update status UMKM
+' user_entity -> user_db : simpan data
+' deactivate user_entity
+' activate user_db
+' user_db -> activate_umkm_control : data tersimpan
+' deactivate user_db
+
+' activate_umkm_control -> activate_umkm : aktivasi status UMKM berhasil
+' deactivate activate_umkm_control
+' activate_umkm -> umkm_profile_view : notifikasi validasi berhasil
+' deactivate activate_umkm
+
+' umkm_profile_view -> login
+' deactivate umkm_profile_view
+' login -> User : logout
+' deactivate login
+' deactivate User
+
+
+
+
+
+
+@enduml

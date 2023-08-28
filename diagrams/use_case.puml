@@ -1,0 +1,74 @@
+@startuml
+
+left to right direction
+skinparam PackageStyle recangle
+
+actor User
+actor Admin
+
+
+rectangle "Aplikasi" as app {
+
+    rectangle "Admin Menu" as admin_menu {
+        usecase "Tambahkan Kategori Produk" as addProductCategory
+        usecase "Verifikasi Pendaftar UMKM" as verifyUmkmRegistration
+        usecase "Verifikasi Rekening Bank" as verifyBankAccount
+        usecase "Review Product" as reviewProduct
+        usecase "Pembayaran ke Penjual" as paymentToSeller
+    }
+
+    usecase Login
+
+    rectangle "Menu User" as user_menu {
+        usecase "Tambah ke keranjang" as addToCart
+        usecase "Checkout Product" as checkoutProduct
+        usecase "Pembayaran" as userPayment
+        usecase "Tambah Produk" as addProduct
+        usecase "Tambah UMKM" as addUMKM
+        usecase "Tambah Rekening Bank" as addBankAccount
+    }
+
+    usecase "Daftar Akun" as registerAccount
+    usecase "Lihat Produk" as seeProduct
+
+
+
+}
+
+
+
+
+' Flow
+
+User -- Login
+Login -- Admin
+
+' admin_menu .> Login #line:red;text:red; : include
+Login <.down. admin_menu #line:red;text:red; : include
+Login <.down. user_menu #line:red;text:red; : include
+
+addProductCategory -- Admin
+verifyUmkmRegistration -- Admin
+verifyBankAccount -- Admin
+reviewProduct -- Admin
+paymentToSeller -- Admin
+
+
+User -- registerAccount
+User -- seeProduct
+User -- addToCart
+User -- checkoutProduct
+User -- userPayment
+User -- addUMKM
+User -- addBankAccount
+User -- addProduct
+
+seeProduct <.down. addToCart #line:blue;text:blue; : extends
+addToCart <. checkoutProduct #line:blue;text:blue; : extends
+checkoutProduct <. userPayment #line:blue;text:blue; : extends
+
+addUMKM <.down. verifyUmkmRegistration #line:blue;text:blue; : extends
+addBankAccount <. verifyBankAccount #line:blue;text:blue; : extends
+addProduct <. reviewProduct #line:blue;text:blue; : extends
+
+@enduml
