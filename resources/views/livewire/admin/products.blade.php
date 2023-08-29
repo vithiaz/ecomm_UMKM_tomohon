@@ -9,6 +9,7 @@
         </div>
         <div class="content-menu-wrapper">
             <a href='{{ route("admin.products", ['status' => 'active']) }}' class='menu-item @if($status == "active") active @endif'>Aktif</a>
+            <a href='{{ route("admin.products", ['status' => 'disabled']) }}' class='menu-item @if($status == "disabled") active @endif'>Nonaktif</a>
             <a href='{{ route("admin.products", ['status' => 'revoked']) }}' class='menu-item @if($status == "revoked") active @endif'>Ditarik</a>
         </div>
         <div class="page-content-card">

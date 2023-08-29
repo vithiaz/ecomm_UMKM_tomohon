@@ -69,7 +69,7 @@
                 @if ($product->status != 'revoked')
                     <button wire:click='set_status("revoked")' class="btn btn-default-red">Tarik dari Market</button>                
                 @else
-                    <button wire:click='set_status("disabled")' class="btn btn-default-orange">Aktifkan</button>                
+                    <button wire:click='set_status("active")' class="btn btn-default-orange">Aktifkan</button>                
                 @endif
                 <button wire:click='redirect_back' class="btn btn-default-dark">Kembali</button>
             </div>

@@ -17,6 +17,7 @@ class Products extends Component
 
         if (!in_array($this->status, [
             'active',
+            'disabled',
             'revoked',
         ])) {
             return abort(404);
