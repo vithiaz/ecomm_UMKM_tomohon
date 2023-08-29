@@ -3,7 +3,7 @@
         <div class="container">
             <div class="header-wrapper">
                 <span class="header-title">
-                    E-Commerce Dinas Koperasi dan UKM
+                    Market Place Dinas Koperasi dan UKM
                 </span>
                 <div class="logo-wrapper">
                     <div class="logo-container">

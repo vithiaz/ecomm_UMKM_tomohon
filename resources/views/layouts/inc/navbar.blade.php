@@ -5,8 +5,8 @@
                 <img src="{{ asset('img\koperasi_dan_UMKM_RI_logo.png') }}" alt="logo_DISKOPUKM">
             </div>
             <div class="logo-text-container">
-                <span class="logo-text-main">DISKOPUKM</span>
-                <span class="logo-text-sub">KOTA TOMOHON</span>
+                <span class="logo-text-sub">MARKET PLACE</span>
+                <span class="logo-text-main">KOTA TOMOHON</span>
             </div>
         </div>
         <div class="menu-wrapper">
