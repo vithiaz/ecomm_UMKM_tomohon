@@ -41,7 +41,7 @@
                                     name='{{ $umkm->name }}' 
                                     location='{{ $umkm->district }}'
                                     sold='{{ $umkm->success_transaction_count }}'
-                                    link='#'
+                                    link='{{ $umkm->id }}'
                                 />
                             @empty
                                 <div class="swiper-slide UMKM-card empty">
@@ -74,7 +74,7 @@
                                 name='{{ $umkm->name }}' 
                                 location='{{ $umkm->district }}'
                                 sold='{{ $umkm->success_transaction_count }}'
-                                link='#'
+                                link='{{ $umkm->id }}'
                             />
                         </div>
                     @empty

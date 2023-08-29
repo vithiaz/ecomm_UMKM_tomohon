@@ -10,7 +10,7 @@
     </div>
     <div class="card-content">
         <div class="card-title">
-            <a href="{{ $link }}">{{ $name }}</a>
+            <a href="{{ route('umkm-products', ['umkm_id' => $link]) }}">{{ $name }}</a>
         </div>
         <div class="info-wrapper">
             <div class="location-wrapper">

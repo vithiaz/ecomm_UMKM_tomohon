@@ -1,3 +1,7 @@
+@push('stylesheet')
+    <link rel="stylesheet" href="{{ asset('css/umkm-products-page.css') }}">
+@endpush
+
 <div class="app">
     <section class="app-message">
         <div class="container">
@@ -25,67 +29,24 @@
         </div>
     </section>
 
-    <section wire:ignore class="page-section">
-        <div class="container">
-            <div class="section-header dashed">
-                <h1 class="section-header-title">Produk <span>Unggulan</span></h1>
-            </div>
-            <div class="section-content">
-                <div class="swiper HeroProductSwiper">
-                    <div class="swiper-wrapper">
-                        @forelse ($hero_product as $product)
-                            <x-card.product-card 
-                                productId='{{ $product["id"] }}'
-                                basePrice='{{ $product["price"] }}'
-                                discount='{{ $product["discount"] }}'
-                                umkm='{{ $product["umkm"]["name"] }}'
-                                sold='{{ $product["sales_qty"] }}'
-                                stock='{{ $product["stock"] }}'
-                                productName='{{ $product["name"] }}'
-                                productNameSlug='{{ $product["name_slug"] }}'
-                                Location='{{ $product["umkm"]["district"] }}'
-                                img='{{ $product["profile_image"]["image"] }}'
-                            />
-                            {{-- @dump($this->get_product_model($product_id)) --}}
-                            {{-- <livewire:component.product-card :product='$this->get_product_model($product_id)' /> --}}
-                        @empty
-                            <div class="empty-card">
-                                <i class="fa-solid fa-exclamation"></i>
-                                <span>tidak ada produk . . .</span>
-                            </div>
-                        @endforelse
-                    </div>
-                    <div class="swiper-pagination product-swiper-pagination"></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-    <section wire:ignore class="page-section">
+    {{-- <section wire:ignore class="page-section">
         <div class="container">
             <div class="row-content-wrapper">
                 <div class="row-section-header">
-                    <h1 class="section-header-title">UMKM <span>Unggulan</span></h1>
+                    <h1 class="section-header-title">Informasi <span>UMKM</span></h1>
                 </div>
                 <div class="row-section-content">
                     <div class="swiper HeroUMKMSwiper">
                         <div class="swiper-wrapper">
-                            {{-- <x-card.umkm-card
-                                 image='{{ asset("img\aziz-acharki-boIJluEJEPM-unsplash.jpg") }}'
-                                 name='Lorem ipsum dolor siLorem ipsum dolor sit amet Lipsums.' 
-                                 location='Location'
-                                 sold='2340'
-                                 link='#'
-                            /> --}}
+
                             @forelse ($popularUmkm as $umkm)
-                               <x-card.umkm-card
+                                <x-card.umkm-card
                                     image='{{ $umkm->profile_img }}'
                                     name='{{ $umkm->name }}' 
                                     location='{{ $umkm->district }}'
                                     sold='{{ $umkm->success_transaction_count }}'
-                                    link='{{ $umkm->id }}'
-                               />
+                                    link='#'
+                                />
                             @empty
                                 <div class="swiper-slide UMKM-card empty">
                                     <i class="fa-solid fa-exclamation"></i>
@@ -99,15 +60,43 @@
                 <div class="swiper-pagination umkm-swiper-pagination"></div>
             </div>
         </div>
+    </section> --}}
+
+    <section class="page-section umkm-profile">
+        <div class="container">
+            <div class="umkm-info-card">
+                <div class="umkm-profile-wrapper">
+                    <div class="image-container">
+                        @if ($umkm->profile_img)
+                            <img src="{{ asset('storage/'.$umkm->profile_img) }}" alt="{{ $umkm->name }}_profile">
+                        @else
+                            <div class="no-image">
+                                <i class="fa-solid fa-store"></i>
+                            </div>
+                        @endif
+                    </div>
+                    <div class="profile-wrapper">
+                        <span class="umkm-name">{{ $umkm->name }}</span>
+                        <div class="product-wrapper">
+                            <span>{{ $umkm->products->count() }} Produk</span>
+                            <span>{{ $umkm->success_transaction_count ? $umkm->success_transaction_count : '0' }} Penjualan</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="address-wrapper">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <p>{{ $umkm->address }}</p>
+                </div>
+            </div>
+        </div>
     </section>
 
-
-    <section class="page-section lighten">
+    <section class="page-section">
         <div class="container">
             <div class="section-header">
-                <h1 class="section-header-title">Produk Lainnya</h1>
+                <h1 class="section-header-title">Produk</h1>
             </div>
-            <div class="section-content">
+            <div class="section-content fill-height">
                 <div wire:ignore.self class="product-wrapper">
                     @forelse ($other_product as $product)
                     <div class="item">
@@ -135,51 +124,18 @@
                     <button wire:click='load_more' class="section-content-button">Lebih Banyak</button>
                 @else
                     @if (count($other_product) > 0)
-                        <a href="{{ route('product-page', ['category_slug' => 0]) }}" class="section-content-button" style="text-decoration: none">Lihat Selengkapnya</a>
+                        {{-- <a href="{{ route('product-page', ['category_slug' => 0]) }}" class="section-content-button" style="text-decoration: none">Lihat Selengkapnya</a> --}}
                     @endif
                 @endif
             </div>
         </div>
     </section>
+
 </div>
+
 
 @push('script')
 <script>
-
-    var HeroProductSwiper = new Swiper(".HeroProductSwiper",
-    {
-        slidesPerView: 4,
-        spaceBetween: 20,
-        slidesPerGroup: 4,
-        loop: false,
-        loopFillGroupWithBlank: true,
-        pagination: {
-            el: ".product-swiper-pagination",
-            clickable: true,
-        },
-        // navigation: {
-        //     nextEl: ".swipe-next-btn",
-        //     prevEl: ".swipe-prev-btn",
-        // },
-        breakpoints: {
-                0: {
-                    slidesPerView: 1,
-                    slidesPerGroup: 1,
-                },
-                430: {
-                    slidesPerView: 2,
-                    slidesPerGroup: 2,
-                },
-                768: {
-                    slidesPerView: 3,
-                    slidesPerGroup: 3,
-                },
-                1200: {
-                    slidesPerView: 4,
-                    slidesPerGroup: 4,
-                },
-            }
-    });
 
     var HeroUMKMSwiper = new Swiper('.HeroUMKMSwiper', 
     {
@@ -211,7 +167,6 @@
                 },
             }
     });
-
     
 </script>
 @endpush

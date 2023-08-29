@@ -125,7 +125,6 @@ class Homepage extends Component
 
     public function load_more() {
         $this->load_count += 8;
-
     }
 
     public function store_user_cart($product_id) {
