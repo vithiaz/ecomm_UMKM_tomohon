@@ -225,35 +225,67 @@ final class UserOrderItemTable extends PowerGridComponent
 
     public function columns(): array
     {
-        return [
-            Column::make('ID', 'id')
-                ->searchable()
-                ->hidden(),
+        if ($this->status == 'onsite') {
+            $columns_return = [
+                Column::make('ID', 'id')
+                    ->searchable()
+                    ->hidden(),
+        
+                Column::make('Status Pembayaran', 'order_success')
+                    ->searchable(),
+        
+                Column::make('Pemesan', 'user_ordered')
+                    ->searchable(),
+             
+                Column::make('Produk', 'product_name')
+                    ->searchable(),
+        
+                Column::make('Qty', 'qty')
+                    ->sortable(),
+        
+                Column::make('Harga Satuan', 'amount_formatted', 'amount')
+                    ->sortable(),
+        
+                Column::make('Catatan', 'message')
+                    ->searchable(),
+        
+                Column::make('Alamat Pengiriman', 'address')
+                    ->searchable(),
+        
+                Column::make('Tanggal', 'updated_at_formatted', 'updated_at')
+                    ->sortable(),
+            ];
+        } else {
+            $columns_return = [
+                Column::make('ID', 'id')
+                    ->searchable()
+                    ->hidden(),
+                
+                Column::make('Pemesan', 'user_ordered')
+                    ->searchable(),
+             
+                Column::make('Produk', 'product_name')
+                    ->searchable(),
+        
+                Column::make('Qty', 'qty')
+                    ->sortable(),
+        
+                Column::make('Harga Satuan', 'amount_formatted', 'amount')
+                    ->sortable(),
+        
+                Column::make('Catatan', 'message')
+                    ->searchable(),
+        
+                Column::make('Alamat Pengiriman', 'address')
+                    ->searchable(),
+        
+                Column::make('Tanggal', 'updated_at_formatted', 'updated_at')
+                    ->sortable(),
+            ];
+        }
 
-            Column::make('Status Pembayaran', 'order_success')
-                ->searchable(),
 
-            Column::make('Pemesan', 'user_ordered')
-                ->searchable(),
-         
-            Column::make('Produk', 'product_name')
-                ->searchable(),
-
-            Column::make('Qty', 'qty')
-                ->sortable(),
-
-            Column::make('Harga Satuan', 'amount_formatted', 'amount')
-                ->sortable(),
-
-            Column::make('Catatan', 'message')
-                ->searchable(),
-
-            Column::make('Alamat Pengiriman', 'address')
-                ->searchable(),
-
-            Column::make('Tanggal', 'updated_at_formatted', 'updated_at')
-                ->sortable(),
-        ];
+        return $columns_return;
     }
 
     /**
