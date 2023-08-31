@@ -164,7 +164,9 @@ final class UserOrderItemTable extends PowerGridComponent
                 'order_belongs',
                 'order_by',
                 'seller_umkm',
-            ])->where('delivery_status', '=', $this->status)
+                'order_success',
+            ])
+            ->where('delivery_status', '=', $this->status)
             ->whereHas('seller_umkm', function($q) {
                 $q->where('user_id', '=', Auth::user()->id);
             })
@@ -182,6 +184,9 @@ final class UserOrderItemTable extends PowerGridComponent
             'order_by' => [
                 'first_name',
                 'last_name',
+            ],
+            'order_success' => [
+                'seller_payment_status',
             ]
         ];
     }
@@ -191,6 +196,9 @@ final class UserOrderItemTable extends PowerGridComponent
     {
         return PowerGrid::eloquent()
             ->addColumn('id')
+            ->addColumn('order_success', function (UserOrderItem $model) {
+                return $model->order_success->seller_payment_status;
+            } )
             ->addColumn('user_ordered', function(UserOrderItem $model) {
                 $full_name = $model->order_by->first_name;
                 if ($model->order_by->last_name) {
@@ -221,6 +229,9 @@ final class UserOrderItemTable extends PowerGridComponent
             Column::make('ID', 'id')
                 ->searchable()
                 ->hidden(),
+
+            Column::make('Status Pembayaran', 'order_success')
+                ->searchable(),
 
             Column::make('Pemesan', 'user_ordered')
                 ->searchable(),

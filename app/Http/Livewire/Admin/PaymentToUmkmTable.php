@@ -158,7 +158,7 @@ final class PaymentToUmkmTable extends PowerGridComponent
     {
         return [
             Column::make('Tanggal', 'updated_at')
-            ->hidden(),
+                ->hidden(),
 
             Column::make('Tanggal', 'updated_at_formatted', 'updated_at')
                 ->searchable()

@@ -5,7 +5,7 @@
 <div class="umkm-transaction-page">
     <div class="container">
         <div class="page-title">
-            <h1>Transaksi Saya</h1>
+            <h1>Transaksi UMKM</h1>
         </div>
         <div class="page-nav-menu-wrapper">
             <ul>
