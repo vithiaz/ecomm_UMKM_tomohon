@@ -354,6 +354,14 @@ body {
   align-items: center;
   justify-content: flex-start;
 }
+.app .page-section .container .product-detail-wrapper .content-container .content-neck-wrapper .main .umkm-name a {
+  text-decoration: none;
+  color: black;
+}
+.app .page-section .container .product-detail-wrapper .content-container .content-neck-wrapper .main .umkm-name a:hover {
+  cursor: pointer;
+  color: #F0AE2C;
+}
 .app .page-section .container .product-detail-wrapper .content-container .price-wrapper {
   display: flex;
   flex-direction: row;
@@ -916,6 +924,14 @@ body {
 }
 .product-card .card-content .store-wrapper .store, .product-card .card-content .stock-wrapper .store {
   font-size: 0.9em;
+}
+.product-card .card-content .store-wrapper .store a, .product-card .card-content .stock-wrapper .store a {
+  text-decoration: none;
+  color: black;
+}
+.product-card .card-content .store-wrapper .store a:hover, .product-card .card-content .stock-wrapper .store a:hover {
+  color: #F0AE2C;
+  font-weight: 600;
 }
 .product-card .card-content .store-wrapper .discount, .product-card .card-content .stock-wrapper .discount {
   padding: 5px 10px;

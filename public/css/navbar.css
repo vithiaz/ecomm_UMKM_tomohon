@@ -150,15 +150,22 @@
   border: 1px solid #F92727;
   color: #F92727;
 }
-#navbar .container .auth-wrapper .search, #navbar .container .auth-wrapper .hidden-menu {
+#navbar .container .auth-wrapper .search, #navbar .container .auth-wrapper .hidden-menu, #navbar .container .auth-wrapper .cart {
   padding: 5px 20px;
   border-radius: 4px;
 }
-#navbar .container .auth-wrapper .search:hover, #navbar .container .auth-wrapper .hidden-menu:hover {
+#navbar .container .auth-wrapper .search:hover, #navbar .container .auth-wrapper .hidden-menu:hover, #navbar .container .auth-wrapper .cart:hover {
   cursor: pointer;
   background-color: #FBF7F7;
 }
-#navbar .container .auth-wrapper .search.active, #navbar .container .auth-wrapper .hidden-menu.active {
+#navbar .container .auth-wrapper .search.active, #navbar .container .auth-wrapper .hidden-menu.active, #navbar .container .auth-wrapper .cart.active {
+  background-color: #F9D00F;
+}
+#navbar .container .auth-wrapper .cart {
+  text-decoration: none;
+  color: black;
+}
+#navbar .container .auth-wrapper .cart:hover {
   background-color: #F9D00F;
 }
 #navbar .container .auth-wrapper .hidden-menu {

@@ -37,6 +37,7 @@
                                     basePrice='{{ $product->price }}'
                                     discount='{{ $product->discount }}'
                                     umkm='{{ $product->umkm->name }}'
+                                    umkmId='{{ $product->umkm->id }}'
                                     sold='{{ $product->sales_qty }}'
                                     stock='{{ $product->stock }}'
                                     productName='{{ $product->name }}'

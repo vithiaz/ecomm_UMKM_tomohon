@@ -13,6 +13,7 @@ class ProductCard extends Component
    public $price;
    public $discount;
    public $umkm;
+   public $umkmId;
    public $sold;
    public $stock;
    public $productName;
@@ -25,6 +26,7 @@ class ProductCard extends Component
         $basePrice,
         $discount,
         $umkm,
+        $umkmId,
         $sold,
         $stock,
         $productName,
@@ -37,6 +39,7 @@ class ProductCard extends Component
         $this->basePrice = number_format($basePrice, 2, ",", '.');
         $this->discount = $discount;
         $this->umkm = $umkm;
+        $this->umkmId = $umkmId;
         $this->sold = $this->simplify_number($sold);
         $this->stock = $stock;
         $this->productName = $productName;

@@ -11,7 +11,7 @@
         {{-- User Profile and Bank Account Card --}}
         <div class="page-content-card">
             <div class="card-title">
-                <h1>Profil UMKM</h1>
+                <h1>Profil Pemilik UMKM</h1>
             </div>
             <div class="card-content">
                 <div class="account-wrapper">

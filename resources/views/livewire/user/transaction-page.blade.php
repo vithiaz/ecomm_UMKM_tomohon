@@ -101,16 +101,20 @@
         if (token) {
             window.snap.pay(token, {
                 onSuccess: function(result){
-                alert("payment success!"); console.log(result);
+                    alert("pembayaran berhasil!");
+                    window.location.href = '/transactions/progress';
                 },
                 onPending: function(result){
-                alert("wating your payment!"); console.log(result);
+                    alert("menunggu pembayaran!");
+                    window.location.href = '/transactions/progress';
                 },
                 onError: function(result){
-                alert("payment failed!"); console.log(result);
+                    alert("pembayaran gagal!");
+                    window.location.href = '/transactions/pending';
                 },
                 onClose: function(){
-                alert('you closed the popup without finishing the payment');
+                    alert('selesaikan pembayaran anda ...');
+                    window.location.href = '/transactions/pending';
                 }
             })
         }

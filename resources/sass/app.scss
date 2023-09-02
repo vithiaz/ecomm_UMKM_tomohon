@@ -369,6 +369,19 @@ body {
                                 align-items: center;
                                 justify-content: flex-start;
                             }
+
+                            .umkm-name {
+
+                                a {
+                                    text-decoration: none;
+                                    color: black;
+
+                                    &:hover {
+                                        cursor: pointer;
+                                        color: $DarkerOrange;
+                                    }
+                                }
+                            }
                         }
 
                     }
@@ -1022,6 +1035,16 @@ body {
 
             .store {
                 font-size: 0.9em;
+
+                a {
+                    text-decoration: none;
+                    color: black;
+
+                    &:hover {
+                        color: $DarkerOrange;
+                        font-weight: 600;
+                    }
+                }
             }
 
             .discount {

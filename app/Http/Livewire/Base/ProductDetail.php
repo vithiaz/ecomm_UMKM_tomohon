@@ -7,6 +7,7 @@ use Livewire\Component;
 use App\Models\UserCart;
 use App\Models\UserOrder;
 use Illuminate\Support\Str;
+use App\Models\UserOrderItem;
 use Illuminate\Support\Facades\Auth;
 
 class ProductDetail extends Component
@@ -23,6 +24,7 @@ class ProductDetail extends Component
     public $stock;
     public $qty_input;
     public $note_input;
+    public $success_transaction_count;
 
 
     protected $rules = [
@@ -40,6 +42,7 @@ class ProductDetail extends Component
         $product = Product::with([
             'profile_image',
             'umkm',
+            'order_item',
         ])->where([
             ['id', '=', $this->product_id],
             ['name_slug', '=', $this->name_slug],
@@ -50,6 +53,8 @@ class ProductDetail extends Component
         }
 
         $this->product = $product->first();
+
+        $this->success_transaction_count = $this->count_success_transaction($this->product->order_item);
 
         $basePrice = (int)$this->product->price;
         $this->final_price = $basePrice - ($basePrice * ((float)$this->product->discount) / 100);
@@ -73,6 +78,21 @@ class ProductDetail extends Component
         return view('livewire.base.product-detail', ['other_product' => $other_product])->layout('layouts.app');
     }
 
+    private function count_success_transaction($order_items) {
+        $success_transaction_count = 0;
+
+        if ($order_items) {
+            foreach($order_items as $order) {
+                $orderItem = UserOrderItem::withCount('order_success')->find($order->id);
+                if ($orderItem) {
+                    $success_transaction_count += $orderItem->order_success_count;
+                }
+            }
+        }
+        return $success_transaction_count;
+    }
+
+    
     public function store_user_cart($product_id, $in_detail_page = true) {
         if (!Auth::check()) {
             $msg = ['info' => 'Silahkan Login terlebih dahulu'];

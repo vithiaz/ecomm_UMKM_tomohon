@@ -16,7 +16,7 @@
             @endif
         </div>
         <div class="store-wrapper">
-            <span class="store">{{ $umkm }}</span>
+            <span class="store"><a href="{{ route('umkm-products', ['umkm_id' => $umkmId]) }}">{{ $umkm }}</a></span>
             @if ($discount > 0)
                 <span class="discount">-{{ $discount }}%</span>
             @endif

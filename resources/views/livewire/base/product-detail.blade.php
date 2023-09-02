@@ -17,14 +17,14 @@
                     </div>
                     <div class="content-neck-wrapper">
                         <div class="main">
+                            <span class="umkm-name"><a href="{{ route('umkm-products', ['umkm_id' => $product->umkm->id]) }}">{{ $product->umkm->name }}</a></span>
                             <div class="location-container">
                                 <i class="fa-solid fa-location-dot"></i>
                                 <span>{{ $product->umkm->district }}</span>
                             </div>
-                            <span>{{ $product->umkm->name }}</span>
                         </div>
                         <div class="sold-container">
-                            <span>122 Terjual</span>
+                            <span>{{ $this->success_transaction_count }} Terjual</span>
                         </div>
                     </div>
                     <div class="price-wrapper">
@@ -113,6 +113,7 @@
                                 basePrice='{{ $product->price }}'
                                 discount='{{ $product->discount }}'
                                 umkm='{{ $product->umkm->name }}'
+                                umkmId='{{ $product->umkm->id }}'
                                 sold='{{ $product->sales_qty }}'
                                 stock='{{ $product->stock }}'
                                 productName='{{ $product->name }}'

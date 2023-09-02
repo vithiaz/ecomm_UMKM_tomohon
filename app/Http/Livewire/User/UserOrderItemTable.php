@@ -197,7 +197,12 @@ final class UserOrderItemTable extends PowerGridComponent
         return PowerGrid::eloquent()
             ->addColumn('id')
             ->addColumn('order_success', function (UserOrderItem $model) {
-                return $model->order_success->seller_payment_status;
+                if ($model->order_success) {
+                    return $model->order_success->seller_payment_status;
+                }
+                else {
+                    return '';
+                }
             } )
             ->addColumn('user_ordered', function(UserOrderItem $model) {
                 $full_name = $model->order_by->first_name;

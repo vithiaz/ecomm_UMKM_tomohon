@@ -35,15 +35,22 @@
             <div id="navbar-search-dropdown-btn" class="search">
                 <i class="fa-solid fa-magnifying-glass"></i>
             </div>
+            @auth
+                <a href="{{ route('cart-page') }}" class="cart">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    {{-- <a href="{{ route('cart-page') }}">
+                    </a> --}}
+                </a>
+            @endauth
             <div id="navbar-hidden-menu" class="hidden-menu">
                 <i class="fa-solid fa-bars"></i>
             </div>
             
             @auth
-                <div class="user">
-                    <span class="username">{{ Auth::user()->username }}</span>
-                    <div id="user-dropdown-btn" class="btn btn-dropdown"><i class="fa-solid fa-angle-down"></i></div>
-                </div>
+            <div class="user">
+                <span class="username">{{ Auth::user()->username }}</span>
+                <div id="user-dropdown-btn" class="btn btn-dropdown"><i class="fa-solid fa-angle-down"></i></div>
+            </div>
             @else
                 <div class="auth">
                     <button class="btn auth-secondary" data-bs-toggle="modal" data-bs-target="#auth_modal">Masuk</button>
@@ -85,7 +92,7 @@
                     <li><a href="{{ route('admin.products', ['status' => 'active']) }}">Admin Panel</a></li>
                 @endif
                 <li><a href="{{ route('account-settings') }}">Pengaturan Akun</a></li>
-                <li><a href="{{ route('cart-page') }}">Pesanan Saya</a></li>
+                <li><a href="{{ route('transaction-page', ['status' => 'progress']) }}">Pesanan Saya</a></li>
                 <li><a href="{{ route('umkm.profile') }}">Zona UMKM</a></li>
                 {{-- <li><a href="#">Keluar</a></li> --}}
                 <li><a href="{{ route('logout') }}">Keluar</a></li>
