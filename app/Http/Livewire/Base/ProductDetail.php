@@ -84,8 +84,8 @@ class ProductDetail extends Component
         if ($order_items) {
             foreach($order_items as $order) {
                 $orderItem = UserOrderItem::withCount('order_success')->find($order->id);
-                if ($orderItem) {
-                    $success_transaction_count += $orderItem->order_success_count;
+                if ($orderItem->order_success_count > 0) {
+                    $success_transaction_count += $orderItem->qty;
                 }
             }
         }

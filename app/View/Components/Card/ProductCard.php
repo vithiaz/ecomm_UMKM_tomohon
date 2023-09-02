@@ -69,6 +69,9 @@ class ProductCard extends Component
     }
 
     public function simplify_number($number) {
+        if ($number < 1) {
+            return 0;
+        }
         if ($number >= 1000) {
             return number_format($number / 1000, 1) . 'rb';
         }
