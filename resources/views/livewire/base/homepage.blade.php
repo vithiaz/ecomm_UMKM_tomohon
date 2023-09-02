@@ -118,7 +118,7 @@
                             discount='{{ $product->discount }}'
                             umkm='{{ $product->umkm->name }}'
                             umkmId='{{ $product->umkm->id }}'
-                            sold='{{ $product->sales_qty }}'
+                            sold='{{ $this->count_success_transaction($product->order_item) }}'
                             stock='{{ $product->stock }}'
                             productName='{{ $product->name }}'
                             productNameSlug='{{ $product->name_slug }}'

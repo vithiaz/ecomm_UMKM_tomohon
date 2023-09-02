@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Base;
 use App\Models\Umkm;
 use App\Models\Product;
 use Livewire\Component;
+use App\Models\UserOrderItem;
 
 class UmkmProductsPage extends Component
 {
@@ -21,7 +22,7 @@ class UmkmProductsPage extends Component
     public function mount($umkm_id) {
         $this->umkm_id = $umkm_id;
         
-        $this->umkm = Umkm::find($umkm_id);
+        $this->umkm = Umkm::withCount('success_transaction')->find($umkm_id);
 
         if (!$this->umkm) {
             return abort(404);
@@ -36,6 +37,7 @@ class UmkmProductsPage extends Component
         $get_other_product = Product::with([
             'profile_image',
             'umkm',
+            'order_item',
         ])
         ->where([
             ['umkm_id', '=', $this->umkm->id],
@@ -53,6 +55,21 @@ class UmkmProductsPage extends Component
             'other_product' => $other_product,
         ]);
     }
+
+    public function count_success_transaction($order_items) {
+        $success_transaction_count = 0;
+
+        if ($order_items) {
+            foreach($order_items as $order) {
+                $orderItem = UserOrderItem::withCount('order_success')->find($order->id);
+                if ($orderItem->order_success_count > 0) {
+                    $success_transaction_count += $orderItem->qty;
+                }
+            }
+        }
+        return $success_transaction_count;
+    }
+
 
     public function load_more() {
         $this->load_count += $this->load_count_increment;

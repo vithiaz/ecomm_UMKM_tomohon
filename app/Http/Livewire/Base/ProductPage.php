@@ -6,6 +6,7 @@ use App\Models\Umkm;
 use App\Models\Product;
 use Livewire\Component;
 use App\Models\UserCart;
+use App\Models\UserOrderItem;
 use App\Models\ProductCategory;
 use Illuminate\Support\Facades\Auth;
 
@@ -57,6 +58,7 @@ class ProductPage extends Component
                 'product_categories',
                 'profile_image',
                 'umkm',
+                'order_item',
             ])->where('status', '=', 'active')
             ->whereHas('umkm', function ($model) {
                 return $model->where('status', '=', true);
@@ -74,6 +76,20 @@ class ProductPage extends Component
         return view('livewire.base.product-page', [
             'products' => $products,
         ])->layout('layouts.app');
+    }
+
+    public function count_success_transaction($order_items) {
+        $success_transaction_count = 0;
+
+        if ($order_items) {
+            foreach($order_items as $order) {
+                $orderItem = UserOrderItem::withCount('order_success')->find($order->id);
+                if ($orderItem->order_success_count > 0) {
+                    $success_transaction_count += $orderItem->qty;
+                }
+            }
+        }
+        return $success_transaction_count;
     }
 
     public function load_more() {

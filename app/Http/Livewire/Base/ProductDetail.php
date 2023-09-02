@@ -69,6 +69,7 @@ class ProductDetail extends Component
         $other_product = Product::with([
             'profile_image',
             'umkm',
+            'order_item',
         ])->whereNotIn('id', [$this->product->id])
         ->where('status', '=', 'active')
         ->whereHas('umkm', function ($model) {
@@ -78,7 +79,7 @@ class ProductDetail extends Component
         return view('livewire.base.product-detail', ['other_product' => $other_product])->layout('layouts.app');
     }
 
-    private function count_success_transaction($order_items) {
+    public function count_success_transaction($order_items) {
         $success_transaction_count = 0;
 
         if ($order_items) {

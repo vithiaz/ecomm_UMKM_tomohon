@@ -49,13 +49,55 @@ class Homepage extends Component
                 ])
                 ->withCount('success_transaction')
                 ->get();
-    
-        $userOrderItem = UserOrderItem::with('order_belongs')->get()->groupBy('product_id');
-    
+        
         $this->umkmQuery = Umkm::with(['order', 'success_transaction'])->withCount('success_transaction')->where('status', '=', true);
         $this->popularUmkm = $this->umkmQuery->whereHas('success_transaction')->get()->sortByDesc('success_transaction_count')->take(8);
 
-        $hero_product = [];
+        $userOrderItem = UserOrderItem::with('order_belongs')->get()->groupBy('product_id');
+        $hero_product = $this->get_hero_item_sales($userOrderItem);
+    
+        // Sorting hero_product
+        usort($hero_product, function ($a, $b) {
+            if ($a['sales_qty'] == $b['sales_qty']) {
+                return 0;
+            }
+            return ($a['sales_qty'] > $b['sales_qty']) ? -1 : 1;
+        });
+    
+        // Specified limit number of hero_product;
+        $hero_product = array_slice($hero_product, 0, 16);
+        $this->hero_product = $hero_product;
+
+        $this->load_count = 12;
+        $this->all_loaded_state = false;
+    }
+    
+    public function render()
+    {
+        $get_other_product = Product::with([
+                            'profile_image',
+                            'umkm',
+                            'order_item',
+                        ])
+                        ->where('status', '=', 'active')
+                        ->whereHas('umkm', function ($model) {
+                            return $model->where('status', '=', true);
+                        })
+                        ->get();
+
+        $other_product = $get_other_product->take($this->load_count);
+
+        if ($this->load_count >= count($get_other_product)) {
+            $this->all_loaded_state = true;
+        }
+        
+        return view('livewire.base.homepage', [
+            'other_product' => $other_product,
+        ])->layout('layouts.app');
+    }
+
+    private function get_hero_item_sales($userOrderItem) {
+        $products = [];
         foreach(array_keys($userOrderItem->toArray()) as $product_id) {
             $product_data = [];
     
@@ -79,48 +121,25 @@ class Homepage extends Component
     
                 if ($sales_qty > 0) {
                     $product_data['sales_qty'] = $sales_qty;
-                    array_push($hero_product, $product_data);
+                    array_push($products, $product_data);
                 }
             }
         }
-    
-        // Sorting hero_product
-        usort($hero_product, function ($a, $b) {
-            if ($a['sales_qty'] == $b['sales_qty']) {
-                return 0;
-            }
-            return ($a['sales_qty'] > $b['sales_qty']) ? -1 : 1;
-        });
-    
-        // Specified limit number of hero_product;
-        $hero_product = array_slice($hero_product, 0, 16);
-        $this->hero_product = $hero_product;
-
-        $this->load_count = 12;
-        $this->all_loaded_state = false;
+        return $products;
     }
-    
-    public function render()
-    {
-        $get_other_product = Product::with([
-                            'profile_image',
-                            'umkm',
-                        ])
-                        ->where('status', '=', 'active')
-                        ->whereHas('umkm', function ($model) {
-                            return $model->where('status', '=', true);
-                        })
-                        ->get();
 
-        $other_product = $get_other_product->take($this->load_count);
+    public function count_success_transaction($order_items) {
+        $success_transaction_count = 0;
 
-        if ($this->load_count >= count($get_other_product)) {
-            $this->all_loaded_state = true;
+        if ($order_items) {
+            foreach($order_items as $order) {
+                $orderItem = UserOrderItem::withCount('order_success')->find($order->id);
+                if ($orderItem->order_success_count > 0) {
+                    $success_transaction_count += $orderItem->qty;
+                }
+            }
         }
-        
-        return view('livewire.base.homepage', [
-            'other_product' => $other_product,
-        ])->layout('layouts.app');
+        return $success_transaction_count;
     }
 
     public function load_more() {
