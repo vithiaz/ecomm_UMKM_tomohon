@@ -18,12 +18,14 @@ use App\Http\Livewire\User\CheckoutPage;
 use App\Http\Livewire\User\RegisterUmkm;
 use App\Http\Livewire\Base\ProductDetail;
 use App\Http\Livewire\Admin\ProductReview;
+use App\Http\Livewire\Admin\RefoundPayment;
 use App\Http\Livewire\User\AccountSettings;
 use App\Http\Livewire\User\TransactionPage;
 use App\Http\Livewire\User\UmkmTransaction;
 use App\Http\Livewire\Admin\ProductCategory;
 use App\Http\Livewire\Base\UmkmProductsPage;
 use App\Http\Livewire\Admin\UmkmRegistration;
+use App\Http\Livewire\User\RefoundTransaction;
 use App\Http\Livewire\Admin\ProductVerification;
 use App\Http\Livewire\Admin\UmkmRegistrationReview;
 use App\Http\Livewire\Admin\UmkmAccountVerification;
@@ -53,6 +55,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/{umkm}/{product}/edit', EditProduct::class)->name('edit-product');
     
     Route::get('/transactions/{status}', TransactionPage::class)->name('transaction-page');
+    Route::get('/refound-transaction/{transaction_id}', RefoundTransaction::class)->name('refound-transaction-page');
+
     Route::get('/umkm/register', RegisterUmkm::class)->name('umkm.register');
     Route::get('/umkm/edit/{umkm}', EditUmkm::class)->name('umkm.edit');
     Route::get('/umkm/profile', UmkmProfile::class)->name('umkm.profile');
@@ -75,7 +79,8 @@ Route::middleware(['auth', 'admin'])->prefix('/admin')->group(function () {
     Route::post('/umkm/account/reject/{account_number}-{id}', [UmkmBankAccountMethods::class, 'reject_request'])->name('admin.umkm-account.reject');    
     Route::post('/umkm/account/revoke/{account_number}-{id}', [UmkmBankAccountMethods::class, 'revoke_request'])->name('admin.umkm-account.revoke');    
 
-    Route::get('/umkm/payment/{status}', UmkmPayment::class)->name('admin.umkm-payment');    
+    Route::get('/umkm/payment/{status}', UmkmPayment::class)->name('admin.umkm-payment');
+    Route::get('/refound-payment/{status}', RefoundPayment::class)->name('admin.refound-payment');
 });
 
 // Checkpoint

@@ -6,16 +6,17 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+
     public function up()
     {
-        Schema::table('success_transactions', function (Blueprint $table) {
+        Schema::table('refound_orders', function (Blueprint $table) {
             $table->foreign('order_id')->references('id')->on('user_orders')->change()->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
     public function down()
     {
-        Schema::table('success_transactions', function (Blueprint $table) {
+        Schema::table('refound_orders', function (Blueprint $table) {
             $table->dropForeign('order_id');
         });
     }

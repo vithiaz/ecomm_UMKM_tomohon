@@ -26,7 +26,7 @@
                     @if ($userDetail)
                         <div class="wrapper-col">
                             <span class="col-title">Nama Lengkap</span>
-                            <span class="col-body">{{ $userDetail['first_name'], $userDetail['last_name'] }}</span>
+                            <span class="col-body">{{ $userDetail['first_name'] }} {{ $userDetail['last_name'] }}</span>
                         </div>
                         <div class="wrapper-col">
                             <span class="col-title">Email</span>

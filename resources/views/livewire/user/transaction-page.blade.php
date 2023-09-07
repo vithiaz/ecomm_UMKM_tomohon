@@ -83,10 +83,77 @@
                         <button type="button" class="btn checkout-btn snap-btn" data-token='{{ $order_detail->payment_token }}'>Bayar</button>
                     </div>
                 @endif
+                @if ($status == 'progress')
+                    @if (!$this->is_delivery($order_detail))
+                        <div class="button-wrapper">
+                            <button style="display: none" id="refoundModalToggleBtn" type="button" data-bs-toggle="modal" data-bs-target="#refoundModal"></button>
+                            <button wire:click='set_refound_state({{ $order_detail }})' type="button" class="btn btn-default-red">Batalkan Pesanan</button>
+                        </div>                        
+                    @endif
+                @endif
+                @if ($status == 'abort' && $order_detail->refound_order)
+                    <div class="content-card-title">
+                        <span>Detail Refound</span>
+                    </div>
+                    <div class="refound-details-wrapper">
+                        <div class="row-wrapper">
+                            <span class="title">Status Pembayaran</span>
+                            <span class="content">{{ $order_detail->refound_order->payment_status }}</span>
+                        </div>
+                        <div class="row-wrapper">
+                            <span class="title">Nama BANK</span>
+                            <span class="content">{{ $order_detail->refound_order->bank_name }}</span>
+                        </div>
+                        <div class="row-wrapper">
+                            <span class="title">Nomor Rekening</span>
+                            <span class="content">{{ $order_detail->refound_order->account_number }}</span>
+                        </div>
+                        <div class="row-wrapper">
+                            <span class="title">Pemilik Rekening</span>
+                            <span class="content">{{ $order_detail->refound_order->account_name }}</span>
+                        </div>
+                        <div class="row-wrapper">
+                            <span class="title">Keterangan Refound</span>
+                            <span class="content">{{ $order_detail->refound_order->refound_description }}</span>
+                        </div>
+
+
+                    </div>
+                @endif
             </div>
         @endforeach
 
     </div>
+
+
+    {{-- Confirmation Modal --}}
+    <div wire:ignore.self class="modal fade" id="refoundModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <button class="close-modal-button" onclick="hide_refound_modal()" data-bs-dismiss="modal">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+
+                <div class="title">Informasi</div>
+
+                <div class="card-content-wrapper">
+                    <p class="indent">Pesanan dapat dibatalkan apabila penjual belum melakukan pengiriman produk ke alamat tujuan.</p>
+                    <p class="indent">Anda akan diminta untuk mengisi form pembatalan transaksi serta mencantumkan informasi rekening Bank yang valid untuk dilakukan refound. Admin akan melakukan refound pada hari kerja.</p>
+                </div>
+
+                <div class="card-content-wrapper">
+                    <span class="card-content-wrapper-title">Konfirmasi Pembatalan Pesanan</span>
+                    <div class="buttons-container">
+                        <button onclick="redirect_to_refound_page()" class="btn btn-danger">Batalkan Pesanan</button>
+                        <button onclick="hide_refound_modal()" data-bs-dismiss="modal" class="btn btn-secondary">Kembali</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
 </div>
 
 @push('script')
@@ -119,6 +186,26 @@
             })
         }
     })
+
+
+    // Modal
+    function hide_refound_modal() {
+        $('#refoundModal').modal('hide');
+        $('body').removeClass('modal-open');
+        $('.modal-backdrop').remove();
+        // $('.modal-backdrop').remove();
+    }
+    $(window).on('toggleRefoundModal', function () {
+        $('#refoundModalToggleBtn').click()
+    })
+
+
+    // Redirect to refound page
+    function redirect_to_refound_page() {
+        if (@this.refoundId) {
+            window.location.href = '/refound-transaction/' + @this.refoundId;
+        }
+    }
 
 </script>
 @endpush

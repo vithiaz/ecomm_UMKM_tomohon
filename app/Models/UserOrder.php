@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Umkm;
 use App\Models\User;
+use App\Models\RefoundOrder;
 use App\Models\UserOrderItem;
 use App\Models\SuccessTransaction;
 use Illuminate\Database\Eloquent\Model;
@@ -46,6 +47,11 @@ class UserOrder extends Model
     public function success_transaction()
     {
         return $this->hasOne(SuccessTransaction::class, 'order_id', 'id');
+    }
+
+    public function refound_order()
+    {
+        return $this->hasOne(RefoundOrder::class, 'order_id', 'id');
     }
 
 

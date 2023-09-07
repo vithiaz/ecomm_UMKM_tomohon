@@ -12,20 +12,13 @@ use PowerComponents\LivewirePowerGrid\Traits\ActionButton;
 use PowerComponents\LivewirePowerGrid\Rules\{Rule, RuleActions};
 use PowerComponents\LivewirePowerGrid\{Button, Column, Exportable, Footer, Header, PowerGrid, PowerGridComponent, PowerGridEloquent};
 
-final class PaymentToUmkmTable extends PowerGridComponent
+final class RefoundPaymentTable extends PowerGridComponent
 {
     use ActionButton;
 
     // Binding Variable
     public string $status;
 
-    /*
-    |--------------------------------------------------------------------------
-    |  Features Setup
-    |--------------------------------------------------------------------------
-    | Setup Table's general features
-    |
-    */
 
     protected function getListeners()
     {
@@ -39,10 +32,10 @@ final class PaymentToUmkmTable extends PowerGridComponent
     public function paymentPayed($id): void
     {
         $userOrderId = $id[0];
-        $UserOrderModel = UserOrder::with('success_transaction')->find($userOrderId);
-        if ($UserOrderModel->success_transaction) {
-            $UserOrderModel->success_transaction->seller_payment_status = 'settlement';
-            $UserOrderModel->success_transaction->save();
+        $UserOrderModel = UserOrder::with('refound_order')->find($userOrderId);
+        if ($UserOrderModel->refound_order) {
+            $UserOrderModel->refound_order->payment_status = 'settlement';
+            $UserOrderModel->refound_order->save();
 
             $msg = ['success' => 'Data Diupdate'];
             $this->dispatchBrowserEvent('display-message', $msg);    
@@ -50,18 +43,30 @@ final class PaymentToUmkmTable extends PowerGridComponent
         }
     }
 
-    public function getBankAccount($umkm_id): void
+    public function getBankAccount($id): void
     {
-        $UmkmId = $umkm_id[0];
-        $UmkmModel = Umkm::with(['user', 'bank_accounts'])->find($UmkmId);
-        $BankAccounts = $UmkmModel->bank_accounts->where('status', '=', 'acc');
-        $this->dispatchBrowserEvent('toggleBankAccountModal', ['data' => $UmkmModel->toArray(), 'bank_accounts' => $BankAccounts->toArray()]);
+        $userOrderId = $id[0];
+        
+        $UserOrderModel = UserOrder::with(['refound_order', 'user'])->find($userOrderId);
+
+        $userDetail = $UserOrderModel->user->toArray();
+        $refoundDetail = $UserOrderModel->refound_order->toArray();
+        $this->dispatchBrowserEvent('toggleRefoundAccountModal', [
+            'userDetail' => $userDetail,
+            'refoundDetail' => $refoundDetail,
+        ]);
     }
 
 
+    /*
+    |--------------------------------------------------------------------------
+    |  Features Setup
+    |--------------------------------------------------------------------------
+    | Setup Table's general features
+    |
+    */
     public function setUp(): array
     {
-        // $this->showCheckBox();
 
         return [
             Header::make()->showSearchInput(),
@@ -87,10 +92,10 @@ final class PaymentToUmkmTable extends PowerGridComponent
     public function datasource(): Builder
     {
         return UserOrder::query()->with([
-            'umkm',
-            'success_transaction',
-        ])->whereHas('success_transaction', function ($q) {
-            return $q->where('seller_payment_status', '=', $this->status);
+            'user',
+            'refound_order',
+        ])->whereHas('refound_order', function ($q) {
+            return $q->where('payment_status', '=', $this->status);
         });
     }
 
@@ -109,7 +114,14 @@ final class PaymentToUmkmTable extends PowerGridComponent
      */
     public function relationSearch(): array
     {
-        return [];
+        return [
+            'user' => [
+                'username',
+                'first_name',
+                'last_name',
+                'email',
+            ]
+        ];
     }
 
     /*
@@ -127,17 +139,21 @@ final class PaymentToUmkmTable extends PowerGridComponent
     {
         return PowerGrid::eloquent()
             ->addColumn('id')
-            ->addColumn('umkm_id')
-            ->addColumn('umkm_name', function (UserOrder $model) {
-                return $model->umkm->name;
+            ->addColumn('buyer_username', function (UserOrder $model) {
+                return $model->user->username;
             })
-            // ->addColumn('name_lower', fn (UserOrder $model) => strtolower(e($model->name)))
+            ->addColumn('buyer_fullname', function (UserOrder $model) {
+                return $model->user->first_name . ' ' . $model->user->last_name;
+            })
+            ->addColumn('buyer_email', function (UserOrder $model) {
+                return $model->user->email;
+            })
             ->addColumn('payment_amount')
             ->addColumn('payment_amount_formatted', function (UserOrder $model) {
                 return format_rupiah($model->payment_amount);
             })
-            ->addColumn('updated_at')
-            ->addColumn('updated_at_formatted', fn (UserOrder $model) => Carbon::parse($model->updated_at)->format('d/m/Y H:i:s'));
+            ->addColumn('created_at')
+            ->addColumn('created_at_formatted', fn (UserOrder $model) => Carbon::parse($model->created_at)->format('d/m/Y H:i:s'));
     }
 
     /*
@@ -157,29 +173,29 @@ final class PaymentToUmkmTable extends PowerGridComponent
     public function columns(): array
     {
         return [
-            Column::make('Tanggal', 'updated_at')
+            Column::make('Created at', 'created_at')
                 ->hidden(),
 
-            Column::make('Tanggal', 'updated_at_formatted', 'updated_at')
-                ->searchable()
-                ->sortable(),
-
-            Column::make('ID', 'id')
-                ->searchable()
-                ->sortable(),
-
-            Column::make('Umkm', 'umkm_id')
-                ->searchable()
-                ->hidden(),
-
-            Column::make('Nama UMKM', 'umkm_name')
+            Column::make('Tanggal', 'created_at_formatted', 'created_at')
+                ->sortable()
+                ->searchable(),
+            
+            Column::make('Order ID', 'id')
                 ->searchable(),
 
-            Column::make('Jumlah Pembayaran', 'payment_amount')
-                ->hidden(),
-
-            Column::make('Jumlah Pembayaran', 'payment_amount_formatted', 'payment_amount')
+            Column::make('Jumlah Refound', 'payment_amount_formatted', 'payment_amount')
+                ->searchable()
                 ->sortable(),
+
+            Column::make('pembeli', 'buyer_fullname')
+                ->searchable(),
+
+            Column::make('username', 'buyer_username')
+                ->searchable(),
+
+            Column::make('email', 'buyer_email')
+                ->searchable()
+
         ];
     }
 
@@ -210,7 +226,6 @@ final class PaymentToUmkmTable extends PowerGridComponent
      * @return array<int, Button>
      */
 
-    
     public function actions(): array
     {
         if ($this->status == 'pending') {
@@ -218,7 +233,7 @@ final class PaymentToUmkmTable extends PowerGridComponent
                 Button::add('paying_acc', 'Akun Pembayaran')
                     ->caption('Lihat Akun')
                     ->class('btn btn-default-dark')
-                    ->emit('getBankAccount', ['umkm_id']),
+                    ->emit('getBankAccount', ['id']),
                 
                 Button::add('payed', 'Dibayarkan')
                     ->caption('Dibayarkan')
@@ -230,10 +245,9 @@ final class PaymentToUmkmTable extends PowerGridComponent
             Button::add('paying_acc', 'Akun Pembayaran')
                 ->caption('Lihat Akun')
                 ->class('btn btn-default-dark')
-                ->emit('getBankAccount', ['umkm_id'])
+                ->emit('getBankAccount', ['id'])
         ];
     }
-    
 
     /*
     |--------------------------------------------------------------------------

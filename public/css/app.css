@@ -828,6 +828,9 @@ body {
   height: auto;
   min-height: calc(100vh - 100px);
 }
+.app .row-container .app-content.lighten {
+  background-color: #EDF0F3;
+}
 
 .swiper {
   display: flex;
@@ -1179,12 +1182,12 @@ body {
   color: white !important;
 }
 
-#auth_modal .modal-dialog, #umkm_bank_account_modal .modal-dialog {
+#auth_modal .modal-dialog, #umkm_bank_account_modal .modal-dialog, #refound_bank_account_modal .modal-dialog, #refoundModal .modal-dialog {
   display: flex;
   align-items: center;
   justify-content: center;
 }
-#auth_modal .modal-dialog .modal-content, #umkm_bank_account_modal .modal-dialog .modal-content {
+#auth_modal .modal-dialog .modal-content, #umkm_bank_account_modal .modal-dialog .modal-content, #refound_bank_account_modal .modal-dialog .modal-content, #refoundModal .modal-dialog .modal-content {
   background-color: white;
   padding: 20px;
   display: flex;
@@ -1199,11 +1202,11 @@ body {
   height: -moz-fit-content;
   height: fit-content;
 }
-#auth_modal .modal-dialog .modal-content small.error, #umkm_bank_account_modal .modal-dialog .modal-content small.error {
+#auth_modal .modal-dialog .modal-content small.error, #umkm_bank_account_modal .modal-dialog .modal-content small.error, #refound_bank_account_modal .modal-dialog .modal-content small.error, #refoundModal .modal-dialog .modal-content small.error {
   padding-left: 10px;
   color: #F92727;
 }
-#auth_modal .modal-dialog .modal-content .close-modal-button, #umkm_bank_account_modal .modal-dialog .modal-content .close-modal-button {
+#auth_modal .modal-dialog .modal-content .close-modal-button, #umkm_bank_account_modal .modal-dialog .modal-content .close-modal-button, #refound_bank_account_modal .modal-dialog .modal-content .close-modal-button, #refoundModal .modal-dialog .modal-content .close-modal-button {
   position: absolute;
   top: 20px;
   right: 20px;
@@ -1212,14 +1215,14 @@ body {
   background-color: transparent;
   border: none;
 }
-#auth_modal .modal-dialog .modal-content .close-modal-button:hover, #umkm_bank_account_modal .modal-dialog .modal-content .close-modal-button:hover {
+#auth_modal .modal-dialog .modal-content .close-modal-button:hover, #umkm_bank_account_modal .modal-dialog .modal-content .close-modal-button:hover, #refound_bank_account_modal .modal-dialog .modal-content .close-modal-button:hover, #refoundModal .modal-dialog .modal-content .close-modal-button:hover {
   cursor: pointer;
   color: #F92727;
 }
-#auth_modal .modal-dialog .modal-content .close-modal-button i, #umkm_bank_account_modal .modal-dialog .modal-content .close-modal-button i {
+#auth_modal .modal-dialog .modal-content .close-modal-button i, #umkm_bank_account_modal .modal-dialog .modal-content .close-modal-button i, #refound_bank_account_modal .modal-dialog .modal-content .close-modal-button i, #refoundModal .modal-dialog .modal-content .close-modal-button i {
   font-size: 1.3rem;
 }
-#auth_modal .modal-dialog .modal-content .logo-wrapper, #umkm_bank_account_modal .modal-dialog .modal-content .logo-wrapper {
+#auth_modal .modal-dialog .modal-content .logo-wrapper, #umkm_bank_account_modal .modal-dialog .modal-content .logo-wrapper, #refound_bank_account_modal .modal-dialog .modal-content .logo-wrapper, #refoundModal .modal-dialog .modal-content .logo-wrapper {
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -1227,19 +1230,19 @@ body {
   align-items: center;
   justify-content: center;
 }
-#auth_modal .modal-dialog .modal-content .logo-wrapper img, #umkm_bank_account_modal .modal-dialog .modal-content .logo-wrapper img {
+#auth_modal .modal-dialog .modal-content .logo-wrapper img, #umkm_bank_account_modal .modal-dialog .modal-content .logo-wrapper img, #refound_bank_account_modal .modal-dialog .modal-content .logo-wrapper img, #refoundModal .modal-dialog .modal-content .logo-wrapper img {
   height: 40px;
   width: -moz-fit-content;
   width: fit-content;
 }
-#auth_modal .modal-dialog .modal-content .logo-wrapper .brand, #umkm_bank_account_modal .modal-dialog .modal-content .logo-wrapper .brand {
+#auth_modal .modal-dialog .modal-content .logo-wrapper .brand, #umkm_bank_account_modal .modal-dialog .modal-content .logo-wrapper .brand, #refound_bank_account_modal .modal-dialog .modal-content .logo-wrapper .brand, #refoundModal .modal-dialog .modal-content .logo-wrapper .brand {
   display: flex;
   flex-direction: row;
   gap: 3px;
   font-weight: 600;
   font-size: 1em;
 }
-#auth_modal .modal-dialog .modal-content .title, #umkm_bank_account_modal .modal-dialog .modal-content .title {
+#auth_modal .modal-dialog .modal-content .title, #umkm_bank_account_modal .modal-dialog .modal-content .title, #refound_bank_account_modal .modal-dialog .modal-content .title, #refoundModal .modal-dialog .modal-content .title {
   width: 100%;
   font-weight: 600;
   display: grid;
@@ -1247,14 +1250,14 @@ body {
   font-size: 1.1em;
   margin: 5px 0;
 }
-#auth_modal .modal-dialog .modal-content .form-floating, #umkm_bank_account_modal .modal-dialog .modal-content .form-floating {
+#auth_modal .modal-dialog .modal-content .form-floating, #umkm_bank_account_modal .modal-dialog .modal-content .form-floating, #refound_bank_account_modal .modal-dialog .modal-content .form-floating, #refoundModal .modal-dialog .modal-content .form-floating {
   width: 100%;
   margin-bottom: 8px;
 }
-#auth_modal .modal-dialog .modal-content .form-floating input, #umkm_bank_account_modal .modal-dialog .modal-content .form-floating input {
+#auth_modal .modal-dialog .modal-content .form-floating input, #umkm_bank_account_modal .modal-dialog .modal-content .form-floating input, #refound_bank_account_modal .modal-dialog .modal-content .form-floating input, #refoundModal .modal-dialog .modal-content .form-floating input {
   background-color: white;
 }
-#auth_modal .modal-dialog .modal-content .login-button, #umkm_bank_account_modal .modal-dialog .modal-content .login-button {
+#auth_modal .modal-dialog .modal-content .login-button, #umkm_bank_account_modal .modal-dialog .modal-content .login-button, #refound_bank_account_modal .modal-dialog .modal-content .login-button, #refoundModal .modal-dialog .modal-content .login-button {
   background-color: black;
   font-weight: 600;
   color: white;
@@ -1262,23 +1265,23 @@ body {
   padding-right: 30px;
   margin: 5px 0;
 }
-#auth_modal .modal-dialog .modal-content .login-button:hover, #umkm_bank_account_modal .modal-dialog .modal-content .login-button:hover {
+#auth_modal .modal-dialog .modal-content .login-button:hover, #umkm_bank_account_modal .modal-dialog .modal-content .login-button:hover, #refound_bank_account_modal .modal-dialog .modal-content .login-button:hover, #refoundModal .modal-dialog .modal-content .login-button:hover {
   cursor: pointer;
   background-color: white;
   color: black;
 }
-#auth_modal .modal-dialog .modal-content .login-button:hover, #umkm_bank_account_modal .modal-dialog .modal-content .login-button:hover {
+#auth_modal .modal-dialog .modal-content .login-button:hover, #umkm_bank_account_modal .modal-dialog .modal-content .login-button:hover, #refound_bank_account_modal .modal-dialog .modal-content .login-button:hover, #refoundModal .modal-dialog .modal-content .login-button:hover {
   cursor: pointer;
   background-color: #2A2A2A;
 }
-#auth_modal .modal-dialog .modal-content .seperator, #umkm_bank_account_modal .modal-dialog .modal-content .seperator {
+#auth_modal .modal-dialog .modal-content .seperator, #umkm_bank_account_modal .modal-dialog .modal-content .seperator, #refound_bank_account_modal .modal-dialog .modal-content .seperator, #refoundModal .modal-dialog .modal-content .seperator {
   width: 100%;
   display: grid;
   place-items: center;
   position: relative;
   margin: 5px 0;
 }
-#auth_modal .modal-dialog .modal-content .seperator span, #umkm_bank_account_modal .modal-dialog .modal-content .seperator span {
+#auth_modal .modal-dialog .modal-content .seperator span, #umkm_bank_account_modal .modal-dialog .modal-content .seperator span, #refound_bank_account_modal .modal-dialog .modal-content .seperator span, #refoundModal .modal-dialog .modal-content .seperator span {
   width: -moz-fit-content;
   width: fit-content;
   padding-left: 5px;
@@ -1287,7 +1290,7 @@ body {
   z-index: 120;
   position: relative;
 }
-#auth_modal .modal-dialog .modal-content .seperator::before, #umkm_bank_account_modal .modal-dialog .modal-content .seperator::before {
+#auth_modal .modal-dialog .modal-content .seperator::before, #umkm_bank_account_modal .modal-dialog .modal-content .seperator::before, #refound_bank_account_modal .modal-dialog .modal-content .seperator::before, #refoundModal .modal-dialog .modal-content .seperator::before {
   content: "";
   position: absolute;
   width: 100%;
@@ -1299,20 +1302,20 @@ body {
   transform: translateY(12px);
   z-index: 119;
 }
-#auth_modal .modal-dialog .modal-content .register-suggest, #umkm_bank_account_modal .modal-dialog .modal-content .register-suggest {
+#auth_modal .modal-dialog .modal-content .register-suggest, #umkm_bank_account_modal .modal-dialog .modal-content .register-suggest, #refound_bank_account_modal .modal-dialog .modal-content .register-suggest, #refoundModal .modal-dialog .modal-content .register-suggest {
   margin: 5px 0;
 }
-#auth_modal .modal-dialog .modal-content .register-suggest .register, #umkm_bank_account_modal .modal-dialog .modal-content .register-suggest .register {
+#auth_modal .modal-dialog .modal-content .register-suggest .register, #umkm_bank_account_modal .modal-dialog .modal-content .register-suggest .register, #refound_bank_account_modal .modal-dialog .modal-content .register-suggest .register, #refoundModal .modal-dialog .modal-content .register-suggest .register {
   margin-left: 2px;
   font-weight: 600;
   text-decoration: none;
 }
-#auth_modal .modal-dialog .modal-content .register-suggest .register:hover, #umkm_bank_account_modal .modal-dialog .modal-content .register-suggest .register:hover {
+#auth_modal .modal-dialog .modal-content .register-suggest .register:hover, #umkm_bank_account_modal .modal-dialog .modal-content .register-suggest .register:hover, #refound_bank_account_modal .modal-dialog .modal-content .register-suggest .register:hover, #refoundModal .modal-dialog .modal-content .register-suggest .register:hover {
   cursor: pointer;
   text-decoration: underline;
 }
 
-#umkm_bank_account_modal .modal-content .profile-wrapper {
+#umkm_bank_account_modal .modal-content .profile-wrapper, #refound_bank_account_modal .modal-content .profile-wrapper {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -1320,7 +1323,7 @@ body {
   align-items: center;
   justify-content: center;
 }
-#umkm_bank_account_modal .modal-content .profile-wrapper .profile-head-wrapper {
+#umkm_bank_account_modal .modal-content .profile-wrapper .profile-head-wrapper, #refound_bank_account_modal .modal-content .profile-wrapper .profile-head-wrapper {
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -1328,12 +1331,12 @@ body {
   align-items: center;
   justify-content: space-evenly;
 }
-#umkm_bank_account_modal .modal-content .profile-wrapper .profile-head-wrapper .profile-name {
+#umkm_bank_account_modal .modal-content .profile-wrapper .profile-head-wrapper .profile-name, #refound_bank_account_modal .modal-content .profile-wrapper .profile-head-wrapper .profile-name {
   font-size: 1rem;
   font-weight: 600;
   letter-spacing: 1px;
 }
-#umkm_bank_account_modal .modal-content .profile-wrapper .profile-head-wrapper .image-container {
+#umkm_bank_account_modal .modal-content .profile-wrapper .profile-head-wrapper .image-container, #refound_bank_account_modal .modal-content .profile-wrapper .profile-head-wrapper .image-container {
   width: 80px;
   height: 80px;
   overflow: hidden;
@@ -1341,18 +1344,18 @@ body {
   display: grid;
   place-items: "center";
 }
-#umkm_bank_account_modal .modal-content .profile-wrapper .profile-head-wrapper .image-container img {
+#umkm_bank_account_modal .modal-content .profile-wrapper .profile-head-wrapper .image-container img, #refound_bank_account_modal .modal-content .profile-wrapper .profile-head-wrapper .image-container img {
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
   transition: all ease-in-out 0.3s;
 }
-#umkm_bank_account_modal .modal-content .profile-wrapper .profile-head-wrapper .image-container img:hover {
+#umkm_bank_account_modal .modal-content .profile-wrapper .profile-head-wrapper .image-container img:hover, #refound_bank_account_modal .modal-content .profile-wrapper .profile-head-wrapper .image-container img:hover {
   cursor: pointer;
   transform: scale(1.5);
 }
-#umkm_bank_account_modal .modal-content .profile-wrapper .profile-head-wrapper .image-container .no-image {
+#umkm_bank_account_modal .modal-content .profile-wrapper .profile-head-wrapper .image-container .no-image, #refound_bank_account_modal .modal-content .profile-wrapper .profile-head-wrapper .image-container .no-image {
   height: 250px !important;
   width: 100%;
   height: 100%;
@@ -1360,30 +1363,30 @@ body {
   display: grid;
   place-items: center;
 }
-#umkm_bank_account_modal .modal-content .profile-wrapper .profile-head-wrapper .image-container .no-image:hover {
+#umkm_bank_account_modal .modal-content .profile-wrapper .profile-head-wrapper .image-container .no-image:hover, #refound_bank_account_modal .modal-content .profile-wrapper .profile-head-wrapper .image-container .no-image:hover {
   cursor: pointer;
   background-color: #2A2A2A;
 }
-#umkm_bank_account_modal .modal-content .profile-wrapper .profile-head-wrapper .image-container .no-image:hover i {
+#umkm_bank_account_modal .modal-content .profile-wrapper .profile-head-wrapper .image-container .no-image:hover i, #refound_bank_account_modal .modal-content .profile-wrapper .profile-head-wrapper .image-container .no-image:hover i {
   color: white;
 }
-#umkm_bank_account_modal .modal-content .profile-wrapper .profile-head-wrapper .image-container .no-image i {
+#umkm_bank_account_modal .modal-content .profile-wrapper .profile-head-wrapper .image-container .no-image i, #refound_bank_account_modal .modal-content .profile-wrapper .profile-head-wrapper .image-container .no-image i {
   font-size: 1.2rem;
   color: black;
 }
-#umkm_bank_account_modal .modal-content .profile-wrapper .card-content-wrapper {
+#umkm_bank_account_modal .modal-content .profile-wrapper .card-content-wrapper, #refound_bank_account_modal .modal-content .profile-wrapper .card-content-wrapper {
   width: 100%;
   padding: 20px 0;
   display: flex;
   flex-direction: column;
-  gap: 20;
+  gap: 8px;
 }
-#umkm_bank_account_modal .modal-content .profile-wrapper .card-content-wrapper .card-content-wrapper-title {
+#umkm_bank_account_modal .modal-content .profile-wrapper .card-content-wrapper .card-content-wrapper-title, #refound_bank_account_modal .modal-content .profile-wrapper .card-content-wrapper .card-content-wrapper-title {
   width: 100%;
   font-weight: 600;
   margin-bottom: 10px;
 }
-#umkm_bank_account_modal .modal-content .profile-wrapper .card-content-wrapper .wrapper-col {
+#umkm_bank_account_modal .modal-content .profile-wrapper .card-content-wrapper .wrapper-col, #refound_bank_account_modal .modal-content .profile-wrapper .card-content-wrapper .wrapper-col {
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -1392,7 +1395,7 @@ body {
   justify-content: space-between;
   flex-wrap: wrap;
 }
-#umkm_bank_account_modal .modal-content .profile-wrapper .card-content-wrapper .wrapper-col .col-title {
+#umkm_bank_account_modal .modal-content .profile-wrapper .card-content-wrapper .wrapper-col .col-title, #refound_bank_account_modal .modal-content .profile-wrapper .card-content-wrapper .wrapper-col .col-title {
   font-weight: 600;
 }
 

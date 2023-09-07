@@ -70,6 +70,13 @@
                     >
                         <a href="{{ route('admin.umkm-payment', ['status' => 'pending']) }}">Pembayaran ke UMKM</a>
                     </li>
+                    <li
+                        @if (\Request::route()->getName() == 'admin.refound-payment')
+                            class="active"
+                        @endif
+                    >
+                        <a href="{{ route('admin.refound-payment', ['status' => 'pending']) }}">Pembayaran Refound</a>
+                    </li>
                 </ul>
             </div>
         </div>

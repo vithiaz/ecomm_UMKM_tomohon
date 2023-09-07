@@ -182,6 +182,22 @@ entity Success_Transaction {
     * updated DATE
 }
 
+entity Refound_Order {
+    * id UUID PRIMARY KEY
+    --
+    * order_id UUID FOUREIGN(User_Order.id)
+    * bank_name VARCHAR(255)
+    * account_number VARCHAR(255)
+    * account_name VARCHAR(255)
+    * payment_status VARCHAR
+    ' pending
+    ' settlement
+    refound_description TEXT
+    --
+    * created DATE
+    * updated DATE
+}
+
 
 ' Relation
 User ||--o{ UMKM
@@ -204,5 +220,6 @@ Product ||--o{ User_Carts
 User_Order ||--|{ User_Order_Item
 
 Success_Transaction |o--|| User_Order
+Refound_Order |o--|| User_Order
 
 @enduml

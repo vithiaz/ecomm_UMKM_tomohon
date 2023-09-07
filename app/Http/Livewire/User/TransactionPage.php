@@ -15,6 +15,9 @@ class TransactionPage extends Component
     // Model Variable
     public $UserOrder;
 
+    // Binding Variable
+    public $refoundId;
+
     public function mount ($status) {
         $this->status = $status;
         if (!in_array($this->status, [
@@ -30,10 +33,13 @@ class TransactionPage extends Component
             'user',
             'umkm',
             'order_item',
+            'refound_order',
         )->where([
             ['buyer_id', '=', Auth::user()->id],
             ['order_status', '=', $this->status],
         ])->get()->sortByDesc('updated_at');
+
+        $this->refoundId = null;
 
     }
 
@@ -68,6 +74,21 @@ class TransactionPage extends Component
             $order_delete->delete();
             return redirect(request()->header('Referer'))->with('message', 'Transaksi dihapus');
         }
+    }
+
+    public function set_refound_state($order) {
+        $this->refoundId = $order['id'];
+        
+        $this->dispatchBrowserEvent('toggleRefoundModal');
+    }
+
+    public function is_delivery($order) {
+        foreach($order->order_item as $item) {
+            if ($item->delivery_status == 'onsite') {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

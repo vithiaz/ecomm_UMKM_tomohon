@@ -943,6 +943,10 @@ body {
             flex-grow: 1;
             height: auto;
             min-height: calc(100vh - 100px);
+
+            &.lighten {
+                background-color: $LightWhite;
+            }
         }
     }
 
@@ -1322,7 +1326,7 @@ body {
 }
 
 // Livewire Login Components / Login Modal
-#auth_modal, #umkm_bank_account_modal {
+#auth_modal, #umkm_bank_account_modal, #refound_bank_account_modal, #refoundModal {
     .modal-dialog {
         display: flex;
         align-items: center;
@@ -1478,7 +1482,7 @@ body {
     }
 }
 
-#umkm_bank_account_modal {
+#umkm_bank_account_modal, #refound_bank_account_modal {
 
     .modal-content {
 
@@ -1531,7 +1535,7 @@ body {
                 padding: 20px 0;
                 display: flex;
                 flex-direction: column;
-                gap: 20;
+                gap: 8px;
                 
                 .card-content-wrapper-title {
                     width: 100%;

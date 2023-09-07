@@ -4,7 +4,7 @@ namespace App\Http\Livewire\Admin;
 
 use Livewire\Component;
 
-class UmkmPayment extends Component
+class RefoundPayment extends Component
 {
     // Route Binding Variable
     public $status;
@@ -23,6 +23,6 @@ class UmkmPayment extends Component
 
     public function render()
     {
-        return view('livewire.admin.umkm-payment')->layout('layouts.admin_app');
+        return view('livewire.admin.refound-payment')->layout('layouts.admin_app');;
     }
 }
