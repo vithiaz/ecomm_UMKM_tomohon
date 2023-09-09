@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\UserCart;
 use App\Models\UserOrder;
 use Illuminate\Support\Str;
+use App\Models\ProductImage;
 use App\Models\UserOrderItem;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -79,6 +80,12 @@ class CheckoutPage extends Component
     public function calculate_amount($final_price, $qty) {
         return (int)$final_price * (int)$qty;
     }
+
+    public function getImage($productId) {
+        $productImages = ProductImage::where('product_id', '=', $productId);
+        return $productImages->first();
+    }
+
 
     public function init_payment() {
         $this->validate();

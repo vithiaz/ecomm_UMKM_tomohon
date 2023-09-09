@@ -39,7 +39,7 @@
                             <tr>
                                 <td>
                                     <div class="image-container">
-                                        <img src="{{ 'img\aziz-acharki-boIJluEJEPM-unsplash.jpg' }}" alt="FILL THIS">
+                                        <img src="{{ asset('storage/'.$this->getImage($product['product']['id'])->image) }}" alt="{{ $this->getImage($product['product']['name_slug']) }}_image">
                                     </div>
                                 </td>
                                 <td>
