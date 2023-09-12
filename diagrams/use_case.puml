@@ -15,6 +15,7 @@ rectangle "Aplikasi" as app {
         usecase "Verifikasi Rekening Bank" as verifyBankAccount
         usecase "Review Product" as reviewProduct
         usecase "Pembayaran ke Penjual" as paymentToSeller
+        usecase "Refund ke Pembeli" as refundToBuyer
     }
 
     usecase Login
@@ -26,6 +27,7 @@ rectangle "Aplikasi" as app {
         usecase "Tambah Produk" as addProduct
         usecase "Tambah UMKM" as addUMKM
         usecase "Tambah Rekening Bank" as addBankAccount
+        usecase "Refund Transaksi" as refundTransaction
     }
 
     usecase "Daftar Akun" as registerAccount
@@ -52,8 +54,9 @@ verifyUmkmRegistration -- Admin
 verifyBankAccount -- Admin
 reviewProduct -- Admin
 paymentToSeller -- Admin
+refundToBuyer -- Admin
 
-
+User -- refundTransaction
 User -- registerAccount
 User -- seeProduct
 User -- addToCart
@@ -70,5 +73,6 @@ checkoutProduct <. userPayment #line:blue;text:blue; : extends
 addUMKM <.down. verifyUmkmRegistration #line:blue;text:blue; : extends
 addBankAccount <. verifyBankAccount #line:blue;text:blue; : extends
 addProduct <. reviewProduct #line:blue;text:blue; : extends
+refundTransaction <. refundToBuyer #line:blue;text:blue; : extends
 
 @enduml

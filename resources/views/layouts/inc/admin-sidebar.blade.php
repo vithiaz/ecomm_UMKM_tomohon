@@ -75,7 +75,7 @@
                             class="active"
                         @endif
                     >
-                        <a href="{{ route('admin.refound-payment', ['status' => 'pending']) }}">Pembayaran Refound</a>
+                        <a href="{{ route('admin.refound-payment', ['status' => 'pending']) }}">Pembayaran Refund</a>
                     </li>
                 </ul>
             </div>

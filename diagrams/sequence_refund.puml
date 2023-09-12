@@ -1,0 +1,56 @@
+@startuml
+
+' declare
+actor "User Pembeli" as User
+participant Login as login
+boundary "Tampilan Transaksi Saya" as my_transaction_view
+database "User_Order" as db_user_order
+boundary "Tampilan Refund Transaksi" as refund_transaction_view
+entity "Data Refund" as refund_entity
+database "Refund_Order" as db_refund_order
+
+
+' flow
+activate User
+User -> login : username, password
+activate login
+
+login -> my_transaction_view : masuk halaman transaksi saya
+activate my_transaction_view
+activate db_user_order
+db_user_order -> my_transaction_view : data transaksi saya
+deactivate db_user_order
+
+my_transaction_view -> refund_transaction_view : batalkan transaksi
+deactivate my_transaction_view
+activate refund_transaction_view
+
+refund_transaction_view -> refund_entity : data refund
+activate refund_entity
+
+refund_entity -> db_refund_order : simpan data
+deactivate refund_entity
+activate db_refund_order
+
+db_refund_order -> refund_transaction_view : data refund tersimpan
+deactivate db_refund_order
+
+refund_transaction_view -> my_transaction_view : tampilkan daftar refund transaksi
+deactivate refund_transaction_view
+activate my_transaction_view
+
+my_transaction_view -> login
+deactivate my_transaction_view
+login -> User : logout
+deactivate login
+
+
+
+
+
+
+
+
+
+
+@enduml

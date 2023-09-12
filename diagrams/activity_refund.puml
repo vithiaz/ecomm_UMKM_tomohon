@@ -1,0 +1,21 @@
+@startuml
+
+|User (Pembeli)|
+
+start
+
+:Login;
+:Membuka Halaman Transaksi Saya;
+:Melihat Transaksi yang dalam Proses;
+:Membatalkan Transaksi;
+:Mengisi Form Refund Transaksi;
+
+|Admin|
+:Validasi Permintaan Refund;
+:Refund ke Rekening Tujuan;
+:Update Status Refund Transaksi;
+
+stop
+
+
+@enduml

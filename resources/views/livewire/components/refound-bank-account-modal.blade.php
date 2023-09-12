@@ -5,7 +5,7 @@
                 <i class="fa-solid fa-xmark"></i>
             </button>
 
-            <div class="title">Informasi Akun Refound</div>
+            <div class="title">Informasi Akun Refund</div>
             <div class="profile-wrapper">
                 <div class="profile-head-wrapper">
                     <div class="image-container">
@@ -37,14 +37,14 @@
                         </div>
                         @if ($refoundDetail)
                             <div class="wrapper-col">
-                                <span class="col-title">Keterangan Refound</span>
+                                <span class="col-title">Keterangan Refund</span>
                                 <span class="col-body">{{ $refoundDetail['refound_description'] }}</span>
                             </div>                                                                    
                         @endif
                     @endif
                 </div>
                 <div class="card-content-wrapper">
-                    <span class="card-content-wrapper-title">Informasi Rekening Refound</span>
+                    <span class="card-content-wrapper-title">Informasi Rekening Refund</span>
                     @if ($refoundDetail)
                         <div class="wrapper-col">
                             <span class="col-title">Nama Bank</span>

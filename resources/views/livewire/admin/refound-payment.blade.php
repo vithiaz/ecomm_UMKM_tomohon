@@ -5,7 +5,7 @@
 <div class="admin-umkm-payment-page">
     <div class="container">
         <div class="page-title">
-            <h1>Refound ke Pembeli</h1>
+            <h1>Refund ke Pembeli</h1>
         </div>
         <div class="content-menu-wrapper">
             <a href="{{ route('admin.refound-payment', ['status' => 'pending']) }}" class="menu-item @if($status == 'pending') active @endif ">Belum dibayarkan</a>

@@ -183,7 +183,7 @@ final class RefoundPaymentTable extends PowerGridComponent
             Column::make('Order ID', 'id')
                 ->searchable(),
 
-            Column::make('Jumlah Refound', 'payment_amount_formatted', 'payment_amount')
+            Column::make('Jumlah Refund', 'payment_amount_formatted', 'payment_amount')
                 ->searchable()
                 ->sortable(),
 

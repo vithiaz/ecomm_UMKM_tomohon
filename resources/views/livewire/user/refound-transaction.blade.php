@@ -71,12 +71,12 @@
 
         <div class="page-content-card lighten">
             <div class="content-card-title">
-                <span>Form Refound</span>
+                <span>Form Refund</span>
             </div>
 
             <div class="info-wrapper">
-                <p>Informasi nomor rekening dibutuhkan untuk melakukan refound. Admin akan melakukan refound pada nomor rekening yang valid dalam hari kerja.</p>
-                <p>Nominal refound adalah sebesar Sub Total dari transaksi.</p>
+                <p>Informasi nomor rekening dibutuhkan untuk melakukan refund. Admin akan melakukan refund pada nomor rekening yang valid dalam hari kerja.</p>
+                <p>Nominal refund adalah sebesar Sub Total dari transaksi.</p>
             </div>
                 
             <form wire:submit.prevent='request_refound' class="account-input-form">
@@ -104,14 +104,14 @@
                     @enderror
                 </div>
                 <div class="form-floating">
-                    <textarea wire:model='refound_description' type="text" class="form-control @error('refound_description') is-invalid @enderror" style="min-height: 130px;" id="refound-description-input" placeholder="Keterangan / Alasan melakukan refound ..."></textarea>
-                    <label for="refound-description-input">Keterangan / Alasan melakukan refound ...</label>
+                    <textarea wire:model='refound_description' type="text" class="form-control @error('refound_description') is-invalid @enderror" style="min-height: 130px;" id="refound-description-input" placeholder="Keterangan / Alasan melakukan refund ..."></textarea>
+                    <label for="refound-description-input">Keterangan / Alasan melakukan refund ...</label>
                     @error('refound_description')
                         <small class="error">{{ $message }}</small>
                     @enderror
                 </div>
                 <div class="button-wrapper">
-                    <button type="submit" class="btn btn-refound">Refound Transaction</button>
+                    <button type="submit" class="btn btn-refound">Refund Transaksi</button>
                 </div>
             </form>
 

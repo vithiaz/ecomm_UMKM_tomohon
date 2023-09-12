@@ -93,7 +93,7 @@
                 @endif
                 @if ($status == 'abort' && $order_detail->refound_order)
                     <div class="content-card-title">
-                        <span>Detail Refound</span>
+                        <span>Detail Refund</span>
                     </div>
                     <div class="refound-details-wrapper">
                         <div class="row-wrapper">
@@ -113,7 +113,7 @@
                             <span class="content">{{ $order_detail->refound_order->account_name }}</span>
                         </div>
                         <div class="row-wrapper">
-                            <span class="title">Keterangan Refound</span>
+                            <span class="title">Keterangan Refund</span>
                             <span class="content">{{ $order_detail->refound_order->refound_description }}</span>
                         </div>
 
@@ -138,7 +138,7 @@
 
                 <div class="card-content-wrapper">
                     <p class="indent">Pesanan dapat dibatalkan apabila penjual belum melakukan pengiriman produk ke alamat tujuan.</p>
-                    <p class="indent">Anda akan diminta untuk mengisi form pembatalan transaksi serta mencantumkan informasi rekening Bank yang valid untuk dilakukan refound. Admin akan melakukan refound pada hari kerja.</p>
+                    <p class="indent">Anda akan diminta untuk mengisi form pembatalan transaksi serta mencantumkan informasi rekening Bank yang valid untuk dilakukan refund. Admin akan melakukan refund pada hari kerja.</p>
                 </div>
 
                 <div class="card-content-wrapper">
