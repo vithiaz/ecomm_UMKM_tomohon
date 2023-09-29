@@ -34,13 +34,13 @@
                     >
                         <a href="{{ route('admin.products', ['status' => 'active']) }}">Daftar Produk</a>
                     </li>
-                    {{-- <li
-                        @if (\Request::route()->getName() == 'admin.product-verification')
+                    <li
+                        @if (\Request::route()->getName() == 'admin.selling-product')
                             class="active"
                         @endif
                     >
-                        <a href="{{ route('admin.product-verification') }}">Verifikasi Pendaftaran</a>
-                    </li> --}}
+                        <a href="{{ route('admin.selling-product') }}">Penjualan</a>
+                    </li>
                 </ul>
             </div>
             <div class="menu-item">

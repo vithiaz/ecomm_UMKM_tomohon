@@ -23,6 +23,7 @@ use App\Http\Livewire\User\AccountSettings;
 use App\Http\Livewire\User\TransactionPage;
 use App\Http\Livewire\User\UmkmTransaction;
 use App\Http\Livewire\Admin\ProductCategory;
+use App\Http\Livewire\Admin\SellingProducts;
 use App\Http\Livewire\Base\UmkmProductsPage;
 use App\Http\Livewire\Admin\UmkmRegistration;
 use App\Http\Livewire\User\RefoundTransaction;
@@ -70,6 +71,8 @@ Route::middleware(['auth', 'admin'])->prefix('/admin')->group(function () {
     
     Route::get('/products/{status}', Products::class)->name('admin.products');
     Route::get('/product/{product_id}-{name_slug}', ProductReview::class)->name('admin.product-review');
+    Route::get('/selling-product', SellingProducts::class)->name('admin.selling-product');
+
     
     Route::get('/umkm/registrations/{status}', UmkmRegistration::class)->name('admin.umkm-registration');
     Route::get('/umkm/registration/{user_id}-{reg_id}', UmkmRegistrationReview::class)->name('admin.umkm-registration-review');

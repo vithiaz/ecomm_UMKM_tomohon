@@ -72,6 +72,26 @@
 .admin-product-page .container .page-content-card * {
   font-size: 0.9rem;
 }
+.admin-product-verification-page .container .page-content-card .filter-form,
+.admin-product-page .container .page-content-card .filter-form {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.admin-product-verification-page .container .page-content-card .filter-form .form-floating,
+.admin-product-page .container .page-content-card .filter-form .form-floating {
+  flex-basis: 240px;
+}
+.admin-product-verification-page .container .page-content-card .filter-form .error,
+.admin-product-page .container .page-content-card .filter-form .error {
+  margin-left: 10px;
+  color: #F92727;
+}
+.admin-product-verification-page .container .page-content-card .filter-form .btn,
+.admin-product-page .container .page-content-card .filter-form .btn {
+  transition: all 0.3s ease-in-out;
+}
 .admin-product-verification-page .container .page-content-card .card-title-wrapper,
 .admin-product-page .container .page-content-card .card-title-wrapper {
   width: 100%;
@@ -105,17 +125,28 @@
   border: 0;
   outline: none;
 }
-.admin-product-verification-page .container .page-content-card table thead tr td,
-.admin-product-page .container .page-content-card table thead tr td {
+.admin-product-verification-page .container .page-content-card .result-count-wrapper,
+.admin-product-page .container .page-content-card .result-count-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.admin-product-verification-page .container .page-content-card .result-count-wrapper span,
+.admin-product-page .container .page-content-card .result-count-wrapper span {
+  color: #2A2A2A;
+}
+.admin-product-verification-page .container .page-content-card .table-responsive table thead tr td,
+.admin-product-page .container .page-content-card .table-responsive table thead tr td {
   font-weight: 600;
 }
-.admin-product-verification-page .container .page-content-card table .table-a,
-.admin-product-page .container .page-content-card table .table-a {
+.admin-product-verification-page .container .page-content-card .table-responsive table .table-a,
+.admin-product-page .container .page-content-card .table-responsive table .table-a {
   color: #F92727;
   text-decoration: underline;
 }
-.admin-product-verification-page .container .page-content-card table .table-a:hover,
-.admin-product-page .container .page-content-card table .table-a:hover {
+.admin-product-verification-page .container .page-content-card .table-responsive table .table-a:hover,
+.admin-product-page .container .page-content-card .table-responsive table .table-a:hover {
   cursor: pointer;
   font-weight: 600;
 }
