@@ -3,9 +3,9 @@
 left to right direction
 skinparam PackageStyle recangle
 
-actor User
+actor "Pembeli" as User
 actor Admin
-
+actor "Penjual" as Buyer
 
 rectangle "Aplikasi" as app {
 
@@ -18,7 +18,6 @@ rectangle "Aplikasi" as app {
         usecase "Refund ke Pembeli" as refundToBuyer
     }
 
-    usecase Login
 
     rectangle "Menu User" as user_menu {
         usecase "Tambah ke keranjang" as addToCart
@@ -30,6 +29,7 @@ rectangle "Aplikasi" as app {
         usecase "Refund Transaksi" as refundTransaction
     }
 
+    usecase Login
     usecase "Daftar Akun" as registerAccount
     usecase "Lihat Produk" as seeProduct
 
@@ -42,12 +42,13 @@ rectangle "Aplikasi" as app {
 
 ' Flow
 
-User -- Login
-Login -- Admin
+Login -right- Admin
+User -down- Login
+Buyer -down- Login
 
 ' admin_menu .> Login #line:red;text:red; : include
-Login <.down. admin_menu #line:red;text:red; : include
-Login <.down. user_menu #line:red;text:red; : include
+Login <.. admin_menu #line:red;text:red; : include
+Login <.. user_menu #line:red;text:red; : include
 
 addProductCategory -- Admin
 verifyUmkmRegistration -- Admin
@@ -56,15 +57,17 @@ reviewProduct -- Admin
 paymentToSeller -- Admin
 refundToBuyer -- Admin
 
-User -- refundTransaction
-User -- registerAccount
-User -- seeProduct
 User -- addToCart
 User -- checkoutProduct
 User -- userPayment
-User -- addUMKM
-User -- addBankAccount
-User -- addProduct
+User -- refundTransaction
+User -- registerAccount
+User -right- seeProduct
+
+Buyer -- addUMKM
+Buyer -- addBankAccount
+Buyer -- addProduct
+Buyer -- seeProduct
 
 seeProduct <.down. addToCart #line:blue;text:blue; : extends
 addToCart <. checkoutProduct #line:blue;text:blue; : extends
@@ -73,6 +76,7 @@ checkoutProduct <. userPayment #line:blue;text:blue; : extends
 addUMKM <.down. verifyUmkmRegistration #line:blue;text:blue; : extends
 addBankAccount <. verifyBankAccount #line:blue;text:blue; : extends
 addProduct <. reviewProduct #line:blue;text:blue; : extends
+refundTransaction .> userPayment #line:blue;text:blue; : extends
 refundTransaction <. refundToBuyer #line:blue;text:blue; : extends
 
 @enduml

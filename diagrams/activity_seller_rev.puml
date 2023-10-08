@@ -1,0 +1,69 @@
+@startuml
+
+|User (Penjual)|
+start
+if (Sudah memiliki akun?) then (ya)
+    :Login;
+else (tidak)
+    :Register;
+endif
+
+|System|
+:Login ke Sistem;
+
+|User (Penjual)|
+:Kelola UMKM;
+fork
+    :Tambah;
+fork again
+    :Edit;
+fork again
+    :Hapus;
+end merge
+
+|System|
+:Simpan Perubahan;
+
+|User (Penjual)|
+:Kelola Rekening;
+fork
+    :Hapus;
+    |System|
+    :Simpan Perubahan;
+fork again
+    |User (Penjual)|
+    :Tambah;
+    |System|
+    :Validasi Rekening;
+end merge
+
+
+|User (Penjual)|
+:Kelola Produk;
+fork 
+    :Tambah;
+fork again
+    :Edit;
+fork again
+    :Hapus;
+end merge
+|System|
+:Simpan Data Produk;
+
+
+|User (Penjual)|
+:Memproses Pengiriman Produk;
+|System|
+:Konfirmasi Produk dalam pengiriman;
+
+|User (Penjual)|
+:Konfirmasi Pengiriman Selesai;
+
+|System|
+:Konfirmasi Selesai Pengiriman;
+:Konfirmasi Selesai Transaksi;
+stop
+
+
+
+@enduml

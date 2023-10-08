@@ -1,0 +1,45 @@
+@startuml
+
+' declare
+actor "Admin" as User
+participant Login as login
+boundary "Tampilan Pembayaran ke UMKM" as payment_to_umkm_view
+control "Update Status Pembayaran" as update_success_transaction
+entity "Data Pembayaran berhasil" as success_trans_entity
+database "SuccessTransaction" as db_success_transaction
+
+
+' flow
+activate User
+User -> login : username, password
+activate login
+
+login -> payment_to_umkm_view : masuk halaman pembayaran ke UMKM
+activate payment_to_umkm_view
+activate db_success_transaction
+db_success_transaction -> payment_to_umkm_view : data transaksi yang berhasil
+deactivate db_success_transaction
+
+payment_to_umkm_view -> update_success_transaction : proses pembayaran ke UMKM
+activate update_success_transaction
+
+update_success_transaction -> success_trans_entity : update data pembayaran
+activate success_trans_entity
+
+success_trans_entity -> db_success_transaction : simpan data
+deactivate success_trans_entity
+
+activate db_success_transaction
+db_success_transaction -> update_success_transaction : data berhasil tersimpan
+deactivate db_success_transaction
+
+update_success_transaction -> payment_to_umkm_view : notifikasi update data pembayaran berhasil
+deactivate update_success_transaction
+
+payment_to_umkm_view -> login
+deactivate payment_to_umkm_view
+
+login -> User : logout
+deactivate login
+
+@enduml

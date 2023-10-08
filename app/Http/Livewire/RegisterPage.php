@@ -59,7 +59,7 @@ class RegisterPage extends Component
 
         $generator_rules = [
             'table' => 'users',
-            'length' => '10',
+            'length' => '9',
             'prefix' => date('ymd'),
         ];
         $id = IdGenerator::generate($generator_rules);

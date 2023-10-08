@@ -122,7 +122,7 @@ class RegisterUmkm extends Component
 
         $generator_rules = [
             'table' => 'umkms',
-            'length' => '14',
+            'length' => '9',
             'prefix' => date('ymd'),
         ];
         $id = IdGenerator::generate($generator_rules);

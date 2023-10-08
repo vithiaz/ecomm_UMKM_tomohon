@@ -1,0 +1,41 @@
+@startuml
+
+|Admin|
+start
+:Login;
+
+|System|
+:Login ke Sistem;
+
+
+|Admin|
+:Tambah Kategori Produk;
+|System|
+:Simpan Katagori Produk;
+
+|Admin|
+:Verifikasi Pendaftar UMKM;
+|System|
+:Proses Pendaftar UMKM;
+
+|Admin|
+:Verifikasi Rekening Bank;
+|System|
+:Proses Rekening Bank;
+
+|Admin|
+:Review Produk;
+:Ubah Status Produk;
+
+|System|
+:Simpan Status Produk;
+
+|Admin|
+:Pembayaran Ke Penjual;
+|System|
+:Proses Status Pembayaran;
+
+stop
+
+
+@enduml

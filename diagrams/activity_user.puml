@@ -1,0 +1,43 @@
+@startuml
+
+|User (Pembeli)|
+start
+
+if (Sudah memiliki akun?) then (ya)
+    :Login;
+else (tidak)
+    :Register;
+endif
+
+|System|
+:Login ke Sistem;
+
+
+|User (Pembeli)|
+:Lihat Produk;
+
+|System|
+:Tampilkan Halaman Produk;
+
+|User (Pembeli)|
+:Tambah Ke Keranjang;
+|System|
+:Tambahkan produk ke keranjang;
+
+|User (Pembeli)|
+:Checkout Produk;
+|System|
+:Tampilkan Menu Pembayaran;
+
+|User (Pembeli)|
+:Pembayaran;
+|System|
+:Proses Pembayaran;
+
+
+
+
+stop
+
+
+@enduml

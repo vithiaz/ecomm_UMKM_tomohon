@@ -28,7 +28,13 @@ class CartPage extends Component
             'umkm',
         ])->where('user_id', '=', Auth::user()->id)->get()->groupBy('umkm.id')->toArray();
 
-        $this->Umkm = Umkm::whereIn('id', array_keys($this->Cart))->get();
+        $cartKeys = [];
+        foreach (array_keys($this->Cart) as $key) {
+            array_push($cartKeys, strval($key));
+        }
+
+        $this->Umkm = Umkm::whereIn('id', $cartKeys)->get();
+        // $this->Umkm = Umkm::whereIn('id', array_keys($this->Cart))->get();
 
         $this->temp_var = '';
 
