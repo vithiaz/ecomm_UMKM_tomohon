@@ -117,7 +117,7 @@ class AddProduct extends Component
 
         $generator_rules = [
             'table' => 'products',
-            'length' => '12',
+            'length' => '9',
             'prefix' => date('ymd'),
         ];
         $id = IdGenerator::generate($generator_rules);
