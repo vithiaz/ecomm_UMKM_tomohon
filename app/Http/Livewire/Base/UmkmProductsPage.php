@@ -5,7 +5,9 @@ namespace App\Http\Livewire\Base;
 use App\Models\Umkm;
 use App\Models\Product;
 use Livewire\Component;
+use App\Models\UserCart;
 use App\Models\UserOrderItem;
+use Illuminate\Support\Facades\Auth;
 
 class UmkmProductsPage extends Component
 {
@@ -17,6 +19,8 @@ class UmkmProductsPage extends Component
     public $load_count;
     public $load_count_increment = 8;
     public $all_loaded_state;
+
+    protected $listeners = ['storeCart' => 'store_user_cart'];
 
     
     public function mount($umkm_id) {
@@ -73,6 +77,31 @@ class UmkmProductsPage extends Component
 
     public function load_more() {
         $this->load_count += $this->load_count_increment;
+    }
+
+    public function store_user_cart($product_id) {
+        if(Auth::check()) {
+            
+            $cart = UserCart::where([
+                ['user_id', '=', Auth::user()->id],
+                ['product_id', '=', $product_id],
+            ])->get()->first();
+
+            if ($cart != null) {
+                $cart->qty += 1;
+                $cart->save();
+            }
+            else {
+                $newCart = new UserCart;
+                $newCart->user_id = Auth::user()->id;
+                $newCart->product_id = $product_id;
+                $newCart->qty = 1;
+                $newCart->save();
+            }            
+            
+            $msg = ['success' => 'Ditambahkan ke keranjang'];
+            $this->dispatchBrowserEvent('display-message', $msg);
+        }
     }
 
 }
