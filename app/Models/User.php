@@ -29,6 +29,7 @@ class User extends Authenticatable
         'email',
         'phone_number',
         'umkm_status',
+        'email_verified_at',
     ];
 
     protected $hidden = [

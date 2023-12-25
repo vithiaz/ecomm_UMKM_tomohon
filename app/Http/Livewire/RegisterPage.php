@@ -4,8 +4,10 @@ namespace App\Http\Livewire;
 
 use App\Models\User;
 use Livewire\Component;
+use App\Mail\UserRegistration;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 
 class RegisterPage extends Component
@@ -18,7 +20,7 @@ class RegisterPage extends Component
     public $phone_number;
     public $password;
     public $password_confirmation;
-
+    
     protected function rules() {
         return [
             'username' => 'required|string|unique:users,username,' . $this->username,
@@ -75,6 +77,23 @@ class RegisterPage extends Component
         $user->umkm_status = false;
         $user->save();
 
+        // Send Verification Email
+        // /$verification_token = Hash::make($user->username . $user->first_name);
+        
+        $verification_token = hash('sha512', $user->username . $user->first_name);
+
+
+        $verification_link = config('app.url') . '/api/registration-verification/' . $id . '/' . $verification_token;
+        $data = [
+            'body' => "Klik disini untuk verifikasi akun anda<br><a href='". $verification_link ."'>Verifikasi Akun</a>" 
+        ];
+        try {
+            Mail::to('vsmurf.x001@gmail.com')->send(new UserRegistration($data));
+        }
+        catch (Excpetion $e) {
+            // 
+        }
+        
         if (Auth::loginUsingId($user->id)) {
             return redirect()->route('homepage');
         }

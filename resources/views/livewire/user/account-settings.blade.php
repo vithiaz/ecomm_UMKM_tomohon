@@ -8,6 +8,9 @@
             <h1>Akun dan Privasi</h1>
         </div>
         <div class="page-content-container">
+            @if (!Auth::user()->email_verified_at)
+                <span>Akun anda belum di verifikasi!</span>
+            @endif
             <div class="row">
                 <div class="profile-wrapper">
                     <div class="image-container">
