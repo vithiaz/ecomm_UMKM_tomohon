@@ -31,13 +31,11 @@
   cursor: pointer;
 }
 #navbar .container .logo-wrapper .logo-img-container {
-  width: -moz-fit-content;
   width: fit-content;
 }
 #navbar .container .logo-wrapper .logo-img-container img {
   height: 100%;
-  -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
 }
 #navbar .container .logo-wrapper .logo-text-container {
   display: flex;
@@ -188,7 +186,6 @@
   z-index: 118;
   transition: all ease-in-out 0.3s;
   overflow: hidden;
-  height: -moz-fit-content;
   height: fit-content;
   width: 100%;
   min-width: 270px;
@@ -270,8 +267,7 @@
 .navbar-auth-dropdown .container .user .img-container img {
   height: 100%;
   width: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 .navbar-auth-dropdown .container .user .username-container {
   flex-grow: 1;
@@ -316,7 +312,6 @@
   z-index: 119;
   transition: all ease-in-out 0.3s;
   overflow: hidden;
-  height: -moz-fit-content;
   height: fit-content;
   width: 100%;
   min-width: 270px;

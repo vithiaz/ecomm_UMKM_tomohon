@@ -76,6 +76,7 @@ entity Product {
     ' active
     ' disabled
     ' revoked
+    * base_delivery_price INT
     --
     * umkm_id BIGINT FOUREIGN(UMKM.id)
     --
@@ -198,6 +199,18 @@ entity Refund_Order {
     * updated DATE
 }
 
+entity Delivery_Prices {
+    * id BIGINT PRIMARY KEY
+    --
+    * id product_id BIGINT FOUREIGN(Product.id)
+    --
+    * location VARCHAR(255)
+    * delivery_price INT
+    --
+    * created DATE
+    * updated DATE
+}
+
 
 ' Relation
 User ||--o{ UMKM
@@ -212,6 +225,7 @@ Product ||--o{ User_Order_Item
 
 Product ||--o{ Product_Image
 Product ||--o{ Product_Categories
+Product ||--o{ Delivery_Prices
 
 Product_Categories }o--|| Product_Category
 

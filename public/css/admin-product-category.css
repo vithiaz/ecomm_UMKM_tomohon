@@ -26,7 +26,6 @@
   flex-direction: column;
   gap: 10px;
   width: 100%;
-  height: -moz-fit-content;
   height: fit-content;
   padding: 10px;
   background-color: white;
@@ -61,7 +60,6 @@
 }
 .admin-product-category-page .container .page-content-card .pagination-wrapper {
   width: 100%;
-  height: -moz-fit-content;
   height: fit-content;
   display: grid;
   place-items: center;

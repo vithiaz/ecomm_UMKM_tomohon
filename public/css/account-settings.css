@@ -38,12 +38,10 @@
 .account-settings-page .container .page-content-container .row .profile-wrapper {
   display: flex;
   flex-direction: row;
-  -moz-column-gap: 10px;
-       column-gap: 10px;
+  column-gap: 10px;
   row-gap: 20px;
   flex-wrap: nowrap;
   max-width: 350px;
-  height: -moz-fit-content;
   height: fit-content;
 }
 .account-settings-page .container .page-content-container .row .profile-wrapper .image-container {
@@ -58,8 +56,7 @@
   transition: all ease-in-out 0.3s;
   width: 100%;
   height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 .account-settings-page .container .page-content-container .row .profile-wrapper .image-container img:hover {
   cursor: pointer;
@@ -166,8 +163,7 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  -moz-column-gap: 10px;
-       column-gap: 10px;
+  column-gap: 10px;
   row-gap: 2px;
 }
 .account-settings-page .container .page-content-container .content-wrapper form .row-label-input-wrapper label {

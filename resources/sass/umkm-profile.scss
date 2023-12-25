@@ -406,7 +406,7 @@
                     }
 
                     .btn-add-product {
-                        @include button-default($bg: $LightenOrange, $color: white, $bg_hover: $DarkerOrange, $color_hover: black);
+                        @include button-default($bg: $LightenOrange, $color: black, $bg_hover: $DarkerOrange, $color_hover: black);
                     }
 
                 }

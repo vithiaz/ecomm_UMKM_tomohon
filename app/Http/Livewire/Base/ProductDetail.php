@@ -26,10 +26,76 @@ class ProductDetail extends Component
     public $note_input;
     public $success_transaction_count;
 
+    public $delivery_selected_kec;
+    public $delivery_price;
+
+    public function updatedDeliverySelectedKec()
+    {
+        $kec_name = $this->delivery_selected_kec;
+        $price_data = $this->product->product_delivery_prices->where('location', '=', $kec_name)->first();
+        if ($price_data) {
+            $this->delivery_price = $price_data->delivery_price;
+        }
+        else {
+            $this->delivery_price = $this->product->base_delivery_price;
+        }
+        $this->dispatchBrowserEvent('calculatePrice');
+    }
+
+    public $city_dir = array(
+        'Tomohon' => [
+            'Taratara',
+            'Taratara I',
+            'Taratara II',
+            'Taratara III',
+            'Woloan I',
+            'Woloan I Utara',
+            'Woloan II',
+            'Woloan III',
+            'Kampung Jawa',
+            'Lahendong',
+            'Lansot',
+            'Pangolombian',
+            'Pinaras',
+            'Tumatangtang',
+            'Tumatangtang I',
+            'Tondangow',
+            'Uluindano',
+            'Walian',
+            'Walian I',
+            'Walian II',
+            'Kamasi',
+            'Kamasi I',
+            'Kolongan',
+            'Kolongan I',
+            'Matani I',
+            'Matani II',
+            'Matani III',
+            'Talete I',
+            'Talete II',
+            'Kumelembuay',
+            'Paslaten I',
+            'Paslaten II',
+            'Rurukan',
+            'Rurukan I',
+            'Kakaskasen',
+            'Kakaskasen I',
+            'Kakaskasen II',
+            'Kakaskasen III',
+            'Kayawu',
+            'Kinilow',
+            'Kinilow I',
+            'Tinoor I',
+            'Tinoor II',
+            'Wailan',
+        ],
+    );
+
 
     protected $rules = [
         'qty_input' => 'required|numeric|min:1',
         'note_input' => 'nullable',
+        'delivery_selected_kec' => 'required',
     ];
 
     protected $messages = [
@@ -43,6 +109,7 @@ class ProductDetail extends Component
             'profile_image',
             'umkm',
             'order_item',
+            'product_delivery_prices',
         ])->where([
             ['id', '=', $this->product_id],
             ['name_slug', '=', $this->name_slug],
@@ -62,6 +129,9 @@ class ProductDetail extends Component
         $this->stock = $this->product->stock;
         $this->qty_input = 1;
         $this->note_input = '';
+        
+        $this->delivery_selected_kec = null;
+        $this->delivery_price = $this->product->base_delivery_price;
     }
 
     public function render()

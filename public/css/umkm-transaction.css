@@ -25,7 +25,6 @@
 }
 .umkm-transaction-page .container .page-nav-menu-wrapper {
   width: 100%;
-  height: -moz-fit-content;
   height: fit-content;
   padding: 10px 0;
 }
@@ -37,10 +36,8 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  -moz-column-gap: 10px;
-       column-gap: 10px;
+  column-gap: 10px;
   row-gap: 5px;
-  height: -moz-fit-content;
   height: fit-content;
 }
 .umkm-transaction-page .container .page-nav-menu-wrapper ul li {
@@ -65,7 +62,6 @@
 }
 .umkm-transaction-page .container .page-content-card {
   width: 100%;
-  height: -moz-fit-content;
   height: fit-content;
   padding: 10px;
   border-radius: 4px;
@@ -89,7 +85,6 @@
 }
 .umkm-transaction-page .container .page-content-card .pagination-wrapper {
   width: 100%;
-  height: -moz-fit-content;
   height: fit-content;
   padding: 10px;
   display: flex;

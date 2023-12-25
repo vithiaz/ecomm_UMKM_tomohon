@@ -9,8 +9,7 @@
 #footer .container .content-wrapper {
   display: flex;
   flex-direction: row;
-  -moz-column-gap: 20px;
-       column-gap: 20px;
+  column-gap: 20px;
   row-gap: 10px;
   align-items: center;
   justify-content: center;
@@ -26,9 +25,7 @@
   flex-grow: 1;
 }
 #footer .container .content-wrapper .head-logo-wrapper .head-title {
-  width: -moz-fit-content;
   width: fit-content;
-  height: -moz-fit-content;
   height: fit-content;
 }
 #footer .container .content-wrapper .head-logo-wrapper .head-title span {
@@ -50,8 +47,7 @@
 #footer .container .content-wrapper .head-logo-wrapper .logo-wrapper .logo-img-container img {
   height: 100%;
   width: 100%;
-  -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
 }
 #footer .container .content-wrapper .head-logo-wrapper .logo-wrapper .logo-text-container {
   display: flex;
@@ -79,7 +75,6 @@
 #footer .container .content-wrapper .menu-wrapper {
   flex-basis: 150px;
   width: 150px;
-  height: -moz-fit-content;
   height: fit-content;
   display: grid;
   place-items: center;
@@ -89,12 +84,10 @@
   margin: 0;
   padding: 0;
   width: 100%;
-  height: -moz-fit-content;
   height: fit-content;
   list-style-type: none;
   row-gap: 5px;
-  -moz-column-gap: 10px;
-       column-gap: 10px;
+  column-gap: 10px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;

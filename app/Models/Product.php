@@ -27,6 +27,7 @@ class Product extends Model
         'description',
         'status',
         'umkm_id',
+        'base_delivery_price',
     ];
 
     public function product_categories()
@@ -42,6 +43,11 @@ class Product extends Model
     public function product_images()
     {
         return $this->hasMany(ProductImage::class, 'product_id', 'id');
+    }
+
+    public function product_delivery_prices()
+    {
+        return $this->hasMany(DeliveryPrice::class, 'product_id', 'id');
     }
 
     public function umkm()

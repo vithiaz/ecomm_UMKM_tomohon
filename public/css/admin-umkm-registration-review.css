@@ -23,7 +23,6 @@
 }
 .admin-umkm-registration-review .container .page-content-card {
   width: 100%;
-  height: -moz-fit-content;
   height: fit-content;
   padding: 15px 10px;
   border-radius: 4px;
@@ -55,13 +54,11 @@
 }
 .admin-umkm-registration-review .container .page-content-card .card-content {
   width: 100%;
-  height: -moz-fit-content;
   height: fit-content;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  -moz-column-gap: 20px;
-       column-gap: 20px;
+  column-gap: 20px;
   row-gap: 10px;
   align-items: stretch;
 }
@@ -112,8 +109,7 @@
 .admin-umkm-registration-review .container .page-content-card .card-content .account-wrapper .profile-container .image-container img {
   width: 100%;
   height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   transition: all ease-in-out 0.3s;
 }
 .admin-umkm-registration-review .container .page-content-card .card-content .account-wrapper .profile-container .image-container img:hover {
@@ -150,7 +146,6 @@
 }
 .admin-umkm-registration-review .container .page-content-card .card-content .account-wrapper .profile-details-wrapper span {
   font-size: 0.9em;
-  width: -moz-fit-content;
   width: fit-content;
 }
 .admin-umkm-registration-review .container .page-content-card .card-content .account-wrapper .profile-details-wrapper span.label {
@@ -162,8 +157,7 @@
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  -moz-column-gap: 20px;
-       column-gap: 20px;
+  column-gap: 20px;
   row-gap: 5px;
 }
 .admin-umkm-registration-review .container .page-content-card .card-content .account-wrapper .profile-details-wrapper .address-wrapper {
@@ -191,7 +185,6 @@
 }
 .admin-umkm-registration-review .container .page-content-card .card-content .response-wrapper .request-wrapper .button-wrapper {
   width: 100%;
-  height: -moz-fit-content;
   height: fit-content;
   display: flex;
   align-items: center;
@@ -211,7 +204,6 @@
 }
 .admin-umkm-registration-review .container .page-content-card .card-content .response-wrapper .request-wrapper .decline-form {
   width: 100%;
-  height: -moz-fit-content;
   height: fit-content;
   display: flex;
   flex-wrap: wrap;

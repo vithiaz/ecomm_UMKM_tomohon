@@ -127,6 +127,69 @@
                         <small class="error">{{ $message }}</small>
                         @enderror
                     </div>
+
+                    <div class="delivery-form">
+                        <div class="row-wrapper">
+                            <div class="row-item">
+                                <span>Ongkos Kirim</span>
+                            </div>
+                            <div class="row-item grow">
+                                <div class="form-floating">
+                                    <input wire:model='base_delivery_price' type="number" class="form-control" id="base_delivery_price_input" placeholder="Harga">
+                                    <label for="base_delivery_price_input">Harga</label>
+                                    @error('base_delivery_price')
+                                        <small class="error">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <span class="separator">*tambahkan data rentang onkos kirim, detail berdasarkan kecamatan</span>
+                        <div class="row-wrapper">
+                            <div class="row-item">
+                                <select wire:model='selected_kec' class="form-select form-select-lg" aria-label="Pilih kecamatan">
+                                    <option selected>Pilih kecamatan</option>
+                                    @foreach ($this->city_dir["Tomohon"] as $kec)
+                                        <option value="{{ $kec }}">{{ $kec }}</option>                    
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="row-item">
+                                <div class="form-floating">
+                                    <input wire:model='kec_delivery_price' type="number" class="form-control" id="kec_delivery_price_input" placeholder="Ongkos kirim">
+                                    <label for="kec_delivery_price_input">Ongkos kirim</label>
+                                    @error('kec_delivery_price')
+                                        <small class="error">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="row-item">
+                                <button type="button" wire:click="add_delivery_detail" class="btn btn-default-orange">+</button>
+                            </div>
+                        </div>
+                        <div class="delivery-price-details">
+                            <table class="table">
+                                <thead>
+                                    <th>Kecamatan</th>
+                                    <th>Ongkos Kirim</th>
+                                    <th></th>
+                                </thead>
+                                <tbody>
+                                    @foreach ($this->kec_delivery_detail as $index=>$kec)
+                                        <tr wire:key="delivery_price_detail_{{ $index }}">
+                                            <td>{{ $kec["kecamatan"] }}</td>
+                                            <td>{{ $kec["price"] }}</td>
+                                            <td>
+                                                <button wire:click='delete_delivery_detail({{ $index }})' type="button" class="btn btn-default-red">
+                                                    <i class="fa-solid fa-trash"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
                     <div class="button-wrapper">
                         <button onclick="window.history.back()" type="button" class="btn btn-default-dark">Batalkan</button>
                         <button type="submit" class="btn btn-default-orange">Simpan Perubahan</button>

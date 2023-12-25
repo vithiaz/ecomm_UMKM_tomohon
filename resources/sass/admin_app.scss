@@ -457,6 +457,7 @@
             
             .confirm-button {
                 @include button-default($bg_color: $LightenOrange);
+                color: black;
 
                 &:hover {
                     cursor: pointer;

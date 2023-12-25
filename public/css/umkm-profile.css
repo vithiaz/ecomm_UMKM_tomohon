@@ -21,7 +21,6 @@
 }
 .umkm-profile-page .container .page-content-card {
   width: 100%;
-  height: -moz-fit-content;
   height: fit-content;
   padding: 15px 10px;
   border-radius: 4px;
@@ -53,13 +52,11 @@
 }
 .umkm-profile-page .container .page-content-card .card-content {
   width: 100%;
-  height: -moz-fit-content;
   height: fit-content;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  -moz-column-gap: 20px;
-       column-gap: 20px;
+  column-gap: 20px;
   row-gap: 10px;
   align-items: flex-start;
 }
@@ -110,8 +107,7 @@
 .umkm-profile-page .container .page-content-card .card-content .account-wrapper .profile-container .image-container img {
   width: 100%;
   height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   transition: all ease-in-out 0.3s;
 }
 .umkm-profile-page .container .page-content-card .card-content .account-wrapper .profile-container .image-container img:hover {
@@ -148,7 +144,6 @@
 }
 .umkm-profile-page .container .page-content-card .card-content .account-wrapper .profile-details-wrapper span {
   font-size: 0.9em;
-  width: -moz-fit-content;
   width: fit-content;
 }
 .umkm-profile-page .container .page-content-card .card-content .account-wrapper .profile-details-wrapper span.label {
@@ -160,8 +155,7 @@
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  -moz-column-gap: 20px;
-       column-gap: 20px;
+  column-gap: 20px;
   row-gap: 5px;
 }
 .umkm-profile-page .container .page-content-card .card-content .account-wrapper .profile-details-wrapper .address-wrapper {
@@ -199,7 +193,6 @@
 }
 .umkm-profile-page .container .page-content-card .card-content .umkm-details-wrapper .message-section {
   width: 100%;
-  height: -moz-fit-content;
   height: fit-content;
   display: flex;
   flex-direction: column;
@@ -220,7 +213,6 @@
   text-align: center;
 }
 .umkm-profile-page .container .page-content-card .card-content .umkm-details-wrapper .message-section button {
-  width: -moz-fit-content;
   width: fit-content;
 }
 .umkm-profile-page .container .page-content-card .card-content .umkm-details-wrapper .account-input-form {
@@ -273,8 +265,7 @@
 .umkm-profile-page .container .umkm-card .card-header {
   display: flex;
   flex-direction: row;
-  -moz-column-gap: 20px;
-       column-gap: 20px;
+  column-gap: 20px;
   row-gap: 10px;
   flex-wrap: wrap;
   background-color: unset;
@@ -297,8 +288,7 @@
 .umkm-profile-page .container .umkm-card .card-header .umkm-profile-wrapper .image-container img {
   width: 100%;
   height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   transition: all ease-in-out 0.3s;
 }
 .umkm-profile-page .container .umkm-card .card-header .umkm-profile-wrapper .image-container img:hover {
@@ -343,8 +333,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  -moz-column-gap: 10px;
-       column-gap: 10px;
+  column-gap: 10px;
   row-gap: 5px;
 }
 .umkm-profile-page .container .umkm-card .card-header .address-wrapper {
@@ -371,8 +360,7 @@
 .umkm-profile-page .container .umkm-card .card-body .body-title-wrapper {
   display: flex;
   flex-direction: row;
-  -moz-column-gap: 20px;
-       column-gap: 20px;
+  column-gap: 20px;
   row-gap: 10px;
   align-items: center;
   justify-content: space-between;
@@ -384,7 +372,7 @@
 .umkm-profile-page .container .umkm-card .card-body .body-title-wrapper .btn-add-product {
   background-color: #F9D00F;
   font-weight: 600;
-  color: white;
+  color: black;
 }
 .umkm-profile-page .container .umkm-card .card-body .body-title-wrapper .btn-add-product:hover {
   cursor: pointer;
@@ -412,7 +400,6 @@
 }
 .umkm-profile-page .container .umkm-card .card-body .pagination-wrapper {
   width: 100%;
-  height: -moz-fit-content;
   height: fit-content;
   display: grid;
   place-items: center;

@@ -186,6 +186,39 @@
 
                     }
 
+                    .delivery-form {
+                        display: flex;
+                        flex-direction: column;
+                        column-gap: 10px;
+                        row-gap: 5px;
+                        width: 100%;
+
+                        .form-select {
+                            min-height: 58px;
+                        }
+
+                        .separator {
+                            padding-top: 24px;
+                            padding-bottom: 12px;
+                        }
+
+                        .row-wrapper {
+                            display: flex;
+                            flex-direction: row;
+                            align-items: center;
+                            column-gap: 12px;
+                            row-gap: 24px;
+
+                            .row-item.grow {
+                                flex-grow: 1;
+                            }
+                        }
+
+                        .delivery-price-details {
+                            padding: 10px 0;
+                        }
+                    }
+
                     .button-wrapper {
                         width: 100%;
                         height: fit-content;

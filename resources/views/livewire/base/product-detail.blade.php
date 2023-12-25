@@ -76,6 +76,21 @@
                                     <label for="cartMsgTextarea">Catatan</label>
                                 </div>
                             </div>
+                            <div class="delivery-price-wrapper">
+                                <span class="label">Lokasi Pengiriman</span>
+                                <div class="row-item">
+                                    <select wire:model='delivery_selected_kec' class="form-select form-select-lg @error('delivery_selected_kec') is-invalid @enderror" id="delivery_selected_kec_select" aria-label="Pilih kecamatan">
+                                        <option selected>Pilih kecamatan</option>
+                                        @foreach ($this->city_dir["Tomohon"] as $kec)
+                                            <option wire:key='delivery_selected_kec_select{{ $kec }}' value="{{ $kec }}">{{ $kec }}</option>                    
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="delivery-price-wrapper">
+                                <span class="label">Ongkos Kirim</span>
+                                <span class="price">{{ format_rupiah($this->delivery_price) }}</span>
+                            </div>
                             <div class="price-wrapper">
                                 <span class="label">Sub Total</span>
                                 <span class="price"></span>
@@ -159,12 +174,19 @@
         calculate_subtotal()
     })
 
+    $(window).on('calculatePrice', function (event) {
+        calculate_subtotal()
+    });
+
+
+    
+
     // Calculate SubTotal
     function calculate_subtotal() {
         let qtyInput = $('#qty-input')
         
         let finalPrice = @this.final_price
-        let calculatedPrice = finalPrice * qtyInput.val()
+        let calculatedPrice = (finalPrice * qtyInput.val()) + @this.delivery_price
 
         $('.price-wrapper .price').text(formatRupiah(calculatedPrice))
     }    

@@ -22,8 +22,8 @@ class RegisterPage extends Component
     protected function rules() {
         return [
             'username' => 'required|string|unique:users,username,' . $this->username,
-            'first_name' => 'required|string',
-            'last_name' => 'string',
+            'first_name' => 'required|string|regex:/^[A-Za-z\s]+$/',
+            'last_name' => 'string|regex:/^[A-Za-z\s]+$/',
             'email' => 'required|string|unique:users,email,' . $this->email,
             'phone_number' => 'numeric',
             'password' => 'required|string|min:8',

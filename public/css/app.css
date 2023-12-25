@@ -21,8 +21,7 @@ body {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  -moz-column-gap: 20px;
-       column-gap: 20px;
+  column-gap: 20px;
   row-gap: 10px;
 }
 .app .app-message .container .header-wrapper {
@@ -47,8 +46,7 @@ body {
 .app .app-message .container .header-wrapper .logo-wrapper .logo-container img {
   width: 100%;
   height: 100%;
-  -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
 }
 .app .app-message .container .header-wrapper .logo-wrapper span {
   letter-spacing: 2px;
@@ -106,7 +104,6 @@ body {
   text-transform: uppercase;
   letter-spacing: 2px;
   margin: 0;
-  height: -moz-fit-content;
   height: fit-content;
   padding-right: 20px;
   margin: 0;
@@ -136,14 +133,12 @@ body {
 }
 .app .page-section .container .section-content .product-wrapper, .app .page-section .container .section-content .umkm-wrapper {
   width: 100%;
-  height: -moz-fit-content;
   height: fit-content;
   padding: 10px 0;
   display: grid;
   grid-gap: 10px;
   row-gap: 20px;
-  -moz-column-gap: 10px;
-       column-gap: 10px;
+  column-gap: 10px;
 }
 .app .page-section .container .section-content .product-wrapper.product-wrapper, .app .page-section .container .section-content .umkm-wrapper.product-wrapper {
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -155,14 +150,12 @@ body {
   background-color: #EDF0F3;
 }
 .app .page-section .container .section-content .product-wrapper .item, .app .page-section .container .section-content .umkm-wrapper .item {
-  height: -moz-fit-content;
   height: fit-content;
   width: 100%;
   display: grid;
   place-items: center;
 }
 .app .page-section .container .section-content .product-wrapper .item .product-card, .app .page-section .container .section-content .umkm-wrapper .item .product-card {
-  height: -moz-fit-content;
   height: fit-content;
   width: 95%;
 }
@@ -218,7 +211,6 @@ body {
   text-transform: uppercase;
   letter-spacing: 2px;
   margin: 0;
-  height: -moz-fit-content;
   height: fit-content;
   margin: 0;
   padding: 0 10px;
@@ -241,7 +233,6 @@ body {
 .app .page-section .container .row-content-wrapper .row-section-content {
   position: relative;
   bottom: 10px;
-  height: -moz-fit-content;
   height: fit-content;
   flex-basis: 620px;
   flex-grow: 1;
@@ -260,8 +251,7 @@ body {
 .app .page-section .container .product-detail-wrapper {
   display: flex;
   flex-direction: row;
-  -moz-column-gap: 15px;
-       column-gap: 15px;
+  column-gap: 15px;
   row-gap: 10px;
   align-items: stretch;
   justify-content: center;
@@ -275,16 +265,13 @@ body {
 }
 .app .page-section .container .product-detail-wrapper .image-container {
   width: 300px;
-  height: -moz-fit-content;
   height: fit-content;
   overflow: hidden;
 }
 .app .page-section .container .product-detail-wrapper .image-container img {
   width: 100%;
-  height: -moz-fit-content;
   height: fit-content;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   transition: all ease-in-out 0.3s;
 }
 .app .page-section .container .product-detail-wrapper .image-container img:hover {
@@ -313,7 +300,6 @@ body {
 .app .page-section .container .product-detail-wrapper .content-container {
   flex-basis: 400px;
   flex-grow: 1;
-  height: -moz-fit-content;
   height: fit-content;
   display: flex;
   flex-direction: column;
@@ -405,7 +391,6 @@ body {
 }
 .app .page-section .container .product-detail-wrapper .cart-container {
   width: 300px;
-  height: -moz-fit-content;
   height: fit-content;
   display: flex;
   flex-direction: column;
@@ -428,8 +413,7 @@ body {
   align-items: center;
   justify-content: flex-end;
   width: 100%;
-  -moz-column-gap: 10px;
-       column-gap: 10px;
+  column-gap: 10px;
   row-gap: 2px;
 }
 .app .page-section .container .product-detail-wrapper .cart-container .qty-wrapper .input-group {
@@ -454,7 +438,6 @@ body {
   align-items: center;
   justify-content: flex-start;
   gap: 5px;
-  width: -moz-fit-content;
   width: fit-content;
 }
 .app .page-section .container .product-detail-wrapper .cart-container .msg-wrapper .title-container:hover {
@@ -474,13 +457,20 @@ body {
 .app .page-section .container .product-detail-wrapper .cart-container .msg-wrapper .form-floating textarea {
   height: 100%;
 }
+.app .page-section .container .product-detail-wrapper .cart-container .delivery-price-wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
 .app .page-section .container .product-detail-wrapper .cart-container .price-wrapper {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  -moz-column-gap: 10px;
-       column-gap: 10px;
+  column-gap: 10px;
   row-gap: 5px;
 }
 .app .page-section .container .product-detail-wrapper .cart-container .price-wrapper .label, .app .page-section .container .product-detail-wrapper .cart-container .price-wrapper .price {
@@ -499,7 +489,7 @@ body {
 .app .page-section .container .product-detail-wrapper .cart-container .button-wrapper .btn-primary {
   background-color: #F9D00F;
   font-weight: 600;
-  color: white;
+  color: black;
 }
 .app .page-section .container .product-detail-wrapper .cart-container .button-wrapper .btn-primary:hover {
   cursor: pointer;
@@ -618,9 +608,7 @@ body {
   font-size: 1.3rem;
   font-weight: 600;
   transition: all ease-in-out 0.3s;
-  width: -moz-fit-content;
   width: fit-content;
-  height: -moz-fit-content;
   height: fit-content;
 }
 .app .row-container .menu-container .navigation {
@@ -633,11 +621,9 @@ body {
   padding: 10px 10px 20px 10px;
 }
 .app .row-container .menu-container .navigation.navigation-menu {
-  height: -moz-fit-content;
   height: fit-content;
 }
 .app .row-container .menu-container .navigation.navigation-menu .nav-content {
-  height: -moz-fit-content;
   height: fit-content;
   overflow: unset;
 }
@@ -770,7 +756,6 @@ body {
 }
 .app .row-container .menu-container .navigation .nav-content ul.sub-menu-expand .nav-item .sub-item {
   width: 100%;
-  height: -moz-fit-content;
   height: fit-content;
   max-height: 0vh;
   transition: all ease 0.3s;
@@ -819,7 +804,6 @@ body {
 }
 .app .row-container .content-container {
   width: 100%;
-  height: -moz-fit-content;
   height: fit-content;
   padding: 20px 0;
 }
@@ -867,8 +851,7 @@ body {
   display: block;
   width: 100%;
   height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   transition: all ease-in-out 0.3s;
 }
 .product-card .image-container img:hover {
@@ -1013,8 +996,7 @@ body {
 .UMKM-card .image-container img {
   height: 100%;
   width: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   transition: all ease-in-out 0.3s;
 }
 .UMKM-card .image-container img:hover {
@@ -1059,8 +1041,7 @@ body {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  -moz-column-gap: 10px;
-       column-gap: 10px;
+  column-gap: 10px;
   row-gap: 5px;
   align-items: center;
   justify-content: space-between;
@@ -1199,7 +1180,6 @@ body {
   justify-content: center;
   position: relative;
   max-width: 400px;
-  height: -moz-fit-content;
   height: fit-content;
 }
 #auth_modal .modal-dialog .modal-content small.error, #umkm_bank_account_modal .modal-dialog .modal-content small.error, #refound_bank_account_modal .modal-dialog .modal-content small.error, #refoundModal .modal-dialog .modal-content small.error {
@@ -1232,7 +1212,6 @@ body {
 }
 #auth_modal .modal-dialog .modal-content .logo-wrapper img, #umkm_bank_account_modal .modal-dialog .modal-content .logo-wrapper img, #refound_bank_account_modal .modal-dialog .modal-content .logo-wrapper img, #refoundModal .modal-dialog .modal-content .logo-wrapper img {
   height: 40px;
-  width: -moz-fit-content;
   width: fit-content;
 }
 #auth_modal .modal-dialog .modal-content .logo-wrapper .brand, #umkm_bank_account_modal .modal-dialog .modal-content .logo-wrapper .brand, #refound_bank_account_modal .modal-dialog .modal-content .logo-wrapper .brand, #refoundModal .modal-dialog .modal-content .logo-wrapper .brand {
@@ -1261,6 +1240,8 @@ body {
   background-color: black;
   font-weight: 600;
   color: white;
+  background-color: #F9D00F;
+  color: black;
   padding-left: 30px;
   padding-right: 30px;
   margin: 5px 0;
@@ -1282,7 +1263,6 @@ body {
   margin: 5px 0;
 }
 #auth_modal .modal-dialog .modal-content .seperator span, #umkm_bank_account_modal .modal-dialog .modal-content .seperator span, #refound_bank_account_modal .modal-dialog .modal-content .seperator span, #refoundModal .modal-dialog .modal-content .seperator span {
-  width: -moz-fit-content;
   width: fit-content;
   padding-left: 5px;
   padding-right: 5px;
@@ -1347,8 +1327,7 @@ body {
 #umkm_bank_account_modal .modal-content .profile-wrapper .profile-head-wrapper .image-container img, #refound_bank_account_modal .modal-content .profile-wrapper .profile-head-wrapper .image-container img {
   width: 100%;
   height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   transition: all ease-in-out 0.3s;
 }
 #umkm_bank_account_modal .modal-content .profile-wrapper .profile-head-wrapper .image-container img:hover, #refound_bank_account_modal .modal-content .profile-wrapper .profile-head-wrapper .image-container img:hover {
@@ -1410,7 +1389,7 @@ body {
 .btn-default-orange {
   background-color: #F9D00F;
   font-weight: 600;
-  color: white;
+  color: black;
 }
 .btn-default-orange:hover {
   cursor: pointer;
@@ -1448,7 +1427,6 @@ body {
     bottom: 0;
     z-index: 5;
     background-color: #2A2A2A;
-    width: -moz-fit-content;
     width: fit-content;
   }
   .app .row-container .menu-container.lighten {

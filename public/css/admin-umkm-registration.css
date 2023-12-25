@@ -24,7 +24,6 @@
 }
 .admin-umkm-registration-page .container .content-menu-wrapper {
   width: 100%;
-  height: -moz-fit-content;
   height: fit-content;
   display: flex;
   flex-direction: row;
@@ -52,7 +51,6 @@
   flex-direction: column;
   gap: 10px;
   width: 100%;
-  height: -moz-fit-content;
   height: fit-content;
   padding: 10px;
   background-color: white;
@@ -63,14 +61,12 @@
 }
 .admin-umkm-registration-page .container .page-content-card .card-title-wrapper {
   width: 100%;
-  height: -moz-fit-content;
   height: fit-content;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  -moz-column-gap: 20px;
-       column-gap: 20px;
+  column-gap: 20px;
   row-gap: 10px;
   flex-wrap: wrap;
 }
@@ -103,7 +99,6 @@
 }
 .admin-umkm-registration-page .container .page-content-card .pagination-wrapper {
   width: 100%;
-  height: -moz-fit-content;
   height: fit-content;
   display: grid;
   place-items: center;

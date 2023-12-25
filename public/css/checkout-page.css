@@ -21,7 +21,6 @@
 }
 .checkout-page .container .page-content-card {
   width: 100%;
-  height: -moz-fit-content;
   height: fit-content;
   padding: 15px 10px;
   border-radius: 4px;
@@ -61,8 +60,7 @@
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  -moz-column-gap: 10px;
-       column-gap: 10px;
+  column-gap: 10px;
   row-gap: 5px;
 }
 .checkout-page .container .page-content-card .address-wrapper * {
@@ -83,19 +81,16 @@
 }
 .checkout-page .container .page-content-card .card-content {
   width: 100%;
-  height: -moz-fit-content;
   height: fit-content;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  -moz-column-gap: 20px;
-       column-gap: 20px;
+  column-gap: 20px;
   row-gap: 10px;
   align-items: flex-start;
 }
 .checkout-page .container .page-content-card .table-responsive {
   width: 100%;
-  height: -moz-fit-content;
   height: fit-content;
   overflow: auto;
 }
@@ -154,8 +149,7 @@
   transition: all ease-in-out 0.3s;
   width: 100%;
   height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 .checkout-page .container .page-content-card .table-responsive table tbody tr td .image-container img:hover {
   cursor: pointer;
@@ -188,8 +182,7 @@
   flex-direction: row;
   align-items: baseline;
   justify-content: flex-end;
-  -moz-column-gap: 20px;
-       column-gap: 20px;
+  column-gap: 20px;
   row-gap: 10px;
   flex-wrap: wrap;
 }

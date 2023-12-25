@@ -38,9 +38,15 @@
                         @foreach ($userCart as $product)
                             <tr>
                                 <td>
-                                    <div class="image-container">
-                                        <img src="{{ asset('storage/'.$this->getImage($product['product']['id'])->image) }}" alt="{{ $this->getImage($product['product']['name_slug']) }}_image">
-                                    </div>
+                                    @if ($this->getImage($product['product']['id']))
+                                        <div class="image-container">
+                                            <img src="{{ asset('storage/'.$this->getImage($product['product']['id'])->image) }}" alt="{{ $this->getImage($product['product']['name_slug']) }}_image">
+                                        </div>
+                                    @else
+                                        <div class="image-container">
+                                            <span>no image</span>
+                                        </div>
+                                    @endif
                                 </td>
                                 <td>
                                     <a href="{{ route('product-details', [$product['product']['id'], $product['product']['name_slug']]) }}">{{ $product['product']['name'] }}</a>

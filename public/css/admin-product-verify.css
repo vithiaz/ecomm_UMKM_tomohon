@@ -26,7 +26,6 @@
   flex-direction: column;
   gap: 10px;
   width: 100%;
-  height: -moz-fit-content;
   height: fit-content;
   background-color: white;
   border-radius: 4px;
@@ -37,8 +36,7 @@
 .admin-product-verify .container .page-content-card .product-detail-wrapper {
   display: flex;
   flex-direction: row;
-  -moz-column-gap: 15px;
-       column-gap: 15px;
+  column-gap: 15px;
   row-gap: 10px;
   align-items: flex-start;
   justify-content: center;
@@ -47,16 +45,13 @@
 }
 .admin-product-verify .container .page-content-card .product-detail-wrapper .image-container {
   width: 300px;
-  height: -moz-fit-content;
   height: fit-content;
   overflow: hidden;
 }
 .admin-product-verify .container .page-content-card .product-detail-wrapper .image-container img {
   width: 100%;
-  height: -moz-fit-content;
   height: fit-content;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   transition: all ease-in-out 0.3s;
 }
 .admin-product-verify .container .page-content-card .product-detail-wrapper .image-container img:hover {
@@ -85,7 +80,6 @@
 .admin-product-verify .container .page-content-card .product-detail-wrapper .content-container {
   flex-basis: 400px;
   flex-grow: 1;
-  height: -moz-fit-content;
   height: fit-content;
   display: flex;
   flex-direction: column;
@@ -178,7 +172,6 @@
 .admin-product-verify .container .page-content-card .button-wrapper {
   flex-basis: 100%;
   width: 100%;
-  height: -moz-fit-content;
   height: fit-content;
   display: flex;
   flex-direction: row;

@@ -7,6 +7,7 @@ use App\Models\Product;
 use Livewire\Component;
 use Illuminate\Support\Str;
 use App\Models\ProductImage;
+use App\Models\DeliveryPrice;
 use Livewire\WithFileUploads;
 use App\Models\ProductCategory;
 use App\Models\ProductCategories;
@@ -32,14 +33,68 @@ class AddProduct extends Component
     public $price;
     public $description;
     public $image;
+    public $base_delivery_price;
+    public $selected_kec;
+    public $kec_delivery_price;
+    public $kec_delivery_detail;
 
     protected $rules = [
         'name' => 'required|string',
         'stock' => 'required|numeric|min:0',
         'discount' => 'required|numeric|min:0|max:100',
-        'price'=> 'required|numeric',
+        'price' => 'required|numeric',
         'description' => 'required|string',
+        'base_delivery_price' => 'required|numeric',
     ];
+
+    public $city_dir = array(
+        'Tomohon' => [
+            'Taratara',
+            'Taratara I',
+            'Taratara II',
+            'Taratara III',
+            'Woloan I',
+            'Woloan I Utara',
+            'Woloan II',
+            'Woloan III',
+            'Kampung Jawa',
+            'Lahendong',
+            'Lansot',
+            'Pangolombian',
+            'Pinaras',
+            'Tumatangtang',
+            'Tumatangtang I',
+            'Tondangow',
+            'Uluindano',
+            'Walian',
+            'Walian I',
+            'Walian II',
+            'Kamasi',
+            'Kamasi I',
+            'Kolongan',
+            'Kolongan I',
+            'Matani I',
+            'Matani II',
+            'Matani III',
+            'Talete I',
+            'Talete II',
+            'Kumelembuay',
+            'Paslaten I',
+            'Paslaten II',
+            'Rurukan',
+            'Rurukan I',
+            'Kakaskasen',
+            'Kakaskasen I',
+            'Kakaskasen II',
+            'Kakaskasen III',
+            'Kayawu',
+            'Kinilow',
+            'Kinilow I',
+            'Tinoor I',
+            'Tinoor II',
+            'Wailan',
+        ],
+    );
 
     public function updatedCategory() {
         $category_data = null;
@@ -79,6 +134,11 @@ class AddProduct extends Component
         $this->image = null;
         $this->category = null;
         $this->selected_categories = [];
+        
+        $this->base_delivery_price = null;
+        $this->kec_delivery_price = null;
+        $this->selected_kec = null;
+        $this->kec_delivery_detail = [];
     }
 
     public function render()
@@ -130,6 +190,7 @@ class AddProduct extends Component
         $product->price = $this->price;
         $product->description = $this->description;
         $product->status = 'active';
+        $product->base_delivery_price = $this->base_delivery_price;
         $product->umkm_id = $this->umkm->id;
         $product->save();
 
@@ -149,7 +210,44 @@ class AddProduct extends Component
             }
         }
 
+        if ($this->kec_delivery_detail) {
+            foreach($this->kec_delivery_detail as $delivery_detail) {
+                $delivery_price = new DeliveryPrice;
+                $delivery_price->product_id = $product->id;
+                $delivery_price->location = $delivery_detail['kecamatan'];
+                $delivery_price->delivery_price = $delivery_detail['price'];
+                $delivery_price->save();
+            }
+        }
+
         return redirect()->route('umkm.profile')->with('message', 'Produk Ditambahkan');
+    }
+
+    public function add_delivery_detail() {
+        if (
+            $this->kec_delivery_price != false &&
+            $this->selected_kec != false
+        ) {
+            $kecamatanExists = false;
+            foreach ($this->kec_delivery_detail as $idx=>$item) {
+                if ($item['kecamatan'] == $this->selected_kec) {
+                    $this->kec_delivery_detail[$idx]['price'] = $this->kec_delivery_price;
+                    // $item['price'] = $this->kec_delivery_price;
+                    $kecamatanExists = true;
+                    break;
+                }
+            }
+            if (!$kecamatanExists) {
+                array_push($this->kec_delivery_detail, [
+                    "price" => $this->kec_delivery_price,
+                    "kecamatan" => $this->selected_kec
+                ]);
+            }
+        }
+    }
+    
+    public function delete_delivery_detail($idx) {
+        unset($this->kec_delivery_detail[$idx]);
     }
 
 
