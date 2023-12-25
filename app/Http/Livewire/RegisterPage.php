@@ -88,7 +88,7 @@ class RegisterPage extends Component
             'body' => "Klik disini untuk verifikasi akun anda<br><a href='". $verification_link ."'>Verifikasi Akun</a>" 
         ];
         try {
-            Mail::to('vsmurf.x001@gmail.com')->send(new UserRegistration($data));
+            Mail::to($this->email)->send(new UserRegistration($data));
         }
         catch (Excpetion $e) {
             // 
